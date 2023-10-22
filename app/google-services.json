@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "842940328597",
+    "project_id": "infernohookah-e47e5",
+    "storage_bucket": "infernohookah-e47e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842940328597:android:7ef8d8b6357e037ac0899c",
+        "android_client_info": {
+          "package_name": "com.pineapplepractice.infernohookah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-l0oqLnojINQ0AKKw7lm080FqbnlzJiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
