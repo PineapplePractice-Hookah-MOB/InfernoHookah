@@ -1,13 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragments.AuthFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Вход" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo_inferno"
+        android:layout_width="wrap_content"
+        android:layout_height="124dp"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/ic_logo_inferno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/entrance_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:textStyle="bold"
+        android:text="Вход"
+        android:layout_marginTop="52dp"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_inferno" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/description_entrance_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:visibility="visible"
+        android:text="Введите номер вашего телефона\nв международном формате"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="14dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entrance_tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/description_proof_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:visibility="invisible"
+        android:text="Введите последние 4 цифры\nвходящего номера"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="14dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entrance_tv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/description_data_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:visibility="invisible"
+        android:text="Введите имя и дату\nвашего рождения"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="14dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entrance_tv" />
+
+    <EditText
+        android:id="@+id/input_phone_number_ti"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:visibility="visible"
+        android:hint="+7 xxx xxx-xx-xx"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/description_entrance_tv" />
+
+    <EditText
+        android:id="@+id/input_proof_number_ti"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:visibility="invisible"
+        android:hint="X X X X"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/description_entrance_tv" />
+
+    <EditText
+        android:id="@+id/input_name_ti"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:visibility="invisible"
+        android:hint="Имя"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/description_entrance_tv" />
+
+    <EditText
+        android:id="@+id/input_birthday_ti"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:visibility="invisible"
+        android:hint="Дата рождения"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/input_name_ti" />
+
+    <DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/next_btn"
+        android:layout_width="280dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="94dp"
+        android:text="Далее"
+
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
