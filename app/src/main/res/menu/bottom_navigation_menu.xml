@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:title="Главная"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/promotionsFragment"
+        android:title="Акции"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/reservationFragment"
+        android:title="Бронь"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/dishesFragment"
+        android:title="Меню"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/miscellaneousFragment"
+        android:title="Контакты"
+        app:showAsAction="always" />
+</menu>
