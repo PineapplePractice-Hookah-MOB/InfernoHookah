@@ -84,4 +84,7 @@ dependencies {
 
     //ViewModel
     implementation ("androidx.fragment:fragment-ktx:1.6.1")
+
+    //SplashScreen
+    implementation ("androidx.core:core-splashscreen:1.0.1")
 }
