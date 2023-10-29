@@ -69,6 +69,6 @@ class MainActivity : AppCompatActivity() {
     private fun checkUserLoggedIn(): Boolean {
         // Здесь необходимо реаоизовать логику проверки наличия токена в SharedPreferences
         // Возвращаем true, если пользователь авторизован, и false в противном случае.
-        return false
+        return true
     }
 }
