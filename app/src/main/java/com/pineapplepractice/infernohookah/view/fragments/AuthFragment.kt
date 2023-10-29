@@ -33,13 +33,13 @@ class AuthFragment : Fragment() {
 
     //пробуем запросить звонок с кодом подтверждения
     private fun inputPhoneNumber() =  with(binding) {
-        descriptionEntranceTv.visibility = View.VISIBLE
-        inputPhoneNumberTi.visibility = View.VISIBLE
-        requestCallBtn.visibility = View.VISIBLE
-        requestCallBtn.setOnClickListener {
+        descriptionDataTV.visibility = View.VISIBLE
+        inputPhoneNumberTI.visibility = View.VISIBLE
+        requestCallBTN.visibility = View.VISIBLE
+        requestCallBTN.setOnClickListener {
             try {
-                sendVerificationCall(inputPhoneNumberTi.text.toString())
-                verifyCode(inputProofNumberTi.text.toString())
+                sendVerificationCall(inputPhoneNumberTI.text.toString())
+                verifyCode(inputBirthdayTI.text.toString())
             } catch (e: Exception) {
                 Toast.makeText(
                     requireContext(),

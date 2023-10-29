@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pineapplepractice.infernohookah.R
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     // проверяем регистрацию, определяем точку входа
     private fun startApp() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_placeholder) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
         navController = navHostFragment.navController
         // Проверяем, авторизован ли пользователь
         val isLoggedIn = checkUserLoggedIn()
@@ -53,8 +52,8 @@ class MainActivity : AppCompatActivity() {
 
     //Подключаем Bottom Navigation
     private fun initBottomNavigationMenu() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_menu_navigation)
-        val navController = findNavController(R.id.fragment_placeholder)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomMenuNavigation)
+        val navController = findNavController(R.id.fragmentPlaceholder)
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemReselectedListener { item ->
             val reselectedDestinationId = item.itemId
