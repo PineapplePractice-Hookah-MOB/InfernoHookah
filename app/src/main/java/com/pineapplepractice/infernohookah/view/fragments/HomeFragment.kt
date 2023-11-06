@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.databinding.FragmentHomeBinding
 import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsListRecyclerAdapter
@@ -32,6 +34,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRV()
+
+        val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
+        val navController = navHostFragment.navController
+
+       binding.bonusCard.setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_bonusHistoryFragment, null)
+        }
     }
 
     private fun initRV() {

@@ -35,7 +35,7 @@ class PromotionsListRecyclerAdapter(
         when (holder) {
             is PromotionsListViewHolder -> {
                 ViewCompat.setTransitionName(
-                    holder.itemView.findViewById(R.id.promotions_image),
+                    holder.itemView.findViewById(R.id.promotionsImage),
                     items[position].description
                 )
                 holder.bind(items[position], clickListener)

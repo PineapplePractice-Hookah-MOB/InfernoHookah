@@ -7,7 +7,7 @@
     tools:context=".view.fragments.AuthFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/logo_inferno"
+        android:id="@+id/logoInfernoAuth"
         android:layout_width="wrap_content"
         android:layout_height="124dp"
         android:layout_marginTop="52dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/entrance_tv"
+        android:id="@+id/entranceTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
@@ -27,10 +27,10 @@
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_inferno" />
+        app:layout_constraintTop_toBottomOf="@+id/logoInfernoAuth" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/description_entrance_tv"
+        android:id="@+id/descriptionEntranceTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_regular"
@@ -41,10 +41,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entrance_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/entranceTV" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/description_proof_tv"
+        android:id="@+id/descriptionProofTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_regular"
@@ -55,10 +55,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entrance_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/entranceTV" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/description_data_tv"
+        android:id="@+id/descriptionDataTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_regular"
@@ -69,10 +69,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entrance_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/entranceTV" />
 
     <EditText
-        android:id="@+id/input_phone_number_ti"
+        android:id="@+id/inputPhoneNumberTI"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:visibility="gone"
@@ -82,10 +82,10 @@
         android:layout_marginTop="68dp"
         android:fontFamily="@font/montserrat_light"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/description_entrance_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionEntranceTV" />
 
     <EditText
-        android:id="@+id/input_proof_number_ti"
+        android:id="@+id/inputProofNumberTI"
         android:layout_width="240dp"
         android:layout_height="40dp"
         android:visibility="gone"
@@ -95,10 +95,10 @@
         android:layout_marginTop="68dp"
         android:fontFamily="@font/montserrat_light"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/description_entrance_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionEntranceTV" />
 
     <EditText
-        android:id="@+id/input_name_ti"
+        android:id="@+id/inputNameTI"
         android:layout_width="240dp"
         android:layout_height="40dp"
         android:visibility="gone"
@@ -108,10 +108,10 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/montserrat_light"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/description_entrance_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionEntranceTV" />
 
     <EditText
-        android:id="@+id/input_birthday_ti"
+        android:id="@+id/inputBirthdayTI"
         android:layout_width="240dp"
         android:layout_height="40dp"
         android:visibility="gone"
@@ -121,10 +121,10 @@
         android:layout_marginTop="28dp"
         android:fontFamily="@font/montserrat_light"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/input_name_ti" />
+        app:layout_constraintTop_toBottomOf="@+id/inputNameTI" />
 
     <DatePicker
-        android:id="@+id/date_picker"
+        android:id="@+id/datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -136,7 +136,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/request_call_btn"
+        android:id="@+id/requestCallBTN"
         android:layout_width="280dp"
         android:layout_height="80dp"
         android:layout_marginBottom="94dp"
@@ -151,7 +151,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/proof_code_btn"
+        android:id="@+id/proofCodeBTN"
         android:layout_width="280dp"
         android:layout_height="80dp"
         android:layout_marginBottom="94dp"
@@ -166,7 +166,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/save_data_btn"
+        android:id="@+id/saveDataBTN"
         android:layout_width="280dp"
         android:layout_height="80dp"
         android:layout_marginBottom="94dp"
@@ -179,7 +179,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
