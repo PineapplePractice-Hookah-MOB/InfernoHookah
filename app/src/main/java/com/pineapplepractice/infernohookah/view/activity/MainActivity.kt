@@ -22,9 +22,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         startApp()
 
+    }
+
+    fun visibleBottomNavigation() {
+        binding.bottomMenuNavigation.visibility = View.VISIBLE
     }
 
     // проверяем регистрацию, определяем точку входа
@@ -38,8 +41,8 @@ class MainActivity : AppCompatActivity() {
             binding.bottomMenuNavigation.visibility = View.VISIBLE
             R.id.homeFragment
         } else {
-            binding.bottomMenuNavigation.visibility = View.INVISIBLE
-            R.id.authFragment
+            binding.bottomMenuNavigation.visibility = View.GONE
+            R.id.authFragmentStep1
         }
         // Устанавливаем точку начала навигации
         navController.navigate(startDestination)
@@ -68,6 +71,6 @@ class MainActivity : AppCompatActivity() {
     private fun checkUserLoggedIn(): Boolean {
         // Здесь необходимо реаоизовать логику проверки наличия токена в SharedPreferences
         // Возвращаем true, если пользователь авторизован, и false в противном случае.
-        return true
+        return false
     }
 }
