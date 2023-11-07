@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activity.SplashScreen"
-    android:background="@color/black">
+    android:background="@color/main_background">
 
     <ImageView
         android:id="@+id/smoke"

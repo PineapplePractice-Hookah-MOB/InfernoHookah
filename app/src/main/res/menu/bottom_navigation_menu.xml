@@ -5,21 +5,26 @@
     <item
         android:id="@+id/homeFragment"
         android:title="Главная"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:menuCategory="secondary"/>
     <item
         android:id="@+id/promotionsFragment"
         android:title="Акции"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:menuCategory="secondary"/>
     <item
         android:id="@+id/reservationFragment"
         android:title="Бронь"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:menuCategory="secondary"/>
     <item
         android:id="@+id/dishesFragment"
         android:title="Меню"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:menuCategory="secondary"/>
     <item
         android:id="@+id/miscellaneousFragment"
         android:title="Контакты"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:menuCategory="secondary"/>
 </menu>

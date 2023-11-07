@@ -41,7 +41,7 @@ class AuthFragmentStep2 : Fragment() {
 
     //Проверка кода
     private fun verifyCode() =  with(binding) {
-        requestCallBTN.setOnClickListener {
+        requestBTN.setOnClickListener {
             try {
                 // Проверка кода
                 findNavController().navigate(R.id.action_authFragmentStep2_to_authFragmentStep3)

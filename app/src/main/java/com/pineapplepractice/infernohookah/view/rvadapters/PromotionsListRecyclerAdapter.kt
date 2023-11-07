@@ -13,11 +13,10 @@ import com.pineapplepractice.infernohookah.view.rvviewholders.PromotionsListView
 
 
 class PromotionsListRecyclerAdapter(
-    private val clickListener: OnItemClickListener,
+    private var items : List<Promotions>,
+    private val clickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private var items = promotionsItems
 
     override fun getItemCount() = items.size
 
@@ -46,6 +45,11 @@ class PromotionsListRecyclerAdapter(
     //Интерфейс для обработки кликов
     interface OnItemClickListener {
         fun click(promotions: Promotions, image: ImageView)
+    }
+
+    fun updateData(list: List<Promotions>) {
+        this.items = list
+        notifyDataSetChanged()
     }
 
 }

@@ -5,15 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Promotions
+import com.pineapplepractice.infernohookah.data.promotionsItems
 import com.pineapplepractice.infernohookah.databinding.FragmentHomeBinding
+import com.pineapplepractice.infernohookah.utils.carouselrecyclerview.SnapHelperOneByOne
 import com.pineapplepractice.infernohookah.view.activity.MainActivity
 import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsListRecyclerAdapter
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
@@ -23,7 +24,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeFragmentViewModel: HomeViewModel by viewModels()
     private lateinit var promotionsAdapter: PromotionsListRecyclerAdapter
-    private lateinit var promotionsRecyclerView: RecyclerView
+    private lateinit var promotionsRecyclerView: CarouselRecyclerview
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,24 +47,26 @@ class HomeFragment : Fragment() {
         }
     }
 
-    interface BottomNavigationHandler {
-        fun visibleBottomNavigation()
-    }
-
     private fun initRV() {
         promotionsRecyclerView = binding.promotionsRv
         promotionsRecyclerView.apply {
             promotionsAdapter =
-                PromotionsListRecyclerAdapter(object : PromotionsListRecyclerAdapter.OnItemClickListener {
-                    override fun click(promotions: Promotions, image: ImageView) {
-                        //пишем логику нажатия на акцию на главном экране
-                    }
-                })
+                PromotionsListRecyclerAdapter(
+                    promotionsItems,
+                    object : PromotionsListRecyclerAdapter.OnItemClickListener {
+                        override fun click(promotions: Promotions, image: ImageView) {
+                            //пишем логику нажатия на акцию на главном экране
+                            Toast.makeText((requireActivity() as MainActivity), "Promotions", Toast.LENGTH_SHORT).show()
+                        }
+                    })
             promotionsRecyclerView.adapter = promotionsAdapter
-            val layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
-            promotionsRecyclerView.layoutManager = layoutManager
+            promotionsRecyclerView.setAlpha(true)
+            promotionsRecyclerView.setInfinite(true)
+            val linearSnapHelper = SnapHelperOneByOne()
+            linearSnapHelper.attachToRecyclerView(promotionsRecyclerView)
+            val carouselLayoutManager = promotionsRecyclerView.getCarouselLayoutManager()
+            val currentlyCenterPosition = promotionsRecyclerView.getSelectedPosition()
+            carouselLayoutManager.scrollToPosition(3)
         }
     }
-
-
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragments.AuthFragmentStep3"
-    android:background="@color/black">
+    android:background="@color/main_background">
 
     <ImageView
         android:id="@+id/smokeMini"
@@ -34,7 +34,7 @@
         android:layout_marginTop="52dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Вход"
-        android:textColor="@color/white"
+        android:textColor="@color/main_text_color"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/descriptionDataTV"
-        android:textColor="@color/white"
+        android:textColor="@color/main_text_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_regular"
@@ -63,8 +63,8 @@
         android:fontFamily="@font/montserrat_light"
         android:gravity="center"
         android:hint="Имя"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,12 +72,12 @@
 
     <EditText
         android:id="@+id/inputBirthdayTI"
-        android:textColor="@color/white"
+        android:textColor="@color/main_text_color"
         android:layout_width="348dp"
         android:layout_height="40dp"
         android:visibility="visible"
         android:hint="Дата рождения"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/main_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="28dp"
@@ -86,9 +86,9 @@
         app:layout_constraintTop_toBottomOf="@+id/inputNameTI" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/requestCallBTN"
-        android:layout_width="286dp"
-        android:layout_height="70dp"
+        android:id="@+id/requestBTN"
+        android:layout_width="278dp"
+        android:layout_height="62dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="94dp"
         android:background="@drawable/button_inactive"
@@ -97,7 +97,7 @@
         android:fontFamily="@font/montserrat_bold"
         android:text="Далее"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="@color/main_text_color"
         android:textSize="16sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -113,8 +113,8 @@
         android:layout_marginEnd="-36dp"
         android:layout_marginBottom="-5dp"
         android:src="@drawable/corner_left"
-        app:layout_constraintBottom_toBottomOf="@+id/requestCallBTN"
-        app:layout_constraintEnd_toStartOf="@+id/requestCallBTN" />
+        app:layout_constraintBottom_toBottomOf="@+id/requestBTN"
+        app:layout_constraintEnd_toStartOf="@+id/requestBTN" />
 
     <ImageView
         android:id="@+id/btnCornerRight"
@@ -123,8 +123,8 @@
         android:layout_marginEnd="-5dp"
         android:layout_marginBottom="-36dp"
         android:src="@drawable/corner_right"
-        app:layout_constraintBottom_toTopOf="@+id/requestCallBTN"
-        app:layout_constraintEnd_toEndOf="@+id/requestCallBTN" />
+        app:layout_constraintBottom_toTopOf="@+id/requestBTN"
+        app:layout_constraintEnd_toEndOf="@+id/requestBTN" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -134,8 +134,8 @@
         android:fontFamily="@font/montserrat_light"
         android:clickable="true"
         android:focusable="true"
-        android:text="Я согласен на обработку персональных данных"
-        android:textColor="@color/white"
+        android:text="@string/check_box_text"
+        android:textColor="@color/main_text_color"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/inputBirthdayTI"
         app:layout_constraintStart_toStartOf="@+id/inputBirthdayTI"

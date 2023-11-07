@@ -85,6 +85,6 @@ dependencies {
     //ViewModel
     implementation ("androidx.fragment:fragment-ktx:1.6.1")
 
-    //SplashScreen
-    implementation ("androidx.core:core-splashscreen:1.0.1")
+    //Carousel
+    implementation ("com.github.sparrow007:carouselrecyclerview:1.2.1")
 }

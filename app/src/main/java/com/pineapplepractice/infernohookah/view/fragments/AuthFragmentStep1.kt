@@ -34,7 +34,7 @@ class AuthFragmentStep1 : Fragment() {
 
     //пробуем запросить звонок с кодом подтверждения
     private fun inputPhoneNumber() =  with(binding) {
-        requestCallBTN.setOnClickListener {
+        requestBTN.setOnClickListener {
             try {
                 sendVerificationCall(inputPhoneNumberTI.text.toString())
                 findNavController().navigate(R.id.action_FragmentStep1_to_authFragmentStep2)

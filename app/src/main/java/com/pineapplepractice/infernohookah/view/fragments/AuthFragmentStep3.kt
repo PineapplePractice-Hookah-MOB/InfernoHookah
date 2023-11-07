@@ -35,7 +35,7 @@ class AuthFragmentStep3 : Fragment() {
 
     //сохранение данных о пользователе
     private fun saveUserData() =  with(binding) {
-        requestCallBTN.setOnClickListener {
+        requestBTN.setOnClickListener {
             try {
                 // Проверка кода
                 findNavController().navigate(R.id.action_authFragmentStep3_to_homeFragment)

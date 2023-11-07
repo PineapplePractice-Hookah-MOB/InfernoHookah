@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1E1E1E"
+    android:background="@color/main_background"
     tools:context=".view.fragments.ReservationFragment">
 
     <ImageView
@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/userAvatarHome"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/ic_user_avatar_icon"
         app:layout_constraintBottom_toTopOf="@+id/userNameHome"
@@ -35,9 +35,9 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/montserrat_regular"
-        android:text="User"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
+        android:text="Андрей"
+        android:textColor="@color/main_text_color"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,16 +50,15 @@
 
     <TextView
         android:id="@+id/reservation"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Забронировать столик"
-        android:textColor="#F9F9F9"
+        android:textColor="@color/main_text_color"
         android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/date_and_time"
+        app:layout_constraintStart_toStartOf="@+id/date_and_time"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <ImageView
@@ -95,17 +94,43 @@
         app:layout_constraintTop_toBottomOf="@+id/guests"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/myButton"
+        android:id="@+id/requestBTN"
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/button_inactive"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Забронировать"
+        android:textAllCaps="false"
+        android:textColor="@color/main_text_color"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comments" />
+
+    <ImageView
+        android:id="@+id/btnCornerLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Забронировать"
-        android:layout_margin="16dp"
-        android:backgroundTint="#1E1E1E"
-        android:textColor="#F9F9F9"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comments"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_marginEnd="-36dp"
+        android:layout_marginBottom="-5dp"
+        android:src="@drawable/corner_left"
+        app:layout_constraintBottom_toBottomOf="@+id/requestBTN"
+        app:layout_constraintEnd_toStartOf="@+id/requestBTN" />
+
+    <ImageView
+        android:id="@+id/btnCornerRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginBottom="-36dp"
+        android:src="@drawable/corner_right"
+        app:layout_constraintBottom_toTopOf="@+id/requestBTN"
+        app:layout_constraintEnd_toEndOf="@+id/requestBTN" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
