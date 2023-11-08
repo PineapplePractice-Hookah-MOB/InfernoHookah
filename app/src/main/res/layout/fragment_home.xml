@@ -4,24 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.HomeFragment">
+    tools:context=".view.fragments.HomeFragment"
+    android:background="@color/main_background">
 
     <ImageView
         android:id="@+id/logoHome"
-        android:layout_width="120dp"
-        android:layout_height="70dp"
+        android:layout_width="136dp"
+        android:layout_height="76dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
-        android:src="@drawable/ic_logo_inferno"
+        android:src="@drawable/ic_logo_inferno_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/userAvatarHome"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_marginTop="12dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/ic_user_avatar_icon"
         app:layout_constraintBottom_toTopOf="@+id/userNameHome"
         app:layout_constraintEnd_toEndOf="@+id/userNameHome"
         app:layout_constraintStart_toStartOf="@+id/userNameHome"
@@ -34,8 +35,9 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/montserrat_regular"
-        android:textSize="16sp"
-        android:text="User"
+        android:textColor="@color/main_text_color"
+        android:textSize="17sp"
+        android:text="Андрей"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,8 +92,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:fontFamily="@font/montserrat_bold"
-        android:textSize="22sp"
         android:text="Бонусы"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notificationAboutReservation" />
@@ -107,21 +110,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bonus_header_tv"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:backgroundTint="#692275">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_smoke_mini">
 
             <TextView
                 android:id="@+id/number_of_bonuses_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="500"
-                android:textSize="36sp"
+                android:textColor="@color/main_text_color"
+                android:textSize="40sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,6 +138,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="баллов"
+                android:textColor="@color/main_text_color"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/number_of_bonuses_tv"
                 app:layout_constraintStart_toEndOf="@+id/number_of_bonuses_tv"
@@ -143,22 +150,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="12dp"
-                android:fontFamily="@font/montserrat_medium"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="5%"
+                android:textColor="@color/black"
                 android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:layout_width="189dp"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:fontFamily="@font/montserrat_medium"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="Ваша постоянная скидка"
-                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/discount_tv"
-                app:layout_constraintEnd_toStartOf="@+id/discount_tv"
-                app:layout_constraintTop_toTopOf="@+id/discount_tv" />
+                app:layout_constraintEnd_toStartOf="@+id/discount_tv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -171,12 +180,24 @@
         android:layout_margin="24dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Акции"
-        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bonus_card" />
 
-    <androidx.recyclerview.widget.RecyclerView
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/promotions_rv"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="160dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:clipToPadding="false"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/promotions_header_tv"-->
+<!--        tools:listitem="@layout/main_promotions_item" />-->
+
+    <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
         android:id="@+id/promotions_rv"
         android:layout_width="match_parent"
         android:layout_height="160dp"
@@ -185,6 +206,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@+id/promotions_header_tv"
-        tools:listitem="@layout/main_promotions_item" />
+        tools:listitem="@layout/main_promotions_item"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
