@@ -62,50 +62,104 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <ImageView
-        android:id="@+id/date_and_time"
+    <TextView
+        android:id="@+id/tv_date_and_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="52dp"
-        android:layout_marginBottom="24dp"
-        android:src="@drawable/date_and_time"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Дата и время"
+        android:textColor="#F9F9F9"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reservation" />
 
-    <ImageView
-        android:id="@+id/guests"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:src="@drawable/guests"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_date_and_time"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/background_date_and_time_button"
+        android:text="16/10/2023 19:00"
+        android:textColor="#F9F9F9"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_and_time" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_and_time" />
 
-    <ImageView
-        android:id="@+id/comments"
+    <TextView
+        android:id="@+id/tv_guests"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/coments"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Количество гостей"
+        android:textColor="#F9F9F9"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_date_and_time" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/background_guests_button"
+        android:entries="@array/guests"
+        android:textColor="#F9F9F9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guests"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_guests"/>
+
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Коментарий"
+        android:textColor="#F9F9F9"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <EditText
+        android:id="@+id/et_comment"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/background_comment_edittext"
+        android:hint="Введите текст"
+        android:padding="8dp"
+        android:textColor="#F9F9F9"
+        android:textColorHint="#F9F9F9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_comment" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/myButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Забронировать"
+        android:layout_width="286dp"
+        android:layout_height="70dp"
         android:layout_margin="16dp"
-        android:backgroundTint="#1E1E1E"
+        android:background="@drawable/background_custom_button"
+        android:text="Забронировать"
+        android:textAllCaps="false"
         android:textColor="#F9F9F9"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comments"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_comment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
