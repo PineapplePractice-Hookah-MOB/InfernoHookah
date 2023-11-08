@@ -57,8 +57,8 @@
         android:text="Забронировать столик"
         android:textColor="@color/main_text_color"
         android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/date_and_time"
-        app:layout_constraintStart_toStartOf="@+id/date_and_time"
+        app:layout_constraintEnd_toEndOf="@+id/bt_date_and_time"
+        app:layout_constraintStart_toStartOf="@+id/bt_date_and_time"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
@@ -78,9 +78,9 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bt_date_and_time"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/background_date_and_time_button"
         android:text="16/10/2023 19:00"
@@ -107,15 +107,16 @@
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/background_guests_button"
         android:entries="@array/guests"
         android:textColor="@color/main_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_guests"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_guests" />
 
     <TextView
         android:id="@+id/tv_comment"
@@ -136,6 +137,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="16dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/background_comment_edittext"
         android:hint="Введите текст"
         android:padding="8dp"
@@ -149,7 +151,7 @@
         android:id="@+id/requestBTN"
         android:layout_width="278dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/button_inactive"
         android:clickable="true"
         android:focusable="true"
@@ -161,7 +163,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comments" />
+        app:layout_constraintTop_toBottomOf="@+id/et_comment" />
 
     <ImageView
         android:id="@+id/btnCornerLeft"
