@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pineapplepractice.infernohookah.R
@@ -26,22 +27,24 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun visibleBottomNavigation() {
-        binding.bottomMenuNavigation.visibility = View.VISIBLE
+    fun visibleBottomNavigation()= with(binding) {
+        bottomMenuNavigation.visibility = View.VISIBLE
+        fab.visibility = View.VISIBLE
     }
 
     // проверяем регистрацию, определяем точку входа
-    private fun startApp() {
+    private fun startApp() = with(binding) {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
         navController = navHostFragment.navController
         // Проверяем, авторизован ли пользователь
         val isLoggedIn = checkUserLoggedIn()
         // Определяем точку начала навигации в зависимости от статуса авторизации
         val startDestination = if (isLoggedIn) {
-            binding.bottomMenuNavigation.visibility = View.VISIBLE
+           bottomMenuNavigation.visibility = View.VISIBLE
             R.id.homeFragment
         } else {
-            binding.bottomMenuNavigation.visibility = View.GONE
+            bottomMenuNavigation.visibility = View.GONE
+            fab.visibility = View.GONE
             R.id.authFragmentStep1
         }
         // Устанавливаем точку начала навигации
@@ -54,13 +57,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Подключаем Bottom Navigation
-    private fun initBottomNavigationMenu() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomMenuNavigation)
+    private fun initBottomNavigationMenu() = with(binding) {
+        val bottomNavigationView = bottomMenuNavigation
         val navController = findNavController(R.id.fragmentPlaceholder)
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemReselectedListener { item ->
             val reselectedDestinationId = item.itemId
             navController.popBackStack(reselectedDestinationId, inclusive = false)
+        }
+        val fab = fab
+        fab.setOnClickListener {
+            navController.navigate(R.id.reservationFragment)
         }
     }
 

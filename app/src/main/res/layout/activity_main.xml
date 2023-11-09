@@ -6,29 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.MainActivity">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomMenuNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/white"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentPlaceholder"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomMenuNavigation"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/navigation_graph" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomMenuNavigation"
+        android:layout_width="370dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/menu_shape"
+        android:clickable="false"
+        android:focusable="true"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
+        app:itemIconSize="46dp"
+        app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
+        app:itemRippleColor="#19FFFFFF"
+        app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="@+id/fragmentPlaceholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:backgroundTint="@color/card_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:rotation="23"
+        android:src="@drawable/ic_booking_rotate"
+        android:visibility="visible"
+        app:fabCustomSize="64dp"
+        app:itemRippleColor="#19FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomMenuNavigation"
+        app:layout_constraintEnd_toEndOf="@+id/bottomMenuNavigation"
+        app:layout_constraintStart_toStartOf="@+id/bottomMenuNavigation"
+        app:layout_constraintTop_toTopOf="@+id/bottomMenuNavigation"
+        app:maxImageSize="46dp"
+        app:shapeAppearanceOverlay="@style/FabOktagon"
+        app:tint="@drawable/bottom_nav_icon_color_selector" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
