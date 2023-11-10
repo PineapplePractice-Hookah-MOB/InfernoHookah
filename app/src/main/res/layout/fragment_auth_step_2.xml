@@ -73,10 +73,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/requestBTN"
-        android:layout_width="278dp"
-        android:layout_height="62dp"
+        android:layout_width="286dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="94dp"
-        android:background="@drawable/button_inactive"
+        android:background="@drawable/background_custom_button"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/montserrat_bold"
@@ -89,26 +89,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputProofNumberTI" />
-
-    <ImageView
-        android:id="@+id/btnCornerLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="-36dp"
-        android:layout_marginBottom="-5dp"
-        android:src="@drawable/corner_left"
-        app:layout_constraintBottom_toBottomOf="@+id/requestBTN"
-        app:layout_constraintEnd_toStartOf="@+id/requestBTN" />
-
-    <ImageView
-        android:id="@+id/btnCornerRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="-5dp"
-        android:layout_marginBottom="-36dp"
-        android:src="@drawable/corner_right"
-        app:layout_constraintBottom_toTopOf="@+id/requestBTN"
-        app:layout_constraintEnd_toEndOf="@+id/requestBTN" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
