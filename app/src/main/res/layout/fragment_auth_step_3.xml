@@ -120,5 +120,4 @@
         app:layout_constraintStart_toStartOf="@+id/inputBirthdayTI"
         app:layout_constraintTop_toBottomOf="@+id/inputBirthdayTI" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
