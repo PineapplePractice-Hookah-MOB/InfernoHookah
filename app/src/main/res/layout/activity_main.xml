@@ -29,7 +29,6 @@
         app:itemActiveIndicatorStyle="@android:color/transparent"
         app:itemIconSize="46dp"
         app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
-        app:itemRippleColor="#19FFFFFF"
         app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="@+id/fragmentPlaceholder"

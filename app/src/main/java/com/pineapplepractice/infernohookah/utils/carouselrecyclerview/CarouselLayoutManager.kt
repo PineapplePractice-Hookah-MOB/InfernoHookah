@@ -428,7 +428,7 @@ class CarouselLayoutManager constructor(
         animator?.addListener(object : Animator.AnimatorListener {
 
             override fun onAnimationStart(animation: Animator) {
-                TODO("Not yet implemented")
+                //do nothing
             }
 
             override fun onAnimationEnd(animation: Animator) {
@@ -436,11 +436,11 @@ class CarouselLayoutManager constructor(
             }
 
             override fun onAnimationCancel(animation: Animator) {
-                TODO("Not yet implemented")
+                //do nothing
             }
 
             override fun onAnimationRepeat(animation: Animator) {
-                TODO("Not yet implemented")
+                //do nothing
             }
 
         })

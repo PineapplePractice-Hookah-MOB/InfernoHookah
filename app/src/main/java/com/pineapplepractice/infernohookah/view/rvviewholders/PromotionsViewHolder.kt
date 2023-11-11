@@ -5,17 +5,17 @@ import com.bumptech.glide.Glide
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.databinding.MainPromotionsItemBinding
-import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsListRecyclerAdapter
+import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsRecyclerAdapter
 
 
-class PromotionsListViewHolder(binding: MainPromotionsItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class PromotionsViewHolder(binding: MainPromotionsItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     private val imageOfPromotion = binding.promotionsImage
     private val titleOfPromotions = binding.promotionsTitle
 
     fun bind(
         promotions: Promotions,
-        clickListener: PromotionsListRecyclerAdapter.OnItemClickListener
+        clickListener: PromotionsRecyclerAdapter.OnItemClickListener
     ) {
         titleOfPromotions.text = promotions.description
         Glide.with(itemView)
