@@ -7,12 +7,11 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Promotions
-import com.pineapplepractice.infernohookah.data.promotionsItems
 import com.pineapplepractice.infernohookah.databinding.MainPromotionsItemBinding
-import com.pineapplepractice.infernohookah.view.rvviewholders.PromotionsListViewHolder
+import com.pineapplepractice.infernohookah.view.rvviewholders.PromotionsViewHolderForCorousel
 
 
-class PromotionsListRecyclerAdapter(
+class PromotionsRecyclerAdapterForCorousel(
     private var items : List<Promotions>,
     private val clickListener: OnItemClickListener
 ) :
@@ -21,7 +20,7 @@ class PromotionsListRecyclerAdapter(
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PromotionsListViewHolder(
+        return PromotionsViewHolderForCorousel(
             MainPromotionsItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -32,7 +31,7 @@ class PromotionsListRecyclerAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is PromotionsListViewHolder -> {
+            is PromotionsViewHolderForCorousel -> {
                 ViewCompat.setTransitionName(
                     holder.itemView.findViewById(R.id.promotionsImage),
                     items[position].description
