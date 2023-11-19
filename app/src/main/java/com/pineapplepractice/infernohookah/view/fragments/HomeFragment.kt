@@ -15,14 +15,14 @@ import com.pineapplepractice.infernohookah.data.promotionsItems
 import com.pineapplepractice.infernohookah.databinding.FragmentHomeBinding
 import com.pineapplepractice.infernohookah.utils.carouselrecyclerview.SnapHelperOneByOne
 import com.pineapplepractice.infernohookah.view.activity.MainActivity
-import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsRecyclerAdapterForCorousel
+import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsRecyclerAdapter
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val homeFragmentViewModel: HomeViewModel by viewModels()
-    private lateinit var promotionsAdapter: PromotionsRecyclerAdapterForCorousel
+    private lateinit var promotionsAdapter: PromotionsRecyclerAdapter
     private lateinit var promotionsRecyclerView: CarouselRecyclerview
 
     override fun onCreateView(
@@ -50,11 +50,14 @@ class HomeFragment : Fragment() {
     private fun initRV() {
         promotionsRecyclerView = binding.promotionsRv
         promotionsRecyclerView.apply {
-            promotionsAdapter = PromotionsRecyclerAdapterForCorousel(promotionsItems,
-                object : PromotionsRecyclerAdapterForCorousel.OnItemClickListener {
+            promotionsAdapter = PromotionsRecyclerAdapter(promotionsItems,
+                object : PromotionsRecyclerAdapter.OnItemClickListener {
                     override fun click(promotions: Promotions, image: ImageView) {
-                        //пишем логику нажатия на акцию на главном экране
-
+                        (requireActivity() as MainActivity).launchDetailsFragment(
+                            promotions,
+                            R.id.action_homeFragment_to_promotionDetailsFragment,
+                            image
+                        )
                     }
                 })
             promotionsRecyclerView.adapter = promotionsAdapter
@@ -66,5 +69,10 @@ class HomeFragment : Fragment() {
             val currentlyCenterPosition = promotionsRecyclerView.getSelectedPosition()
             carouselLayoutManager.scrollToPosition(3)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

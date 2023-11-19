@@ -22,7 +22,7 @@ class AuthFragmentStep1 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAuthStep1Binding.inflate(inflater, container, false)
         return binding.root
     }
@@ -55,6 +55,11 @@ class AuthFragmentStep1 : Fragment() {
         } catch (e: Exception) {
             throw e // обработка ошибки
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

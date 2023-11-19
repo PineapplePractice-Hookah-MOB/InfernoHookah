@@ -2,15 +2,19 @@ package com.pineapplepractice.infernohookah.view.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pineapplepractice.infernohookah.R
+import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.databinding.ActivityMainBinding
+import com.pineapplepractice.infernohookah.view.fragments.PromotionDetailsFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -79,5 +83,34 @@ class MainActivity : AppCompatActivity() {
         // Здесь необходимо реаоизовать логику проверки наличия токена в SharedPreferences
         // Возвращаем true, если пользователь авторизован, и false в противном случае.
         return false
+    }
+
+    fun launchDetailsFragment(promotion: Promotions, direction: Int, poster: ImageView) {
+        //Создаем "посылку"
+        val bundle = Bundle()
+        val extras: FragmentNavigator.Extras = FragmentNavigator.Extras.Builder()
+            .addSharedElement(
+                poster,
+                poster.transitionName
+            )
+            .build()
+
+        //Кладем наш фильм в "посылку"
+        bundle.putParcelable(KEY_PROMOTIONS_DETAILS_FRAGMENT, promotion)
+
+        //Кладем фрагмент с деталями в перменную
+        val fragment = PromotionDetailsFragment()
+
+        //Прикрепляем нашу "посылку" к фрагменту
+        fragment.arguments = bundle
+
+        //Запускаем фрагмент
+        navController.navigate(direction, fragment.arguments, null, extras)
+    }
+
+    companion object {
+        const val KEY_PROMOTIONS_DETAILS_FRAGMENT = "promotion"
+        const val TRANSITION_DURATION = 400L
+        const val TRANSITION_DURATION_FAST = 150L
     }
 }

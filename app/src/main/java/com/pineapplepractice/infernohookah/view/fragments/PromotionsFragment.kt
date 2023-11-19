@@ -9,12 +9,13 @@ import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.data.promotionsItems
 import com.pineapplepractice.infernohookah.viewmodel.PromotionsViewModel
 import com.pineapplepractice.infernohookah.databinding.FragmentPromotionsBinding
+import com.pineapplepractice.infernohookah.view.activity.MainActivity
 import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsRecyclerAdapter
-import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsRecyclerAdapterForCorousel
 
 class PromotionsFragment : Fragment() {
     private var _binding: FragmentPromotionsBinding? = null
@@ -45,13 +46,20 @@ class PromotionsFragment : Fragment() {
                 promotionsItems,
                 object : PromotionsRecyclerAdapter.OnItemClickListener {
                     override fun click(promotions: Promotions, image: ImageView) {
-                        //пишем логику нажатия на акцию на главном экране
-
+                        (requireActivity() as MainActivity).launchDetailsFragment(
+                            promotions,
+                            R.id.action_promotionsFragment_to_promotionDetailsFragment,
+                            image)
                     }
                 })
         }
         recyclerView.adapter = promotionsRecyclerAdapter
         val layoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = layoutManager
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

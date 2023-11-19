@@ -1,10 +1,17 @@
 package com.pineapplepractice.infernohookah.data
 
+import com.google.gson.annotations.SerializedName
+
 data class HistoryBonus(
+    @SerializedName("id")
     val id: Int,
+    @SerializedName("date")
     val date: String,
+    @SerializedName("isWriteOff")
     val isWriteOff: Boolean,
+    @SerializedName("sum")
     val sum: Double,
+    @SerializedName("bonus")
     val bonus: Int
 )
 
