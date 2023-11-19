@@ -9,7 +9,6 @@ import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.databinding.MainPromotionsItemBinding
 import com.pineapplepractice.infernohookah.view.rvviewholders.PromotionsViewHolder
-import com.pineapplepractice.infernohookah.view.rvviewholders.PromotionsViewHolderForCorousel
 
 
 class PromotionsRecyclerAdapter(
@@ -21,7 +20,7 @@ class PromotionsRecyclerAdapter(
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PromotionsViewHolderForCorousel(
+        return PromotionsViewHolder(
             MainPromotionsItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -47,6 +46,10 @@ class PromotionsRecyclerAdapter(
         fun click(promotions: Promotions, image: ImageView)
     }
 
+    fun updateData(list: List<Promotions>) {
+        this.items = list
+        notifyDataSetChanged()
+    }
 
 }
 

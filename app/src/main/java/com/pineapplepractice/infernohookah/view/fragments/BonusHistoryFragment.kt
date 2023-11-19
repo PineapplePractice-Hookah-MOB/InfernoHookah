@@ -78,6 +78,11 @@ class BonusHistoryFragment : Fragment() {
         recyclerView.addOnScrollListener(scrollListener)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     companion object {
         private const val VISIBLE_THRESHOLD = 10
         private var isLoading: Boolean = false
