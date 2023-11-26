@@ -2,10 +2,16 @@ package com.pineapplepractice.infernohookah.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.Index
 import com.google.gson.annotations.SerializedName
 import com.pineapplepractice.infernohookah.R
 
+@Entity(tableName = "cached_promotion",
+    primaryKeys = ["id"],
+    indices = [Index(value = ["name"], unique = true)])
 data class Promotions(
+    @SerializedName("id") val id: Int,
     @SerializedName("name")
     val name: String?,
     @SerializedName("description")
@@ -13,7 +19,7 @@ data class Promotions(
     @SerializedName("image")
     val image: Int
 ) : Parcelable {
-    constructor(parcel: Parcel) : this(
+    constructor(parcel: Parcel) : this(0,
         parcel.readString(),
         parcel.readString(),
         parcel.readInt()
@@ -41,9 +47,9 @@ data class Promotions(
 }
 
 val promotionsItems = listOf(
-    Promotions(name = "Скидка до 19:00!", description = "Кальян до 19 каждый день 600 руб", image = R.drawable.ic_launcher_background),
-    Promotions(name = "Скидка до 19:00 на 2 кальяна!", description = "2 кальяна до 19 каждый день 1000 руб", image = R.drawable.ic_launcher_background),
-    Promotions(name = "Студентам почет!", description = "Студентам скидка 10 %", image = R.drawable.ic_launcher_background),
-    Promotions(name = "Дни рождения", description = "В ДР и 7 дней после 20 %", image = R.drawable.ic_launcher_background),
-    Promotions(name = "Ты отзыв, а мы скидку!", description = "За отзыв скидка 10 %", image = R.drawable.ic_launcher_background)
+    Promotions(0,name = "Скидка до 19:00!", description = "Кальян до 19 каждый день 600 руб", image = R.drawable.ic_launcher_background),
+    Promotions(1,name = "Скидка до 19:00 на 2 кальяна!", description = "2 кальяна до 19 каждый день 1000 руб", image = R.drawable.ic_launcher_background),
+    Promotions(2,name = "Студентам почет!", description = "Студентам скидка 10 %", image = R.drawable.ic_launcher_background),
+    Promotions(3,name = "Дни рождения", description = "В ДР и 7 дней после 20 %", image = R.drawable.ic_launcher_background),
+    Promotions(4,name = "Ты отзыв, а мы скидку!", description = "За отзыв скидка 10 %", image = R.drawable.ic_launcher_background)
 )
