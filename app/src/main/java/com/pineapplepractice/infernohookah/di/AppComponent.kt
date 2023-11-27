@@ -3,6 +3,7 @@ package com.pineapplepractice.infernohookah.di
 import com.pineapplepractice.infernohookah.di.modules.DatabaseModule
 import com.pineapplepractice.infernohookah.di.modules.DomainModule
 import com.pineapplepractice.infernohookah.di.modules.RemoteModule
+import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -16,4 +17,6 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent {
+    fun inject(homeViewModel: HomeViewModel)
+
 }

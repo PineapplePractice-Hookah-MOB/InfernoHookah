@@ -17,6 +17,10 @@ import com.pineapplepractice.infernohookah.utils.carouselrecyclerview.SnapHelper
 import com.pineapplepractice.infernohookah.view.activity.MainActivity
 import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsRecyclerAdapter
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -24,6 +28,9 @@ class HomeFragment : Fragment() {
     private val homeFragmentViewModel: HomeViewModel by viewModels()
     private lateinit var promotionsAdapter: PromotionsRecyclerAdapter
     private lateinit var promotionsRecyclerView: CarouselRecyclerview
+
+    private lateinit var scope: CoroutineScope
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +51,13 @@ class HomeFragment : Fragment() {
 
         binding.bonusCard.setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_bonusHistoryFragment, null)
+        }
+
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                homeFragmentViewModel.listFlow.collect {
+                }
+            }
         }
     }
 
