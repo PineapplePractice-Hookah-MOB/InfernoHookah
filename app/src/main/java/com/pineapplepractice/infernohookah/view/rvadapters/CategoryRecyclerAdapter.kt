@@ -6,19 +6,21 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Tea
-import com.pineapplepractice.infernohookah.data.listOfTea
+import com.pineapplepractice.infernohookah.data.listOfCategory
 import com.pineapplepractice.infernohookah.databinding.DishesItemBinding
+import com.pineapplepractice.infernohookah.databinding.ItemCategoryBinding
+import com.pineapplepractice.infernohookah.view.rvviewholders.CategoryViewHolder
 import com.pineapplepractice.infernohookah.view.rvviewholders.DishesViewHolder
 
-class DishesRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CategoryRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items = listOfTea
+    private var items = listOfCategory
 
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return DishesViewHolder(
-            DishesItemBinding.inflate(
+        return CategoryViewHolder(
+            ItemCategoryBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -28,25 +30,14 @@ class DishesRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is DishesViewHolder -> {
+            is CategoryViewHolder -> {
                 ViewCompat.setTransitionName(
-                    holder.itemView.findViewById(R.id.dishesCardView),
+                    holder.itemView.findViewById(R.id.categoryCV),
                     items[position].id.toString()
                 )
                 holder.bind(items[position])
             }
         }
-    }
-
-    fun setItems(newItems: List<Tea>) {
-        items = newItems
-        notifyDataSetChanged()
-    }
-
-    // Метод для фильтрации элементов по категории
-    fun filterItemsByCategory(category: String) {
-        val filteredItems = items.filter { it.description == category }
-        setItems(filteredItems)
     }
 
 }
