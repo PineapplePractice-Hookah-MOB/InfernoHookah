@@ -1,7 +1,10 @@
 package com.pineapplepractice.infernohookah.view.rvadapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.pineapplepractice.infernohookah.R
@@ -13,6 +16,8 @@ class CategoryRecyclerAdapter(
     private var items: List<Category>,
     private val clickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var selectedItemPosition: Int = 0
 
     override fun getItemCount() = items.size
 
@@ -26,14 +31,30 @@ class CategoryRecyclerAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int
+    ) {
         when (holder) {
             is CategoryViewHolder -> {
                 ViewCompat.setTransitionName(
                     holder.itemView.findViewById(R.id.categoryCV),
                     items[position].id.toString()
                 )
-                holder.bind(items[position], clickListener)
+                holder.bind(items[position], clickListener.also{
+                    if (selectedItemPosition == position) {
+                        holder.itemView.findViewById<CardView>(R.id.categoryCV)
+                            .setCardBackgroundColor(Color.WHITE)
+                        holder.itemView.findViewById<TextView>(R.id.categoryCVText)
+                            .setTextColor(Color.parseColor("#272727"))
+                    } else {
+                        holder.itemView.findViewById<CardView>(R.id.categoryCV)
+                            .setCardBackgroundColor(Color.parseColor("#272727"))
+                        holder.itemView.findViewById<TextView>(R.id.categoryCVText)
+                            .setTextColor(Color.WHITE)
+                    }
+                })
+
             }
         }
     }
@@ -41,11 +62,6 @@ class CategoryRecyclerAdapter(
     //Интерфейс для обработки кликов
     interface OnItemClickListener {
         fun click(category: Category)
-    }
-
-    fun updateData(list: List<Category>) {
-        this.items = list
-        notifyDataSetChanged()
     }
 
 }

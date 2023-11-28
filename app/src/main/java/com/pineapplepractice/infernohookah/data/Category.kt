@@ -1,7 +1,7 @@
 package com.pineapplepractice.infernohookah.data
 
 data class Category(
-    val id: Int,
+    var id: Int,
     val name: String
 )
 
