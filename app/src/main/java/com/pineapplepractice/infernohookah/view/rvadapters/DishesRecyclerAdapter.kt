@@ -13,6 +13,7 @@ import com.pineapplepractice.infernohookah.view.rvviewholders.DishesViewHolder
 class DishesRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items = listOfTea
+    private var returnItems = listOfTea
 
     override fun getItemCount() = items.size
 
@@ -45,8 +46,20 @@ class DishesRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     // Метод для фильтрации элементов по категории
     fun filterItemsByCategory(category: String) {
-        val filteredItems = items.filter { it.description == category }
-        setItems(filteredItems)
+        returnItems()
+        if (category == "Все") {
+            val filteredItems = returnItems
+            setItems(filteredItems)
+        } else {
+            val filteredItems = items.filter { it.description == category }
+            setItems(filteredItems)
+        }
+
+    }
+
+    fun returnItems(){
+        items = returnItems
+        notifyDataSetChanged()
     }
 
 }

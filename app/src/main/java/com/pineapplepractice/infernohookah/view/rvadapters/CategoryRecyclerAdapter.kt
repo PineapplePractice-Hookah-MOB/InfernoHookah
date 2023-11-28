@@ -5,16 +5,14 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.pineapplepractice.infernohookah.R
-import com.pineapplepractice.infernohookah.data.Tea
-import com.pineapplepractice.infernohookah.data.listOfCategory
-import com.pineapplepractice.infernohookah.databinding.DishesItemBinding
+import com.pineapplepractice.infernohookah.data.Category
 import com.pineapplepractice.infernohookah.databinding.ItemCategoryBinding
 import com.pineapplepractice.infernohookah.view.rvviewholders.CategoryViewHolder
-import com.pineapplepractice.infernohookah.view.rvviewholders.DishesViewHolder
 
-class CategoryRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private var items = listOfCategory
+class CategoryRecyclerAdapter(
+    private var items: List<Category>,
+    private val clickListener: OnItemClickListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
@@ -35,9 +33,19 @@ class CategoryRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(
                     holder.itemView.findViewById(R.id.categoryCV),
                     items[position].id.toString()
                 )
-                holder.bind(items[position])
+                holder.bind(items[position], clickListener)
             }
         }
+    }
+
+    //Интерфейс для обработки кликов
+    interface OnItemClickListener {
+        fun click(category: Category)
+    }
+
+    fun updateData(list: List<Category>) {
+        this.items = list
+        notifyDataSetChanged()
     }
 
 }

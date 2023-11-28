@@ -1,16 +1,21 @@
 package com.pineapplepractice.infernohookah.view.fragments
 
+import android.nfc.Tag
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.pineapplepractice.infernohookah.viewmodel.DishesViewModel
+import com.pineapplepractice.infernohookah.data.Category
+import com.pineapplepractice.infernohookah.data.listOfCategory
 import com.pineapplepractice.infernohookah.databinding.FragmentDishesBinding
+import com.pineapplepractice.infernohookah.view.activity.MainActivity
 import com.pineapplepractice.infernohookah.view.rvadapters.CategoryRecyclerAdapter
 import com.pineapplepractice.infernohookah.view.rvadapters.DishesRecyclerAdapter
+import com.pineapplepractice.infernohookah.viewmodel.DishesViewModel
 
 class DishesFragment : Fragment() {
     private var _binding: FragmentDishesBinding? = null
@@ -35,22 +40,27 @@ class DishesFragment : Fragment() {
     }
 
     private fun initRV() {
-        initCategoryRV()
+
+        // для Items
         recyclerView = binding.dishesRecyclerView
         recyclerView.apply {
             dishesRecyclerAdapter = DishesRecyclerAdapter()
         }
         recyclerView.adapter = dishesRecyclerAdapter
 
-//        dishesRecyclerAdapter.filterItemsByCategory("Зеленый")
-    }
-
-    private fun initCategoryRV() {
+        // Для категорий
         recyclerView = binding.categoryRecyclerView
         recyclerView.apply {
-            categoryRecyclerAdapter = CategoryRecyclerAdapter()
+            categoryRecyclerAdapter = CategoryRecyclerAdapter(listOfCategory,
+                object : CategoryRecyclerAdapter.OnItemClickListener {
+                    override fun click(category: Category) {
+                        dishesRecyclerAdapter.filterItemsByCategory(category.name)
+                    }
+                })
         }
         recyclerView.adapter = categoryRecyclerAdapter
+
+//        dishesRecyclerAdapter.filterItemsByCategory("Зеленый")
     }
 
     override fun onDestroyView() {
