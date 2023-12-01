@@ -46,10 +46,5 @@ class PromotionsRecyclerAdapter(
         fun click(promotions: Promotions, image: ImageView)
     }
 
-    fun updateData(list: List<Promotions>) {
-        this.items = list
-        notifyDataSetChanged()
-    }
-
 }
 

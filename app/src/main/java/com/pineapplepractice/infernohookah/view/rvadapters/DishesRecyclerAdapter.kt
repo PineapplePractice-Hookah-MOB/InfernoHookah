@@ -39,7 +39,7 @@ class DishesRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         }
     }
 
-    fun setItems(newItems: List<Tea>) {
+    private fun setItems(newItems: List<Tea>) {
         items = newItems
         notifyDataSetChanged()
     }
@@ -57,7 +57,7 @@ class DishesRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     }
 
-    fun returnItems(){
+    private fun returnItems(){
         items = returnItems
         notifyDataSetChanged()
     }

@@ -6,11 +6,11 @@ data class Category(
 )
 
 val listOfCategory = listOf(
-    Category(id = 1, name = "Все"),
-    Category(id = 2, name = "Фирменный"),
-    Category(id = 3, name = "Вкусовой"),
-    Category(id = 4, name = "Улун"),
-    Category(id = 5, name = "Зеленый"),
-    Category(id = 6, name = "Черный")
+    Category(id = 0, name = "Все"),
+    Category(id = 1, name = "Фирменный"),
+    Category(id = 2, name = "Вкусовой"),
+    Category(id = 3, name = "Улун"),
+    Category(id = 4, name = "Зеленый"),
+    Category(id = 5, name = "Черный")
 )
 

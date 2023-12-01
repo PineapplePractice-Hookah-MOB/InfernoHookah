@@ -4,10 +4,11 @@ import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pineapplepractice.infernohookah.R
+import com.pineapplepractice.infernohookah.data.Hookah
 import com.pineapplepractice.infernohookah.data.Tea
 import com.pineapplepractice.infernohookah.databinding.DishesItemBinding
 
-class DishesViewHolder(binding: DishesItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class HookahViewHolder(binding: DishesItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     private val name = binding.nameOfDish
     private val description = binding.descriptionOfDish
@@ -17,15 +18,15 @@ class DishesViewHolder(binding: DishesItemBinding) : RecyclerView.ViewHolder(bin
 
     @SuppressLint("SetTextI18n")
     fun bind(
-        tea: Tea
+        hookah: Hookah
     ) {
-        name.text = tea.name
-        description.text = tea.description
-        count.text = tea.count.toString() + "мл"
-        price.text = tea.price.toString() + "р."
+        name.text = hookah.name
+        description.text = hookah.description
+        count.text = hookah.count
+        price.text = hookah.price.toString() + "р."
         Glide.with(itemView)
-            .load(tea.image)
-            .error(R.drawable.ic_menu)
+            .load(hookah.image)
+            .error(R.drawable.ic_hookah_white)
             .centerCrop()
             .into(image)
 

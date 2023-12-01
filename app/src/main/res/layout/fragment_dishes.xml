@@ -61,93 +61,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <LinearLayout
-        android:id="@+id/typeItemSpace"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/typeOfDishesRV"
         android:layout_width="match_parent"
         android:layout_height="77dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_marginBottom="12dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dishes_header_tv">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/teaCardView"
-            android:layout_weight="1"
-            android:layout_width="170dp"
-            android:layout_height="77dp"
-            android:layout_marginEnd="5dp"
-            app:cardCornerRadius="5dp"
-            app:cardBackgroundColor="@color/card_background">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/teaTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="center"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="Чай"
-                    android:textColor="@color/main_text_color"/>
-
-                <ImageView
-                    android:id="@+id/teaTypeIV"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    android:gravity="center"
-                    android:src="@mipmap/ic_launcher"/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/hookahCardView"
-            android:layout_width="170dp"
-            android:layout_height="77dp"
-            android:layout_weight="1"
-            app:cardCornerRadius="5dp"
-            app:cardBackgroundColor="@color/card_background">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/hookahTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="center"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:text="Кальяны"
-                    android:textColor="@color/main_text_color"/>
-
-                <ImageView
-                    android:id="@+id/hookahTypeIV"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    android:gravity="center"
-                    android:src="@mipmap/ic_launcher"/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/dishes_header_tv"
+        tools:listitem="@layout/item_type_of_dishes">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/categoryTV"
@@ -163,7 +93,7 @@
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/typeItemSpace" />
+        app:layout_constraintTop_toBottomOf="@+id/typeOfDishesRV" />
 
     <LinearLayout
         android:id="@+id/categoryItemSpace"
@@ -198,6 +128,23 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="72dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryItemSpace"
+        app:spanCount="2"
+        tools:listitem="@layout/dishes_item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hookahsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="72dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

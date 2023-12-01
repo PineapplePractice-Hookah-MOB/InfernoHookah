@@ -15,7 +15,7 @@ class CategoryViewHolder(binding: ItemCategoryBinding) : RecyclerView.ViewHolder
     @SuppressLint("SetTextI18n")
     fun bind(
         category: Category,
-        clickListener: CategoryRecyclerAdapter.OnItemClickListener
+        clickListener: CategoryRecyclerAdapter.OnItemClickListener,
     ) {
         name.text = category.name
         itemView.findViewById<View>(R.id.categoryCV).setOnClickListener {

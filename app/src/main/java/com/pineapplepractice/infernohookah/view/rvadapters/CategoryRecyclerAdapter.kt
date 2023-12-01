@@ -1,5 +1,6 @@
 package com.pineapplepractice.infernohookah.view.rvadapters
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -41,7 +42,7 @@ class CategoryRecyclerAdapter(
                     holder.itemView.findViewById(R.id.categoryCV),
                     items[position].id.toString()
                 )
-                holder.bind(items[position], clickListener.also{
+                holder.bind(items[position], clickListener)
                     if (selectedItemPosition == position) {
                         holder.itemView.findViewById<CardView>(R.id.categoryCV)
                             .setCardBackgroundColor(Color.WHITE)
@@ -53,7 +54,16 @@ class CategoryRecyclerAdapter(
                         holder.itemView.findViewById<TextView>(R.id.categoryCVText)
                             .setTextColor(Color.WHITE)
                     }
-                })
+
+                holder.itemView.setOnClickListener {
+                    val category = items[position]
+                    category.id.toString()
+                    val previousSelected = selectedItemPosition
+                    selectedItemPosition = holder.adapterPosition
+                    notifyItemChanged(previousSelected)
+                    notifyItemChanged(selectedItemPosition)
+                    clickListener.click(category)
+                }
 
             }
         }
