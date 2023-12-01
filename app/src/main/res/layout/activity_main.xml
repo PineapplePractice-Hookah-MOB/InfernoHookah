@@ -18,7 +18,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomMenuNavigation"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
         android:layout_height="51dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
@@ -34,7 +34,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/fragmentPlaceholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu"/>
+        app:menu="@menu/bottom_navigation_menu" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/categoryCV"
+    android:layout_width="111dp"
+    android:layout_height="32dp"
+    android:layout_marginEnd="6dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/card_background">
+
+    <TextView
+        android:id="@+id/categoryCVText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/main_text_color"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:text="Категория"/>
+
+</androidx.cardview.widget.CardView>
