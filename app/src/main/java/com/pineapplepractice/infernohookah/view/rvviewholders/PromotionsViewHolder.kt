@@ -18,12 +18,16 @@ class PromotionsViewHolder(binding: MainPromotionsItemBinding) : RecyclerView.Vi
 
     private val imageOfPromotion = binding.promotionsImage
     private val titleOfPromotions = binding.promotionsTitle
+    private val smalllDesc = binding.promotionsDesc
+    private val time = binding.promotionsTime
 
     fun bind(
         promotions: Promotions,
         clickListener: PromotionsRecyclerAdapter.OnItemClickListener
     ) {
-        titleOfPromotions.text = promotions.description
+        titleOfPromotions.text = promotions.name
+        smalllDesc.text = promotions.smallDescription
+        time.text = promotions.time
         Glide.with(itemView)
             .load(promotions.image)
             .error(R.drawable.ic_logo_inferno)

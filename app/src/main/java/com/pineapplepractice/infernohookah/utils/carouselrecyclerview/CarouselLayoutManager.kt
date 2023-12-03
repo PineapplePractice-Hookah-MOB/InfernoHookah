@@ -1,4 +1,4 @@
-package com.jackandphantom.carouselrecyclerview
+package com.pineapplepractice.infernohookah.utils.carouselrecyclerview
 
 import android.animation.Animator
 import android.animation.ValueAnimator

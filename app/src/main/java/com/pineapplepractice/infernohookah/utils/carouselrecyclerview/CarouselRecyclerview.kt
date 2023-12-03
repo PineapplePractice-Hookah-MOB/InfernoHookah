@@ -1,4 +1,4 @@
-package com.jackandphantom.carouselrecyclerview
+package com.pineapplepractice.infernohookah.utils.carouselrecyclerview
 
 import android.content.Context
 import android.os.Bundle
@@ -154,6 +154,10 @@ class CarouselRecyclerview(context: Context, attributeSet: AttributeSet) : Recyc
     override fun setAdapter(adapter: Adapter<*>?) {
         super.setAdapter(adapter)
         restorePosition()
+
+    }
+
+    override fun addItemDecoration(decor: ItemDecoration) {
 
     }
 
