@@ -1,4 +1,4 @@
-package com.jackandphantom.carouselrecyclerview.view
+package com.pineapplepractice.infernohookah.utils.carouselrecyclerview.forview
 
 import android.content.Context
 import android.graphics.*

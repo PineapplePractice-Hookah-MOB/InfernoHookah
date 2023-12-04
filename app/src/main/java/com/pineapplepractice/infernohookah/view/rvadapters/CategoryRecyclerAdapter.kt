@@ -1,6 +1,5 @@
 package com.pineapplepractice.infernohookah.view.rvadapters
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup

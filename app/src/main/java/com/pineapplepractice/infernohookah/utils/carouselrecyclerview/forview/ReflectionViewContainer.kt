@@ -12,7 +12,7 @@
 * limitations under the License.
 * */
 
-package com.jackandphantom.carouselrecyclerview.view
+package com.pineapplepractice.infernohookah.utils.carouselrecyclerview.forview
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi

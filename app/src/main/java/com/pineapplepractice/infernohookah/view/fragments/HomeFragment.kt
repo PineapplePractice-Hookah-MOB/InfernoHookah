@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
-import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+import com.pineapplepractice.infernohookah.utils.carouselrecyclerview.CarouselRecyclerview
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.data.promotionsItems
@@ -20,7 +21,6 @@ import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as MainActivity).visibleBottomNavigation()
+
         initRV()
 
         val navHostFragment =
@@ -80,8 +81,8 @@ class HomeFragment : Fragment() {
             val linearSnapHelper = SnapHelperOneByOne()
             linearSnapHelper.attachToRecyclerView(promotionsRecyclerView)
             val carouselLayoutManager = promotionsRecyclerView.getCarouselLayoutManager()
-            val currentlyCenterPosition = promotionsRecyclerView.getSelectedPosition()
-            carouselLayoutManager.scrollToPosition(3)
+            carouselLayoutManager.scrollToPosition(2)
+
         }
     }
 
