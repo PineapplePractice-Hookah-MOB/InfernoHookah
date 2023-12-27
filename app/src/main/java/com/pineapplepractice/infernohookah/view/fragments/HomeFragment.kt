@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+import com.pineapplepractice.infernohookah.App
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.data.promotionsItems
@@ -21,15 +24,26 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
+
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var homeViewModel: HomeViewModel
+
     private val homeFragmentViewModel: HomeViewModel by viewModels()
     private lateinit var promotionsAdapter: PromotionsRecyclerAdapter
     private lateinit var promotionsRecyclerView: CarouselRecyclerview
 
     private lateinit var scope: CoroutineScope
+
+
+    @Inject
+    lateinit var vmFactory: HomeViewModel.Factory
+
+//    private val homeViewModel: HomeViewModel by viewModels { vmFactory }
 
 
     override fun onCreateView(
@@ -42,6 +56,21 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        App.instance.dagger.inject(this)
+
+        homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            homeFragmentViewModel.bookingTVText.collect { newText ->
+                // Обработка нового текста
+                if (newText.isNotEmpty()) {
+                    binding.bookingTv.text = newText
+                    binding.cardViewBooking.visibility = View.VISIBLE
+                }
+            }
+        }
+
         (requireActivity() as MainActivity).visibleBottomNavigation()
         initRV()
 

@@ -83,12 +83,13 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/background_date_and_time_button"
-        android:text="16/10/2023 19:00"
         android:textColor="@color/main_text_color"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date_and_time" />
+    <!--        android:text="16/10/2023 19:00"-->
+
 
     <TextView
         android:id="@+id/tv_guests"

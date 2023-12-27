@@ -48,7 +48,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="82dp" />
 
-    <androidx.cardview.widget.CardView
+<!--    <androidx.cardview.widget.CardView
         android:id="@+id/notificationAboutReservation"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -84,7 +84,40 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+    </androidx.cardview.widget.CardView>-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_booking"
+        android:layout_width="350dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        app:cardBackgroundColor="#272727"
+        app:cardCornerRadius="20dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline">
+
+        <TextView
+            android:id="@+id/booking_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="У вас забронирован столик\n16.10.2023 в 19:00"
+            android:textColor="#F9F9F9"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
     </androidx.cardview.widget.CardView>
+
+
 
     <TextView
         android:id="@+id/bonus_header_tv"
@@ -95,20 +128,21 @@
         android:text="Бонусы"
         android:textColor="@color/white"
         android:textSize="25sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bonus_card"
-        android:layout_width="0dp"
+        android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_margin="24dp"
         android:elevation="@dimen/cardElevation"
         app:cardCornerRadius="@dimen/cardCornerRadius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bonus_header_tv"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_booking"
         android:clickable="true"
         android:focusable="true"
         android:backgroundTint="#692275">

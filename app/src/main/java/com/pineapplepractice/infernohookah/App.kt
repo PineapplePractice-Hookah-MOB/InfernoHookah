@@ -3,6 +3,7 @@ package com.pineapplepractice.infernohookah
 import android.app.Application
 import com.pineapplepractice.infernohookah.di.AppComponent
 import com.pineapplepractice.infernohookah.di.DaggerAppComponent
+import com.pineapplepractice.infernohookah.di.modules.AppModule
 import com.pineapplepractice.infernohookah.di.modules.DatabaseModule
 import com.pineapplepractice.infernohookah.di.modules.DomainModule
 import com.pineapplepractice.infernohookah.di.modules.RemoteModule
@@ -16,7 +17,8 @@ class App : Application() {
         dagger = DaggerAppComponent.builder()
             .remoteModule(RemoteModule())
             .databaseModule(DatabaseModule())
-            .domainModule(DomainModule(this))
+            .domainModule(DomainModule())
+            .appModule(AppModule(context = this))
             .build()
     }
 

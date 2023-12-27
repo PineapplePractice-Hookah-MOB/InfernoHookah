@@ -7,18 +7,22 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.databinding.FragmentAuthStep1Binding
 import com.pineapplepractice.infernohookah.viewmodel.AuthViewModel
+import com.pineapplepractice.infernohookah.viewmodel.vmfactory.AuthViewModelFactory
+import javax.inject.Inject
 
 class AuthFragmentStep1 : Fragment() {
 
     private var _binding: FragmentAuthStep1Binding? = null
     private val binding get() = _binding!!
 
-    private val authFragmentViewModel: AuthViewModel by viewModels()
+    @Inject
+    lateinit var authFragmentViewModelFactory: AuthViewModelFactory
+
+    private val authFragmentViewModel: AuthViewModel by viewModels{authFragmentViewModelFactory}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
