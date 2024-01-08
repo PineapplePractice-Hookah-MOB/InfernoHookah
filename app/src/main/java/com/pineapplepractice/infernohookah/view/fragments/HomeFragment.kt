@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
-import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+import com.pineapplepractice.infernohookah.utils.carouselrecyclerview.CarouselRecyclerview
 import com.pineapplepractice.infernohookah.App
 import com.pineapplepractice.infernohookah.R
-import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.data.promotionsItems
 import com.pineapplepractice.infernohookah.databinding.FragmentHomeBinding
 import com.pineapplepractice.infernohookah.utils.carouselrecyclerview.SnapHelperOneByOne
@@ -23,7 +21,6 @@ import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {

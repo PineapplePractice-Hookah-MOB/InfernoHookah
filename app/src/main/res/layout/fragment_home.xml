@@ -231,7 +231,7 @@
 <!--        app:layout_constraintTop_toBottomOf="@+id/promotions_header_tv"-->
 <!--        tools:listitem="@layout/main_promotions_item" />-->
 
-    <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+    <com.pineapplepractice.infernohookah.utils.carouselrecyclerview.CarouselRecyclerview
         android:id="@+id/promotions_rv"
         android:layout_width="match_parent"
         android:layout_height="160dp"
