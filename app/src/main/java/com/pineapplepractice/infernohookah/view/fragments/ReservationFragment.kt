@@ -59,13 +59,14 @@ class ReservationFragment : Fragment() {
             reservationViewModel.showToastEvent.collect { toastText ->
                 // Обработка нового текста
                 if (toastText.isNotEmpty()) {
+                    showSnackBar(toastText)
 //                    Toast.makeText(requireContext(), toastText, Toast.LENGTH_SHORT).show()
 
-                    Snackbar.make(
-                        binding.root,
-                        toastText,
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                    /*                    Snackbar.make(
+                                            binding.root,
+                                            toastText,
+                                            Snackbar.LENGTH_LONG
+                                        ).show()*/
                 }
             }
         }
@@ -88,11 +89,17 @@ class ReservationFragment : Fragment() {
             ) {
                 println("Позиция: pos=$pos ")
                 println("Выбрано: item=${parent?.getItemAtPosition(pos)} ")
+                if (parent?.getItemAtPosition(pos) == "6 и более") {
+                    binding.tvContactWithUs.visibility = View.VISIBLE
+                } else {
+                    binding.tvContactWithUs.visibility = View.INVISIBLE
+                }
 
             }
 
             override fun onNothingSelected(arg0: AdapterView<*>?) {
                 println("Ничего не выбрано ")
+                binding.tvContactWithUs.visibility = View.INVISIBLE
             }
         }
 
@@ -111,13 +118,21 @@ class ReservationFragment : Fragment() {
         binding.requestBTN.setOnClickListener {
             println("binding.btDateAndTime.text = ${binding.btDateAndTime.text}")
             println("binding.spinner.selectedItem = ${binding.spinner.selectedItem}")
+            println("binding.spinner.selectedItem = ${binding.spinner.selectedItemPosition}")
             println("binding.etComment.text = ${binding.etComment.text}")
+
+            val itemPosition: Int = if (binding.spinner.selectedItemPosition == 0) {
+                DEFAULT_COUNT_PEOPLE
+            } else {
+                binding.spinner.selectedItemPosition
+            }
 
             reservationViewModel.saveBooking(
                 binding.btDateAndTime.text.toString(),
                 binding.spinner.selectedItem.toString(),
                 binding.etComment.text.toString(),
-                currentDateTimeInMillis
+                currentDateTimeInMillis,
+                itemPosition
             )
         }
     }
@@ -130,7 +145,9 @@ class ReservationFragment : Fragment() {
 
     fun checkDateAndTimeWithNow(dateTimeInMillis: Long): Boolean {
         val currentDate: Long = Date().time
-        return (dateTimeInMillis >= currentDate)
+        val result: Boolean = (dateTimeInMillis >= currentDate)
+        if (!result) showSnackBar("Неверная дата. Введите правильную дату.")
+        return result
     }
 
     fun checkDateAndTimeOutOfRange(dateTimeInMillis: Long): Boolean {
@@ -170,8 +187,18 @@ class ReservationFragment : Fragment() {
             set(Calendar.MILLISECOND, 0)
         }
 
-        return ((calendar in morningStartTime..morningEndTime)
+        val result: Boolean = ((calendar in morningStartTime..morningEndTime)
                 || (calendar in eveningStartTime..eveningEndTime))
+        if (!result) showSnackBar("Режим работы с 15:00 до 1:00")
+        return result
+    }
+
+    fun showSnackBar(toastText: String) {
+        Snackbar.make(
+            binding.root,
+            toastText,
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 
     override fun onDestroyView() {
@@ -184,5 +211,6 @@ class ReservationFragment : Fragment() {
         private const val END_AM_HOUR = 1
         private const val START_PM_HOUR = 15
         private const val END_PM_HOUR = 24
+        private const val DEFAULT_COUNT_PEOPLE = 1
     }
 }

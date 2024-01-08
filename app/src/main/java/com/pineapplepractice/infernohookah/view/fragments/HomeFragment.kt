@@ -93,8 +93,13 @@ class HomeFragment : Fragment() {
     private fun initRV() {
         promotionsRecyclerView = binding.promotionsRv
         promotionsRecyclerView.apply {
-            promotionsAdapter = PromotionsRecyclerAdapter(promotionsItems,
-                object : PromotionsRecyclerAdapter.OnItemClickListener {
+            promotionsAdapter = PromotionsRecyclerAdapter(promotionsItems) { promotions, image ->
+                (requireActivity() as MainActivity).launchDetailsFragment(
+                    promotions,
+                    R.id.action_promotionsFragment_to_promotionDetailsFragment,
+                    image)
+            }
+/*                object : PromotionsRecyclerAdapter.OnItemClickListener {
                     override fun click(promotions: Promotions, image: ImageView) {
                         (requireActivity() as MainActivity).launchDetailsFragment(
                             promotions,
@@ -102,7 +107,7 @@ class HomeFragment : Fragment() {
                             image
                         )
                     }
-                })
+                })*/
             promotionsRecyclerView.adapter = promotionsAdapter
             promotionsRecyclerView.setAlpha(true)
             promotionsRecyclerView.setInfinite(true)

@@ -1,5 +1,7 @@
 package com.pineapplepractice.infernohookah.view.fragments
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -26,6 +28,10 @@ class MiscellaneousFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btSocials.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(URL_SOCIAL_INFERNO_HOOKAH))
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {
@@ -33,4 +39,7 @@ class MiscellaneousFragment : Fragment() {
         _binding = null
     }
 
+    companion object {
+        private const val URL_SOCIAL_INFERNO_HOOKAH = "https://vk.com/inferno_arh"
+    }
 }

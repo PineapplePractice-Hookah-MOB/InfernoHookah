@@ -19,7 +19,7 @@ class PromotionsViewHolder(binding: MainPromotionsItemBinding) : RecyclerView.Vi
     private val imageOfPromotion = binding.promotionsImage
     private val titleOfPromotions = binding.promotionsTitle
 
-    fun bind(
+/*    fun bind(
         promotions: Promotions,
         clickListener: PromotionsRecyclerAdapter.OnItemClickListener
     ) {
@@ -44,6 +44,6 @@ class PromotionsViewHolder(binding: MainPromotionsItemBinding) : RecyclerView.Vi
             }
             clickListener.click(promotions, imageOfPromotion)
         }
-    }
+    }*/
 
 }

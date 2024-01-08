@@ -43,15 +43,20 @@ class PromotionsFragment : Fragment() {
         recyclerView.apply {
             promotionsRecyclerAdapter =
             PromotionsRecyclerAdapter(
-                promotionsItems,
-                object : PromotionsRecyclerAdapter.OnItemClickListener {
+                promotionsItems) { promotions, image ->
+                (requireActivity() as MainActivity).launchDetailsFragment(
+                    promotions,
+                    R.id.action_promotionsFragment_to_promotionDetailsFragment,
+                    image)
+            }
+/*                object : PromotionsRecyclerAdapter.OnItemClickListener {
                     override fun click(promotions: Promotions, image: ImageView) {
                         (requireActivity() as MainActivity).launchDetailsFragment(
                             promotions,
                             R.id.action_promotionsFragment_to_promotionDetailsFragment,
                             image)
                     }
-                })
+                })*/
         }
         recyclerView.adapter = promotionsRecyclerAdapter
         val layoutManager = LinearLayoutManager(requireContext())

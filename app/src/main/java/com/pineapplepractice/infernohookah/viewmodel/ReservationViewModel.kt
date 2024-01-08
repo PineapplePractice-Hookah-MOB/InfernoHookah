@@ -25,7 +25,8 @@ class ReservationViewModel(private val saveBookingUseCase: SaveBookingUseCase) :
         dateAndTime: String,
         spinnerItem: String,
         comment: String,
-        dateTimeInMillis: Long
+        dateTimeInMillis: Long,
+        itemPosition: Int
     ) {
         val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("ru", "RU"))
         val bookedFrom = format.format(Date(dateTimeInMillis))
@@ -42,21 +43,22 @@ class ReservationViewModel(private val saveBookingUseCase: SaveBookingUseCase) :
 
         val bookedTill = format.format(calendar.time)
 
-        val firstChar = spinnerItem.firstOrNull()
+/*        val firstChar = spinnerItem.firstOrNull()
         val people = firstChar?.toString()?.toIntOrNull()
         if (people != null) {
-            viewModelScope.launch {
-                saveBookingUseCase.execute(
-                    BookingRequest(
-                        tableId = 1,
-                        people = people,
-                        comment = comment,
-                        bookedFrom = bookedFrom,
-                        bookedTill = bookedTill
-                    )
+
+        }*/
+        viewModelScope.launch {
+            saveBookingUseCase.execute(
+                BookingRequest(
+                    tableId = 1,
+                    people = itemPosition,
+                    comment = comment,
+                    bookedFrom = bookedFrom,
+                    bookedTill = bookedTill
                 )
-                _showToastEvent.emit("У вас забронирован столик №1 на $spinnerItem с $bookedFrom по $bookedTill")
-            }
+            )
+            _showToastEvent.emit("У вас забронирован столик №1 на $itemPosition с $bookedFrom по $bookedTill")
         }
 
     }
