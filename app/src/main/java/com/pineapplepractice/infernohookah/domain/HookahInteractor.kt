@@ -1,27 +1,41 @@
 package com.pineapplepractice.infernohookah.domain
 
 import com.pineapplepractice.infernohookah.data.HookahApi
-import com.pineapplepractice.infernohookah.data.MainRepository
+import com.pineapplepractice.infernohookah.data.datamodels.BookingRequest
+import com.pineapplepractice.infernohookah.data.remote.booking.BookingApi
+import com.pineapplepractice.infernohookah.domain.repositoryinterface.MainRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
-import retrofit2.HttpException
 import retrofit2.awaitResponse
 
-class HookahInteractor (
+class HookahInteractor(
     private val retrofitService: HookahApi,
     private val repo: MainRepository,
+    private val bookingApi: BookingApi
 ) {
     val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
     fun getApi() {
         scope.launch {
             try {
-                val response = retrofitService.getApi().awaitResponse()
+//                val response = retrofitService.getApi().awaitResponse()
+                val bookingRequest = BookingRequest(
+                    2,
+                    4,
+                    "Android test booking",
+                    "2023-12-22 22:04:30",
+                    "2023-12-22 22:45:30"
+                )
+
+                val response = bookingApi.createPost(bookingRequest).awaitResponse()
+//                val response = bookingApi.getFreeOnDate("2023-12-22").awaitResponse()
+
+                println("response : $response")
+
                 if (response.isSuccessful) {
-                    val responseBody: ResponseBody? = response.body()
+//                    val responseBody: ResponseBody? = response.body()
                     println("Теперь у вас есть тело ответа, которое вы можете прочитать или обработать ")
                     // Теперь у вас есть тело ответа, которое вы можете прочитать или обработать
                 } else {

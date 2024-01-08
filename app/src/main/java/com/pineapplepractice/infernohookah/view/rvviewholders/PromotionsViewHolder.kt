@@ -21,7 +21,7 @@ class PromotionsViewHolder(binding: MainPromotionsItemBinding) : RecyclerView.Vi
     private val smalllDesc = binding.promotionsDesc
     private val time = binding.promotionsTime
 
-    fun bind(
+/*    fun bind(
         promotions: Promotions,
         clickListener: PromotionsRecyclerAdapter.OnItemClickListener
     ) {
@@ -48,6 +48,6 @@ class PromotionsViewHolder(binding: MainPromotionsItemBinding) : RecyclerView.Vi
             }
             clickListener.click(promotions, imageOfPromotion)
         }
-    }
+    }*/
 
 }

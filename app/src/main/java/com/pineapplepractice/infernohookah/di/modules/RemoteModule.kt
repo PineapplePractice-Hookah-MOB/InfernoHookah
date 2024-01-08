@@ -2,6 +2,9 @@ package com.pineapplepractice.infernohookah.di.modules
 
 import com.pineapplepractice.infernohookah.BuildConfig
 import com.pineapplepractice.infernohookah.data.HookahApi
+import com.pineapplepractice.infernohookah.data.remote.NetworkApi
+import com.pineapplepractice.infernohookah.data.remote.booking.BookingApi
+import com.pineapplepractice.infernohookah.data.remote.zvonok.ZvonokApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.Credentials
@@ -11,6 +14,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -18,6 +22,18 @@ class RemoteModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
+        //Настраиваем таймауты для медленного интернета
+        .callTimeout(HALF_MINUTE_FOR_SLOW_INTERNET, TimeUnit.SECONDS)
+        .readTimeout(HALF_MINUTE_FOR_SLOW_INTERNET, TimeUnit.SECONDS)
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            if (BuildConfig.DEBUG) {
+                level = HttpLoggingInterceptor.Level.BODY
+//                level = HttpLoggingInterceptor.Level.BASIC
+//                level = HttpLoggingInterceptor.Level.HEADERS
+            }
+        })
+        .build()
+/*    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
         //Настраиваем таймауты для медленного интернета
         .callTimeout(HALF_MINUTE_FOR_SLOW_INTERNET, TimeUnit.SECONDS)
         .readTimeout(HALF_MINUTE_FOR_SLOW_INTERNET, TimeUnit.SECONDS)
@@ -34,13 +50,35 @@ class RemoteModule {
                 level = HttpLoggingInterceptor.Level.HEADERS
             }
         })
+        .build()*/
+
+    @Provides
+    @Named("hookah")
+    fun provideHookahRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        //Указываем базовый URL из констант
+        .baseUrl(HOOKAH_URL)
+        //Добавляем конвертер
+        .addConverterFactory(GsonConverterFactory.create())
+        //Добавляем кастомный клиент
+        .client(okHttpClient)
         .build()
 
     @Provides
-    @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    @Named("zvonok")
+    fun provideZvonokRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         //Указываем базовый URL из констант
-        .baseUrl(HookahApi.ApiConst.BASE_URL)
+        .baseUrl(ZVONOK_URL)
+        //Добавляем конвертер
+        .addConverterFactory(GsonConverterFactory.create())
+        //Добавляем кастомный клиент
+        .client(okHttpClient)
+        .build()
+
+    @Provides
+    @Named("booking")
+    fun provideBookingRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        //Указываем базовый URL из констант
+        .baseUrl(BOOKING_URL)
         //Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
         //Добавляем кастомный клиент
@@ -49,10 +87,23 @@ class RemoteModule {
 
     @Provides
     @Singleton
-    fun provideTmdbApi(retrofit: Retrofit): HookahApi = retrofit.create(HookahApi::class.java)
+    fun provideHookahApi(@Named("hookah") retrofit: Retrofit): HookahApi = retrofit.create(HookahApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideZvonokApi(@Named("zvonok") retrofit: Retrofit): NetworkApi = retrofit.create(ZvonokApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideBookingApi(@Named("booking") retrofit: Retrofit): BookingApi = retrofit.create(BookingApi::class.java)
 
     companion object {
         private const val HALF_MINUTE_FOR_SLOW_INTERNET = 30L
+        private const val API_KEY = "4fd6a85fabb643a3dd5712210eb2dcfd"
+        private const val HOOKAH_URL = "https://infernolounge5.hookah.work/"
+        private const val ZVONOK_URL = "https://zvonok.com/manager/cabapi_external/api/v1/phones/"
+        private const val BOOKING_URL = "http://213.219.212.47:9000/api/"
+
     }
 
 }

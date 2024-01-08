@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.recyclerview.widget.RecyclerView
+import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
 
 class CarouselRecyclerview(context: Context, attributeSet: AttributeSet) : RecyclerView(context, attributeSet) {
 

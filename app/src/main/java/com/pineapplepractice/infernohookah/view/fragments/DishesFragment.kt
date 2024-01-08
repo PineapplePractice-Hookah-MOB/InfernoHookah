@@ -53,6 +53,37 @@ class DishesFragment : Fragment() {
         recyclerView = typeOfDishesRV
         recyclerView.apply {
             typeOfDishesRecyclerAdapter = TypeOfDishesRecyclerAdapter(
+                listOfTypeOfDishes) { string ->
+                println("!!! тип кальяна - $string")
+            }
+
+/*                object : TypeOfDishesRecyclerAdapter.OnItemClickListener {
+                    override fun click(typeOfDishes: TypeOfDishes) {
+                        if (typeOfDishes.name == "Кальян") {
+                            dishesRecyclerView.visibility = View.GONE
+                            categoryRecyclerView.visibility = View.GONE
+                            categoryItemSpace.visibility = View.GONE
+                            categoryTV.visibility = View.GONE
+
+                            //Для кальянов
+                            recyclerView = hookahsRecyclerView
+                            recyclerView.apply {
+                                hookahsRecyclerAdapter = HookahsRecyclerAdapter()
+                            }
+                            recyclerView.adapter = hookahsRecyclerAdapter
+                            hookahsRecyclerView.visibility = View.VISIBLE
+                        }
+                        else {
+                            hookahsRecyclerView.visibility = View.GONE
+                            dishesRecyclerView.visibility = View.VISIBLE
+                            categoryRecyclerView.visibility = View.VISIBLE
+                            categoryItemSpace.visibility = View.VISIBLE
+                            categoryTV.visibility = View.VISIBLE
+                        }
+                    }
+                })*/
+
+/*            typeOfDishesRecyclerAdapter = TypeOfDishesRecyclerAdapter(
                 listOfTypeOfDishes,
                 object : TypeOfDishesRecyclerAdapter.OnItemClickListener {
                     override fun click(typeOfDishes: TypeOfDishes) {
@@ -96,7 +127,7 @@ class DishesFragment : Fragment() {
 
                         }
                     }
-                })
+                })*/
         }
         recyclerView.adapter = typeOfDishesRecyclerAdapter
         typeOfDishesRV.addItemDecoration(itemDecoration)
