@@ -53,9 +53,10 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_margin="24dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:elevation="4dp"
         app:cardCornerRadius="4dp"
+        app:cardBackgroundColor="@color/card_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logoHome">
@@ -71,6 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:textColor="@color/main_text_color"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="У вас забронирован столик"/>
 
@@ -79,8 +81,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:textColor="@color/main_text_color"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="16/10/2023 в 19:00"/>
+                android:text="16.10.2023 в 19:00"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -131,7 +134,7 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@id/notificationAboutReservation"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bonus_card"
@@ -145,20 +148,20 @@
         app:layout_constraintTop_toBottomOf="@+id/card_view_booking"
         android:clickable="true"
         android:focusable="true"
-        android:backgroundTint="#692275">
+        app:cardBackgroundColor="@color/card_background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ic_smoke_mini">
+            android:background="@drawable/bonus_card_mask">
 
             <TextView
                 android:id="@+id/number_of_bonuses_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/montserrat_medium"
                 android:text="500"
                 android:textColor="@color/main_text_color"
                 android:textSize="40sp"
@@ -169,11 +172,12 @@
                 android:id="@+id/discount_header_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/montserrat_medium"
+                android:layout_marginStart="6dp"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="баллов"
+                android:textAllCaps="true"
                 android:textColor="@color/main_text_color"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/number_of_bonuses_tv"
                 app:layout_constraintStart_toEndOf="@+id/number_of_bonuses_tv"
                 app:layout_constraintTop_toTopOf="@+id/number_of_bonuses_tv" />
@@ -184,24 +188,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="12dp"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/montserrat_medium"
                 android:text="5%"
-                android:textColor="@color/black"
+                android:textColor="@color/main_text_color"
                 android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:layout_width="189dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="6dp"
-                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginEnd="6dp"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="Ваша постоянная скидка"
-                android:textColor="@color/black"
-                android:textSize="13sp"
+                android:textColor="@color/main_text_color"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/discount_tv"
-                app:layout_constraintEnd_toStartOf="@+id/discount_tv" />
+                app:layout_constraintEnd_toStartOf="@+id/discount_tv"
+                app:layout_constraintTop_toTopOf="@+id/discount_tv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

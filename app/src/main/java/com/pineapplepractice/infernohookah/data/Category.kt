@@ -14,3 +14,12 @@ val listOfCategory = listOf(
     Category(id = 5, name = "Черный")
 )
 
+val listOfHookahCategory = listOf(
+    Category(id = 0, name = "Все"),
+    Category(id = 1, name = "Стандарт"),
+    Category(id = 2, name = "Премиум"),
+    Category(id = 3, name = "Эксклюзив"),
+    Category(id = 4, name = "Перезабивка")
+)
+
+

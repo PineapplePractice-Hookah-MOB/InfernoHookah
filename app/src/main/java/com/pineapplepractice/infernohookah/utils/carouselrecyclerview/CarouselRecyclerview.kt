@@ -158,4 +158,8 @@ class CarouselRecyclerview(context: Context, attributeSet: AttributeSet) : Recyc
 
     }
 
+    override fun addItemDecoration(decor: ItemDecoration) {
+
+    }
+
 }

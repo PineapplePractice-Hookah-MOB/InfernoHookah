@@ -12,8 +12,9 @@ data class Hookah(
 )
 
 val listOfHookah = listOf(
-    Hookah(id = 0, name = "Стандарт", description = "Кальян", count = "1шт.", price = 900, image = R.drawable.ic_hookah_white),
-    Hookah(id = 1, name = "Премиум", description = "Кальян", count = "1шт.", price = 1100, image = R.drawable.ic_hookah_white),
-    Hookah(id = 2, name = "Перезабивка", description = "Перзабивка", count = "Разово", price = 450, image = R.drawable.ic_hookah_white),
+    Hookah(id = 0, name = "Стандарт", description = "Стандарт", count = "1шт.", price = 900, image = R.drawable.img_hookah_1),
+    Hookah(id = 1, name = "Премиум", description = "Премиум", count = "1шт.", price = 1100, image = R.drawable.img_hookah_2),
+    Hookah(id = 2, name = "Эксклюзив", description = "Премиум", count = "1шт.", price = 1100, image = R.drawable.img_hookah_4),
+    Hookah(id = 3, name = "Перезабивка", description = "Перезабивка", count = "Разово", price = 450, image = R.drawable.img_hookah_3),
 
 )
