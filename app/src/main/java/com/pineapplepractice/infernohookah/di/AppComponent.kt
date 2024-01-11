@@ -5,7 +5,9 @@ import com.pineapplepractice.infernohookah.di.modules.DataModule
 import com.pineapplepractice.infernohookah.di.modules.DatabaseModule
 import com.pineapplepractice.infernohookah.di.modules.DomainModule
 import com.pineapplepractice.infernohookah.di.modules.RemoteModule
+import com.pineapplepractice.infernohookah.view.fragments.AuthFragment
 import com.pineapplepractice.infernohookah.view.fragments.HomeFragment
+import com.pineapplepractice.infernohookah.view.fragments.RegistrationFragment
 import com.pineapplepractice.infernohookah.view.fragments.ReservationFragment
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
 import dagger.Component
@@ -26,5 +28,7 @@ interface AppComponent {
     fun inject(homeViewModel: HomeViewModel)
     fun inject(homeFragment: HomeFragment)
     fun inject(reservationFragment: ReservationFragment)
+    fun inject(registrationFragment: RegistrationFragment)
+    fun inject(authFragment: AuthFragment)
 
 }

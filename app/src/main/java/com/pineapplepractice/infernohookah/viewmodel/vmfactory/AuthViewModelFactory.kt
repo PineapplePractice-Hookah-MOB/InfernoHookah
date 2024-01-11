@@ -13,12 +13,12 @@ class AuthViewModelFactory(
     val validatePhoneNumberUseCase: ValidatePhoneNumberUseCase
 ) : ViewModelProvider.Factory {
 
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+/*    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return AuthViewModel(
             loginByPhoneUseCase = loginByPhoneUseCase,
             savePhoneToSharedPrefUseCase = savePhoneToSharedPrefUseCase,
             validatePhoneNumberUseCase = validatePhoneNumberUseCase
         ) as T
-    }
+    }*/
 
 }

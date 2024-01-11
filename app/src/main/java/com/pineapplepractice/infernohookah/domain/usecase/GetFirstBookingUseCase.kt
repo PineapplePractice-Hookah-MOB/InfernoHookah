@@ -5,6 +5,6 @@ import com.pineapplepractice.infernohookah.domain.repositoryinterface.MainReposi
 
 class GetFirstBookingUseCase(private val mainRepository: MainRepository) {
     suspend fun execute(): BookingResponse?   {
-        return mainRepository.GetBookingByUserId(444)
+        return mainRepository.getBookingByUserId(444)
     }
 }

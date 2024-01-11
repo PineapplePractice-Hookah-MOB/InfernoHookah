@@ -28,12 +28,12 @@ class AuthFragmentStep2 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        verifyCode()
-        checkUserData()
+//        verifyCode()
+//        checkUserData()
 
     }
 
-    private fun checkUserData() {
+/*    private fun checkUserData() {
         // Проверка есть ли полные данные о пользователе в БД на сервере, если нет, то
         // необходимо вывести поля для их заполнения
     }
@@ -50,7 +50,7 @@ class AuthFragmentStep2 : Fragment() {
             }
         }
 
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

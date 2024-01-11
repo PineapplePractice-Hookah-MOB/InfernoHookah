@@ -9,9 +9,11 @@ import com.pineapplepractice.infernohookah.data.remote.booking.BookingApi
 import com.pineapplepractice.infernohookah.domain.HookahInteractor
 import com.pineapplepractice.infernohookah.domain.repositoryinterface.MainRepository
 import com.pineapplepractice.infernohookah.domain.usecase.GetFirstBookingUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.GetUserByLoginUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.LoginByPhoneUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SaveBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SavePhoneToSharedPrefUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.SaveUserUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.ValidatePhoneNumberUseCase
 import dagger.Module
 import dagger.Provides
@@ -19,6 +21,17 @@ import javax.inject.Singleton
 
 @Module
 class DomainModule() {
+
+    @Singleton
+    @Provides
+    fun provideGetUserByLoginUseCase(mainRepository: MainRepository): GetUserByLoginUseCase {
+        return GetUserByLoginUseCase(mainRepository = mainRepository)
+    }
+    @Singleton
+    @Provides
+    fun provideSaveUserUseCase(mainRepository: MainRepository): SaveUserUseCase {
+        return SaveUserUseCase(mainRepository = mainRepository)
+    }
 
     @Singleton
     @Provides

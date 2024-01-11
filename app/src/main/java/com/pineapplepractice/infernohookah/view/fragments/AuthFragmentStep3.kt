@@ -28,12 +28,12 @@ class AuthFragmentStep3 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        saveUserData()
+//        saveUserData()
 
     }
 
     //сохранение данных о пользователе
-    private fun saveUserData() =  with(binding) {
+/*    private fun saveUserData() =  with(binding) {
         requestBTN.setOnClickListener {
             try {
                 // Проверка кода
@@ -44,7 +44,7 @@ class AuthFragmentStep3 : Fragment() {
             }
         }
 
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

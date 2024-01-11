@@ -2,11 +2,15 @@ package com.pineapplepractice.infernohookah.di.modules
 
 import android.content.Context
 import com.pineapplepractice.infernohookah.domain.usecase.GetFirstBookingUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.GetUserByLoginUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.LoginByPhoneUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SaveBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SavePhoneToSharedPrefUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.SaveUserUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.ValidatePhoneNumberUseCase
+import com.pineapplepractice.infernohookah.viewmodel.AuthViewModel
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
+import com.pineapplepractice.infernohookah.viewmodel.RegistrationViewModel
 import com.pineapplepractice.infernohookah.viewmodel.ReservationViewModel
 import com.pineapplepractice.infernohookah.viewmodel.vmfactory.AuthViewModelFactory
 import dagger.Module
@@ -44,5 +48,19 @@ class AppModule(val context: Context) {
         saveBookingUseCase: SaveBookingUseCase
     ) = ReservationViewModel.Factory(
         saveBookingUseCase = saveBookingUseCase
+    )
+
+    @Provides
+    fun provideRegistrationViewModelFactory(
+        saveUserUseCase: SaveUserUseCase
+    ) = RegistrationViewModel.Factory(
+        saveUserUseCase = saveUserUseCase
+    )
+
+    @Provides
+    fun provideAuthViewModelFactory(
+        getUserByLoginUseCase: GetUserByLoginUseCase
+    ) = AuthViewModel.Factory(
+        getUserByLoginUseCase = getUserByLoginUseCase
     )
 }

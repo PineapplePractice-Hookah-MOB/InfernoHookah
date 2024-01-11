@@ -33,11 +33,11 @@ class AuthFragmentStep1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        inputPhoneNumber()
+//        inputPhoneNumber()
     }
 
     //пробуем запросить звонок с кодом подтверждения
-    private fun inputPhoneNumber() =  with(binding) {
+/*    private fun inputPhoneNumber() =  with(binding) {
         requestBTN.setOnClickListener {
             try {
                 sendVerificationCall(inputPhoneNumberTI.text.toString())
@@ -59,7 +59,7 @@ class AuthFragmentStep1 : Fragment() {
         } catch (e: Exception) {
             throw e // обработка ошибки
         }
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

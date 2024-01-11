@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
@@ -36,8 +37,16 @@ class MainActivity : AppCompatActivity() {
         fab.visibility = View.VISIBLE
     }
 
+    private fun startApp() {
+//        navController = Navigation.findNavController(this, R.id.fragmentPlaceholder)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
+        navController = navHostFragment.navController
+
+        binding.bottomMenuNavigation.visibility = View.GONE
+        binding.fab.visibility = View.GONE
+    }
     // проверяем регистрацию, определяем точку входа
-    private fun startApp() = with(binding) {
+/*    private fun startApp() = with(binding) {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
         navController = navHostFragment.navController
         // Проверяем, авторизован ли пользователь
@@ -53,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
         // Устанавливаем точку начала навигации
         navController.navigate(startDestination)
-    }
+    }*/
 
     override fun onStart() {
         super.onStart()

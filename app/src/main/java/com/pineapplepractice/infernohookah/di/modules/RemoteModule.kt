@@ -63,11 +63,22 @@ class RemoteModule {
         .client(okHttpClient)
         .build()
 
-    @Provides
+/*    @Provides
     @Named("zvonok")
     fun provideZvonokRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         //Указываем базовый URL из констант
         .baseUrl(ZVONOK_URL)
+        //Добавляем конвертер
+        .addConverterFactory(GsonConverterFactory.create())
+        //Добавляем кастомный клиент
+        .client(okHttpClient)
+        .build()*/
+
+    @Provides
+    @Named("network")
+    fun provideNetworkRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        //Указываем базовый URL из констант
+        .baseUrl(NETWORK_URL)
         //Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
         //Добавляем кастомный клиент
@@ -91,7 +102,7 @@ class RemoteModule {
 
     @Provides
     @Singleton
-    fun provideZvonokApi(@Named("zvonok") retrofit: Retrofit): NetworkApi = retrofit.create(ZvonokApi::class.java)
+    fun provideNetworkApi(@Named("network") retrofit: Retrofit): NetworkApi = retrofit.create(NetworkApi::class.java)
 
     @Provides
     @Singleton
@@ -103,6 +114,7 @@ class RemoteModule {
         private const val HOOKAH_URL = "https://infernolounge5.hookah.work/"
         private const val ZVONOK_URL = "https://zvonok.com/manager/cabapi_external/api/v1/phones/"
         private const val BOOKING_URL = "http://213.219.212.47:9000/api/"
+        private const val NETWORK_URL = "http://213.219.212.47:9000/api/"
 
     }
 

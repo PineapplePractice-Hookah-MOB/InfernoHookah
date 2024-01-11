@@ -5,6 +5,6 @@ import com.pineapplepractice.infernohookah.domain.repositoryinterface.MainReposi
 
 class SaveBookingUseCase(private val mainRepository: MainRepository) {
     suspend fun execute(bookingRequest: BookingRequest): Boolean  {
-        return mainRepository.SaveBooking(bookingRequest)
+        return mainRepository.saveBooking(bookingRequest)
     }
 }
