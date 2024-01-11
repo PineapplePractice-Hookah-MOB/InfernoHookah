@@ -21,19 +21,19 @@ class AuthFragmentStep2 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAuthStep2Binding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        verifyCode()
-        checkUserData()
+//        verifyCode()
+//        checkUserData()
 
     }
 
-    private fun checkUserData() {
+/*    private fun checkUserData() {
         // Проверка есть ли полные данные о пользователе в БД на сервере, если нет, то
         // необходимо вывести поля для их заполнения
     }
@@ -41,7 +41,7 @@ class AuthFragmentStep2 : Fragment() {
 
     //Проверка кода
     private fun verifyCode() =  with(binding) {
-        requestCallBTN.setOnClickListener {
+        requestBTN.setOnClickListener {
             try {
                 // Проверка кода
                 findNavController().navigate(R.id.action_authFragmentStep2_to_authFragmentStep3)
@@ -50,6 +50,11 @@ class AuthFragmentStep2 : Fragment() {
             }
         }
 
+    }*/
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">InfernoHookah</string>
     <string name="inferno_hookah_lounge">Inferno Hookah Lounge</string>
+    <string name="underline_discount">
+        <u>Как потратить баллы?</u>
+    </string>
+    <string name="check_box_text">Я согласен на обработку <u>персональных данных</u></string>
+    <string-array name="guests">
+        <item>Выберите количество гостей </item>
+        <item>1 человек</item>
+        <item>2 человека</item>
+        <item>3 человека</item>
+        <item>4 человека</item>
+        <item>5 человек</item>
+        <item>6 и более</item>
+    </string-array>
 </resources>

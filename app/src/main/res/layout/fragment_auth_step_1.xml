@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragments.AuthFragmentStep1"
-    android:background="@color/black">
+    android:background="@color/main_background">
 
     <ImageView
         android:id="@+id/smokeMini"
@@ -34,7 +34,7 @@
         android:layout_marginTop="52dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Вход"
-        android:textColor="@color/white"
+        android:textColor="@color/main_text_color"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
         android:fontFamily="@font/montserrat_regular"
         android:gravity="center_horizontal"
         android:text="Введите номер вашего телефона\nв международном формате"
-        android:textColor="@color/white"
+        android:textColor="@color/main_text_color"
         android:textSize="16sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,51 +64,30 @@
         android:fontFamily="@font/montserrat_light"
         android:gravity="center"
         android:hint="+7 xxx xxx-xx-xx"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/smokeMini" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/requestCallBTN"
+        android:id="@+id/requestBTN"
         android:layout_width="286dp"
         android:layout_height="70dp"
         android:layout_marginBottom="94dp"
-        android:background="@drawable/button_inactive"
+        android:background="@drawable/background_custom_button"
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/montserrat_bold"
         android:text="Далее"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="@color/main_text_color"
         android:textSize="16sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPhoneNumberTI" />
-
-    <ImageView
-        android:id="@+id/btnCornerLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="-36dp"
-        android:layout_marginBottom="-5dp"
-        android:src="@drawable/corner_left"
-        app:layout_constraintBottom_toBottomOf="@+id/requestCallBTN"
-        app:layout_constraintEnd_toStartOf="@+id/requestCallBTN" />
-
-    <ImageView
-        android:id="@+id/btnCornerRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="-5dp"
-        android:layout_marginBottom="-36dp"
-        android:src="@drawable/corner_right"
-        app:layout_constraintBottom_toTopOf="@+id/requestCallBTN"
-        app:layout_constraintEnd_toEndOf="@+id/requestCallBTN" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-crashlytics-ktx:18.4.3")
     implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -85,6 +87,7 @@ dependencies {
     //ViewModel
     implementation ("androidx.fragment:fragment-ktx:1.6.1")
 
-    //SplashScreen
-    implementation ("androidx.core:core-splashscreen:1.0.1")
+    //Carousel
+    implementation ("com.github.sparrow007:carouselrecyclerview:1.2.1")
+
 }

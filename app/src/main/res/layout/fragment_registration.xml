@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    tools:context=".view.fragments.RegistrationFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="111dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logoInfernoAuth"
+        android:layout_width="80dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_logo_inferno_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/registrationTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Регистрация"
+        android:textColor="@color/main_text_color"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/logoInfernoAuth" />
+
+    <EditText
+        android:id="@+id/emailTI"
+        android:layout_width="348dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="157dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="start"
+        android:hint="Введите email"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nameTI"
+        android:layout_width="348dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="start"
+        android:hint="Введите имя"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailTI" />
+
+    <EditText
+        android:id="@+id/birthdayTI"
+        android:layout_width="348dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="start"
+        android:hint="Введите дату рождения"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameTI" />
+
+    <EditText
+        android:id="@+id/passTI"
+        android:layout_width="348dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="start"
+        android:hint="Пароль"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
+        android:visibility="visible"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/birthdayTI" />
+
+    <EditText
+        android:id="@+id/replypassTI"
+        android:layout_width="348dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="start"
+        android:hint="Повторите пароль"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
+        android:visibility="visible"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passTI" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Я согласен на обработку персональных данных"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/replypassTI" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/requestBTN"
+        android:layout_width="286dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="94dp"
+        android:background="@drawable/background_custom_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Далее"
+        android:textAllCaps="false"
+        android:textColor="@color/main_text_color"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <ImageView
+        android:id="@+id/smokeMini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_smoke_mini"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1E1E1E"
+    android:background="@color/main_background"
     tools:context=".view.fragments.MiscellaneousFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -25,7 +25,6 @@
         android:id="@+id/logo"
         android:layout_width="136dp"
         android:layout_height="76dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="30dp"
         android:src="@drawable/ic_logo_inferno_white"
@@ -39,7 +38,7 @@
         android:layout_height="170dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
-        app:cardBackgroundColor="#272727"
+        app:cardBackgroundColor="@color/card_background"
         app:cardCornerRadius="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo">
@@ -69,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
-                android:textColor="#F9F9F9"
+                android:textColor="@color/main_text_color"
                 android:textSize="20sp"
                 android:text="Андрей"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:textColor="#F9F9F9"
+                android:textColor="@color/grey_text_color"
                 android:textSize="10sp"
                 android:text="+7 (991) 167 88 94"
                 app:layout_constraintStart_toStartOf="parent"
@@ -120,207 +119,100 @@
 
             <TextView
                 android:id="@+id/discount"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:textColor="#F9F9F9"
-                android:textSize="9sp"
                 android:text="Ваша скидка 5%"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/grey_text_color"
+                android:textSize="9sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bonus"/>
+                app:layout_constraintStart_toStartOf="@+id/bonus"
+                app:layout_constraintTop_toBottomOf="@id/bonus" />
 
             <TextView
                 android:id="@+id/note"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:textColor="#F9F9F9"
+                android:text="@string/underline_discount"
+                android:textColor="@color/grey_text_color"
                 android:textSize="10sp"
-                android:text="Как потратить баллы?"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="@+id/bonus" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
 
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/response_card"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_response"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="#272727"
-        app:cardCornerRadius="5dp"
+        android:paddingStart="20dp"
+        android:background="@drawable/background_mail_outline_button"
+        android:text="Оставить отзыв"
+        android:textColor="@color/main_text_color"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline">
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/response"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:textColor="#F9F9F9"
-                android:textSize="14sp"
-                android:text="Оставить отзыв"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/icon_mail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ion_mail_outline"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/contacts_card"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_contact"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="#272727"
-        app:cardCornerRadius="5dp"
+        android:paddingStart="20dp"
+        android:text="Контакты"
+        android:background="@drawable/background_contact_button"
+        android:textColor="@color/main_text_color"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/response_card">
+        app:layout_constraintTop_toBottomOf="@+id/bt_response" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/contacts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:textColor="#F9F9F9"
-                android:textSize="14sp"
-                android:text="Контакты"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/icon_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ion_phone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/socials_card"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_socials"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        app:cardBackgroundColor="#272727"
-        app:cardCornerRadius="5dp"
+        android:paddingStart="20dp"
+        android:text="Социальные сети"
+        android:background="@drawable/background_socials_button"
+        android:textColor="@color/main_text_color"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contacts_card">
+        app:layout_constraintTop_toBottomOf="@+id/bt_contact" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/socials"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:textColor="#F9F9F9"
-                android:textSize="14sp"
-                android:text="Социальные сети"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/icon_socials"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ion_phone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/exit_card"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_exit"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="#272727"
-        app:cardCornerRadius="5dp"
+        android:paddingStart="20dp"
+        android:text="Выйти"
+        android:background="@drawable/background_exit_button"
+        android:textColor="@color/main_text_color"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:gravity="start|center_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline600">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:textColor="#F9F9F9"
-                android:textSize="14sp"
-                android:text="Выйти"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/icon_exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ion_exit"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
+        app:layout_constraintTop_toBottomOf="@+id/guideline600" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
