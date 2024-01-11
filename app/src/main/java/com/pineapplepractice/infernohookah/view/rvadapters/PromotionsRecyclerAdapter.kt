@@ -50,7 +50,10 @@ class PromotionsRecyclerAdapter(
 
         val item = items[position]
 
-        binding.promotionsTitle.text = item.description
+        binding.promotionsTitle.text = item.name
+        binding.promotionsDesc.text = item.smallDescription
+        binding.promotionsTime.text = item.time
+
         Glide.with(binding.cardViewBody)
             .load(item.image)
             .error(R.drawable.ic_logo_inferno)
