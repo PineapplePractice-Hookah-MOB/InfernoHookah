@@ -18,8 +18,8 @@ import com.pineapplepractice.infernohookah.view.activity.MainActivity
 
 
 class PromotionsRecyclerAdapter(
-    private var items : List<Promotions>,
-    private val onItemClick: (promotions: Promotions, imageOfPromotion: ImageView) -> Unit
+    private var items: List<Promotions>,
+    private val onItemClick: (id: Int) -> Unit
 //    private val clickListener: OnItemClickListener
 ) : RecyclerView.Adapter<PromotionsRecyclerAdapter.InnerPromotionsViewHolder>() {
 //    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -46,7 +46,10 @@ class PromotionsRecyclerAdapter(
         )*/
     }
 
-    override fun onBindViewHolder(holder: PromotionsRecyclerAdapter.InnerPromotionsViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: PromotionsRecyclerAdapter.InnerPromotionsViewHolder,
+        position: Int
+    ) {
 
         val item = items[position]
 
@@ -75,26 +78,26 @@ class PromotionsRecyclerAdapter(
                         .setDuration(MainActivity.TRANSITION_DURATION_FAST)
                 )
             }
-            ViewCompat.setTransitionName(binding.promotionsImage,item.description)
-            onItemClick(item, binding.promotionsImage)
+            ViewCompat.setTransitionName(binding.promotionsImage, item.description)
+            onItemClick(item.id)
         }
     }
-/*    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is PromotionsViewHolder -> {
-                ViewCompat.setTransitionName(
-                    holder.itemView.findViewById(R.id.promotionsImage),
-                    items[position].description
-                )
-                holder.bind(items[position], clickListener)
+    /*    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            when (holder) {
+                is PromotionsViewHolder -> {
+                    ViewCompat.setTransitionName(
+                        holder.itemView.findViewById(R.id.promotionsImage),
+                        items[position].description
+                    )
+                    holder.bind(items[position], clickListener)
+                }
             }
-        }
-    }*/
+        }*/
 
     //Интерфейс для обработки кликов
-/*    interface OnItemClickListener {
-        fun click(promotions: Promotions, image: ImageView)
-    }*/
+    /*    interface OnItemClickListener {
+            fun click(promotions: Promotions, image: ImageView)
+        }*/
 
 }
 

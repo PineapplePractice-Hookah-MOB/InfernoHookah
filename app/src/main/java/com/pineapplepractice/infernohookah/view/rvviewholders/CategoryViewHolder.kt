@@ -12,7 +12,7 @@ class CategoryViewHolder(binding: ItemCategoryBinding) : RecyclerView.ViewHolder
 
     private val name = binding.categoryCVText
 
-    @SuppressLint("SetTextI18n")
+/*    @SuppressLint("SetTextI18n")
     fun bind(
         category: Category,
         clickListener: CategoryRecyclerAdapter.OnItemClickListener,
@@ -21,5 +21,5 @@ class CategoryViewHolder(binding: ItemCategoryBinding) : RecyclerView.ViewHolder
         itemView.findViewById<View>(R.id.categoryCV).setOnClickListener {
             clickListener.click(category)
         }
-    }
+    }*/
 }

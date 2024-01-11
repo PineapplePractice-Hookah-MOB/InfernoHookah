@@ -16,7 +16,7 @@ import com.pineapplepractice.infernohookah.databinding.ItemTypeOfDishesBinding
 
 class TypeOfDishesRecyclerAdapter(
     private val items: List<TypeOfDishes>,
-    private val onItemClick: (title: String) -> Unit
+    private val onItemClick: (title: String, id: Int) -> Unit
 ) : RecyclerView.Adapter<TypeOfDishesRecyclerAdapter.InnerTypeOfDishesViewHolder>() {
 
     private var _binding: ItemTypeOfDishesBinding? = null
@@ -69,7 +69,7 @@ class TypeOfDishesRecyclerAdapter(
             selectedItemPosition = holder.adapterPosition
             notifyItemChanged(previousSelected)
             notifyItemChanged(selectedItemPosition)
-            onItemClick(item.name)
+            onItemClick(item.name, item.id)
         }
     }
 

@@ -55,7 +55,7 @@ class RegistrationFragment : Fragment() {
                         toastText,
                         Snackbar.LENGTH_LONG
                     ).show()
-                    delay(5000)
+                    delay(3000)
 
                     findNavController().navigate(R.id.action_registrationFragment_to_authFragment)
                 }

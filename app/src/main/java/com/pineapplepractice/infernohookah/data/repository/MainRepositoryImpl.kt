@@ -208,8 +208,8 @@ class MainRepositoryImpl(
         return User(
             email = user.email,
             login = user.login,
-//            birthday = "",
-            birthday = "${user.birthday[0]}-${user.birthday[1]}-${user.birthday[2]}",
+            birthday = "",
+//            birthday = "${user.birthday[0]}-${user.birthday[1]}-${user.birthday[2]}",
             pass = ""
         )
     }

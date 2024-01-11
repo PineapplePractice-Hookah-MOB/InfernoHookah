@@ -6,17 +6,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pineapplepractice.infernohookah.R
-import com.pineapplepractice.infernohookah.data.Tea
-import com.pineapplepractice.infernohookah.data.listOfTea
+import com.pineapplepractice.infernohookah.data.Dishes
+import com.pineapplepractice.infernohookah.data.listOfDishes
 import com.pineapplepractice.infernohookah.databinding.DishesItemBinding
 
-class DishesRecyclerAdapter() : RecyclerView.Adapter<DishesRecyclerAdapter.InnerDishesViewHolder>() {
+class DishesRecyclerAdapter(private var items: List<Dishes>) :
+    RecyclerView.Adapter<DishesRecyclerAdapter.InnerDishesViewHolder>() {
 
     private var _binding: DishesItemBinding? = null
     private val binding get() = _binding!!
 
-    private var items = listOfTea
-    private var returnItems = listOfTea
+    //    private var items = listOfTea
+//    private var returnItems = listOfTea
+    private var returnItems = listOfDishes
+
+    /*    private var items = listOfDishes
+        private var returnItems = listOfDishes*/
 
     inner class InnerDishesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -46,40 +51,47 @@ class DishesRecyclerAdapter() : RecyclerView.Adapter<DishesRecyclerAdapter.Inner
         }
     }
 
-/*    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is DishesViewHolder -> {
-                ViewCompat.setTransitionName(
-                    holder.itemView.findViewById(R.id.dishesCardView),
-                    items[position].id.toString()
-                )
-                holder.bind(items[position])
+    /*    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            when (holder) {
+                is DishesViewHolder -> {
+                    ViewCompat.setTransitionName(
+                        holder.itemView.findViewById(R.id.dishesCardView),
+                        items[position].id.toString()
+                    )
+                    holder.bind(items[position])
+                }
             }
-        }
-    }*/
+        }*/
 
-    private fun setItems(newItems: List<Tea>) {
-        items = newItems
-        notifyDataSetChanged()
-    }
+    /*private fun setItems(newItems: List<Dishes>) {
 
-    // Метод для фильтрации элементов по категории
-    fun filterItemsByCategory(category: String) {
-        returnItems()
-        if (category == "Все") {
-            val filteredItems = returnItems
-            setItems(filteredItems)
-        } else {
-            val filteredItems = items.filter { it.description == category }
-            setItems(filteredItems)
+    //    private fun setItems(newItems: List<Tea>) {
+            items = newItems
+            notifyDataSetChanged()
         }
 
-    }
+        // Метод для фильтрации элементов по категории
+        fun filterItemsByCategory(category: String) {
+            returnItems()
+            if (category == "Все") {
+                val filteredItems = returnItems
+                setItems(filteredItems)
+            } else {
+                val filteredItems = items.filter { it.description == category }
+                setItems(filteredItems)
+            }
 
-    private fun returnItems(){
-        items = returnItems
+        }*/
+
+    /*    private fun returnItems(){
+            items = returnItems
+            notifyDataSetChanged()
+        }*/
+
+    fun updateData(newData: List<Dishes>) {
+        items = newData
         notifyDataSetChanged()
+        println("CategoryRecyclerAdapterЖ Data updated. New data size: ${newData.size}")
     }
 
 }
-

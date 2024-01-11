@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    fun launchDetailsFragment(promotion: Promotions, direction: Int, poster: ImageView) {
+/*    fun launchDetailsFragment(promotion: Promotions, direction: Int, poster: ImageView) {
         //Создаем "посылку"
         val bundle = Bundle()
         val extras: FragmentNavigator.Extras = FragmentNavigator.Extras.Builder()
@@ -116,10 +116,10 @@ class MainActivity : AppCompatActivity() {
 
         //Запускаем фрагмент
         navController.navigate(direction, fragment.arguments, null, extras)
-    }
+    }*/
 
     companion object {
-        const val KEY_PROMOTIONS_DETAILS_FRAGMENT = "promotion"
+//        const val KEY_PROMOTIONS_DETAILS_FRAGMENT = "promotion"
         const val TRANSITION_DURATION = 400L
         const val TRANSITION_DURATION_FAST = 150L
     }

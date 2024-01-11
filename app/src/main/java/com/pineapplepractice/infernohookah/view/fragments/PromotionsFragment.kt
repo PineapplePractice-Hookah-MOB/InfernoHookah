@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pineapplepractice.infernohookah.R
@@ -24,6 +26,12 @@ class PromotionsFragment : Fragment() {
 
     private lateinit var promotionsRecyclerAdapter: PromotionsRecyclerAdapter
     private lateinit var recyclerView: RecyclerView
+
+    private val navController: NavController by lazy {
+        val navHostFragment =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
+        navHostFragment.navController
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,11 +51,11 @@ class PromotionsFragment : Fragment() {
         recyclerView.apply {
             promotionsRecyclerAdapter =
             PromotionsRecyclerAdapter(
-                promotionsItems) { promotions, image ->
-                (requireActivity() as MainActivity).launchDetailsFragment(
-                    promotions,
-                    R.id.action_promotionsFragment_to_promotionDetailsFragment,
-                    image)
+                promotionsItems) { id ->
+                val bundle = Bundle()
+                bundle.putInt("idPromotion",id)
+
+                navController.navigate(R.id.action_promotionsFragment_to_promotionDetailsFragment, bundle)
             }
 /*                object : PromotionsRecyclerAdapter.OnItemClickListener {
                     override fun click(promotions: Promotions, image: ImageView) {
