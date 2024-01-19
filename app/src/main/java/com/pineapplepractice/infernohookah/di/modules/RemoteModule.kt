@@ -113,9 +113,9 @@ class RemoteModule {
         private const val API_KEY = "4fd6a85fabb643a3dd5712210eb2dcfd"
         private const val HOOKAH_URL = "https://infernolounge5.hookah.work/"
         private const val ZVONOK_URL = "https://zvonok.com/manager/cabapi_external/api/v1/phones/"
-        private const val BOOKING_URL = "http://213.219.212.47:9000/api/"
+        private const val BOOKING_URL = "http://213.219.212.47:9001/api/"
         private const val NETWORK_URL = "http://213.219.212.47:9000/api/"
-
+//        private const val NETWORK_URL = "http://213.219.212.47:9001/api/"
     }
 
 }

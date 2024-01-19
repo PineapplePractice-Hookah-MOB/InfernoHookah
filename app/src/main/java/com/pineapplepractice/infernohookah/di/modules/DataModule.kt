@@ -26,12 +26,12 @@ class DataModule {
     fun provideRepository(
         storage: Storage,
         networkApi: NetworkApi,
-        bookingApi: BookingApi
+//        bookingApi: BookingApi
     ): MainRepository {
         return MainRepositoryImpl(
             storage = storage,
-            networkApi = networkApi,
-            bookingApi = bookingApi
+            networkApi = networkApi
+//            bookingApi = bookingApi
         )
     }
 

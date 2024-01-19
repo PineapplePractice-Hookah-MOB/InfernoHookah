@@ -25,13 +25,10 @@ class DishesFragment : Fragment() {
     private val includeEdge = false // включить отступы по краям
 
     private lateinit var typeOfDishesRecyclerAdapter: TypeOfDishesRecyclerAdapter
-//    private lateinit var typeOfDishesRecyclerView: RecyclerView
 
     private lateinit var categoryRecyclerAdapter: CategoryRecyclerAdapter
-//    private lateinit var categoryRecyclerView: RecyclerView
 
     private lateinit var dishesRecyclerAdapter: DishesRecyclerAdapter
-//    private lateinit var dishesRecyclerView: RecyclerView
 
 
     override fun onCreateView(
@@ -71,7 +68,6 @@ class DishesFragment : Fragment() {
                     }
                 }
                 dishesRecyclerAdapter.updateData(filteredList)
-                dishesRecyclerView.adapter = dishesRecyclerAdapter
             }
         categoryRecyclerView.adapter = categoryRecyclerAdapter
 
@@ -83,123 +79,17 @@ class DishesFragment : Fragment() {
                     it.idType == id
                 }
                 println("!!! список категорий - $filteredListCategory")
+                categoryRecyclerAdapter.resetSelectedItem()
                 categoryRecyclerAdapter.updateData(filteredListCategory)
-                categoryRecyclerView.adapter = categoryRecyclerAdapter
 
                 val filteredListDishes = listOfDishes.filter {
                     it.idType == id
                 }
                 dishesRecyclerAdapter.updateData(filteredListDishes)
-                dishesRecyclerView.adapter = dishesRecyclerAdapter
             }
         typeOfDishesRV.adapter = typeOfDishesRecyclerAdapter
         typeOfDishesRV.addItemDecoration(itemDecoration)
     }
-
-
-    // Для выбора кальяна или чая
-    /*        typeOfDishesRecyclerView = typeOfDishesRV
-            typeOfDishesRecyclerView.apply {
-                typeOfDishesRecyclerAdapter = TypeOfDishesRecyclerAdapter(
-                    listOfTypeOfDishes) { string ->
-                    println("!!! тип кальяна - $string")
-                }*/
-
-    /*                object : TypeOfDishesRecyclerAdapter.OnItemClickListener {
-                        override fun click(typeOfDishes: TypeOfDishes) {
-                            if (typeOfDishes.name == "Кальян") {
-                                dishesRecyclerView.visibility = View.GONE
-                                categoryRecyclerView.visibility = View.GONE
-                                categoryItemSpace.visibility = View.GONE
-                                categoryTV.visibility = View.GONE
-
-                                //Для кальянов
-                                recyclerView = hookahsRecyclerView
-                                recyclerView.apply {
-                                    hookahsRecyclerAdapter = HookahsRecyclerAdapter()
-                                }
-                                recyclerView.adapter = hookahsRecyclerAdapter
-                                hookahsRecyclerView.visibility = View.VISIBLE
-                            }
-                            else {
-                                hookahsRecyclerView.visibility = View.GONE
-                                dishesRecyclerView.visibility = View.VISIBLE
-                                categoryRecyclerView.visibility = View.VISIBLE
-                                categoryItemSpace.visibility = View.VISIBLE
-                                categoryTV.visibility = View.VISIBLE
-                            }
-                        }
-                    })*/
-
-    /*            typeOfDishesRecyclerAdapter = TypeOfDishesRecyclerAdapter(
-                    listOfTypeOfDishes,
-                    object : TypeOfDishesRecyclerAdapter.OnItemClickListener {
-                        override fun click(typeOfDishes: TypeOfDishes) {
-                            if (typeOfDishes.name == "Кальян") {
-                                dishesRecyclerView.visibility = View.GONE
-                                recyclerView = categoryRecyclerView
-                                recyclerView.apply {
-                                    categoryRecyclerAdapter = CategoryRecyclerAdapter(
-                                        listOfHookahCategory,
-                                        object : CategoryRecyclerAdapter.OnItemClickListener {
-                                            override fun click(category: Category) {
-                                                hookahsRecyclerAdapter.filterHookahItemsByCategory(category.name)
-                                            }
-                                        })
-                                }
-                                recyclerView.adapter = categoryRecyclerAdapter
-
-                                //Для кальянов
-                                recyclerView = hookahsRecyclerView
-                                recyclerView.apply {
-                                    hookahsRecyclerAdapter = HookahsRecyclerAdapter()
-                                }
-                                recyclerView.adapter = hookahsRecyclerAdapter
-                                hookahsRecyclerView.addItemDecoration(itemDecoration)
-                                hookahsRecyclerView.visibility = View.VISIBLE
-                            }
-                            else {
-                                hookahsRecyclerView.visibility = View.GONE
-                                dishesRecyclerView.visibility = View.VISIBLE
-                                recyclerView = categoryRecyclerView
-                                recyclerView.apply {
-                                    categoryRecyclerAdapter = CategoryRecyclerAdapter(
-                                        listOfCategory,
-                                        object : CategoryRecyclerAdapter.OnItemClickListener {
-                                            override fun click(category: Category) {
-                                                dishesRecyclerAdapter.filterItemsByCategory(category.name)
-                                            }
-                                        })
-                                }
-                                recyclerView.adapter = categoryRecyclerAdapter
-
-                            }
-                        }
-                    })*/
-    /*   }
-       typeOfDishesRecyclerView.adapter = typeOfDishesRecyclerAdapter
-       typeOfDishesRV.addItemDecoration(itemDecoration)
-
-       // для Items
-       dishesRecyclerView.apply
-       {
-           dishesRecyclerAdapter = DishesRecyclerAdapter()
-       }
-       dishesRecyclerView.adapter = dishesRecyclerAdapter
-       dishesRecyclerView.addItemDecoration(itemDecoration)
-
-       recyclerView = categoryRecyclerView
-       recyclerView.apply
-       {
-           categoryRecyclerAdapter = CategoryRecyclerAdapter(listOfCategory,
-               object : CategoryRecyclerAdapter.OnItemClickListener {
-                   override fun click(category: Category) {
-                       dishesRecyclerAdapter.filterItemsByCategory(category.name)
-                   }
-               })
-       }
-       recyclerView.adapter = categoryRecyclerAdapter
-   }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

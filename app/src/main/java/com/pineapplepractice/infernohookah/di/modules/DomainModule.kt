@@ -8,8 +8,10 @@ import com.pineapplepractice.infernohookah.data.remote.NetworkApi
 import com.pineapplepractice.infernohookah.data.remote.booking.BookingApi
 import com.pineapplepractice.infernohookah.domain.HookahInteractor
 import com.pineapplepractice.infernohookah.domain.repositoryinterface.MainRepository
+import com.pineapplepractice.infernohookah.domain.usecase.AuthUserUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetFirstBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetUserByLoginUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.GetUserIdFromStorageUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.LoginByPhoneUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SaveBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SavePhoneToSharedPrefUseCase
@@ -24,9 +26,22 @@ class DomainModule() {
 
     @Singleton
     @Provides
+    fun provideGetUserIdFromStorageUseCase(mainRepository: MainRepository): GetUserIdFromStorageUseCase {
+        return GetUserIdFromStorageUseCase(mainRepository = mainRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthUserUseCase(mainRepository: MainRepository): AuthUserUseCase {
+        return AuthUserUseCase(mainRepository = mainRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetUserByLoginUseCase(mainRepository: MainRepository): GetUserByLoginUseCase {
         return GetUserByLoginUseCase(mainRepository = mainRepository)
     }
+
     @Singleton
     @Provides
     fun provideSaveUserUseCase(mainRepository: MainRepository): SaveUserUseCase {

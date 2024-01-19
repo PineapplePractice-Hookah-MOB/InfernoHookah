@@ -1,9 +1,7 @@
 package com.pineapplepractice.infernohookah.view.rvadapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
@@ -16,34 +14,30 @@ import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.databinding.MainPromotionsItemBinding
 import com.pineapplepractice.infernohookah.view.activity.MainActivity
 
-
 class PromotionsRecyclerAdapter(
     private var items: List<Promotions>,
     private val onItemClick: (id: Int) -> Unit
-//    private val clickListener: OnItemClickListener
 ) : RecyclerView.Adapter<PromotionsRecyclerAdapter.InnerPromotionsViewHolder>() {
-//    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var _binding: MainPromotionsItemBinding? = null
-    private val binding get() = _binding!!
-
-    inner class InnerPromotionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
+    inner class InnerPromotionsViewHolder(binding: MainPromotionsItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        val promotionsTitle = binding.promotionsTitle
+        val promotionsDesc = binding.promotionsDesc
+        val promotionsTime = binding.promotionsTime
+        val cardViewBody = binding.cardViewBody
+        val promotionsImage = binding.promotionsImage
+    }
 
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerPromotionsViewHolder {
-        _binding = MainPromotionsItemBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
-        )
-        return InnerPromotionsViewHolder(binding.root)
-        /*return PromotionsViewHolder(
+        return InnerPromotionsViewHolder(
             MainPromotionsItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-        )*/
+        )
     }
 
     override fun onBindViewHolder(
@@ -53,19 +47,19 @@ class PromotionsRecyclerAdapter(
 
         val item = items[position]
 
-        binding.promotionsTitle.text = item.name
-        binding.promotionsDesc.text = item.smallDescription
-        binding.promotionsTime.text = item.time
+        holder.promotionsTitle.text = item.name
+        holder.promotionsDesc.text = item.smallDescription
+        holder.promotionsTime.text = item.time
 
-        Glide.with(binding.cardViewBody)
+        Glide.with(holder.cardViewBody)
             .load(item.image)
             .error(R.drawable.ic_logo_inferno)
             .centerCrop()
-            .into(binding.promotionsImage)
+            .into(holder.promotionsImage)
 
         //Подумать над привязкой анимации не на клик на CardView
 
-        binding.cardViewBody.setOnClickListener {
+        holder.cardViewBody.setOnClickListener {
             it.findFragment<Fragment>().exitTransition = TransitionSet().apply {
                 addTransition(
                     Fade(Fade.OUT)
@@ -78,26 +72,9 @@ class PromotionsRecyclerAdapter(
                         .setDuration(MainActivity.TRANSITION_DURATION_FAST)
                 )
             }
-            ViewCompat.setTransitionName(binding.promotionsImage, item.description)
+            ViewCompat.setTransitionName(holder.promotionsImage, item.description)
             onItemClick(item.id)
         }
     }
-    /*    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            when (holder) {
-                is PromotionsViewHolder -> {
-                    ViewCompat.setTransitionName(
-                        holder.itemView.findViewById(R.id.promotionsImage),
-                        items[position].description
-                    )
-                    holder.bind(items[position], clickListener)
-                }
-            }
-        }*/
-
-    //Интерфейс для обработки кликов
-    /*    interface OnItemClickListener {
-            fun click(promotions: Promotions, image: ImageView)
-        }*/
-
 }
 
