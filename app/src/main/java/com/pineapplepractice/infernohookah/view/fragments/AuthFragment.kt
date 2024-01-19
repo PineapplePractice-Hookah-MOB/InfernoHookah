@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -14,10 +13,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.pineapplepractice.infernohookah.App
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.databinding.FragmentAuthBinding
-import com.pineapplepractice.infernohookah.view.activity.MainActivity
+import com.pineapplepractice.infernohookah.domain.models.User
 import com.pineapplepractice.infernohookah.viewmodel.AuthViewModel
-import com.pineapplepractice.infernohookah.viewmodel.RegistrationViewModel
-import com.pineapplepractice.infernohookah.viewmodel.vmfactory.AuthViewModelFactory
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,18 +28,18 @@ class AuthFragment : Fragment() {
     @Inject
     lateinit var vmFactory: AuthViewModel.Factory
 
-/*    @Inject
-    lateinit var authFragmentViewModelFactory: AuthViewModelFactory
+    /*    @Inject
+        lateinit var authFragmentViewModelFactory: AuthViewModelFactory
 
-    //мы испльзовали эту строку только тогда, когда через emit посылаем данные
-    //тогда создается экземпляр authFragmentViewModel
-    private val authFragmentViewModel: AuthViewModel by viewModels{authFragmentViewModelFactory}
-    //в противном случае выполняем (ниже по коду)
+        //мы испльзовали эту строку только тогда, когда через emit посылаем данные
+        //тогда создается экземпляр authFragmentViewModel
+        private val authFragmentViewModel: AuthViewModel by viewModels{authFragmentViewModelFactory}
+        //в противном случае выполняем (ниже по коду)
 
-            authViewModel =
-            ViewModelProvider(this, vmFactory)[AuthViewModel::class.java]
-            //в этом случае экземпляр создается при создании фрагмента
-    */
+                authViewModel =
+                ViewModelProvider(this, vmFactory)[AuthViewModel::class.java]
+                //в этом случае экземпляр создается при создании фрагмента
+        */
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -74,14 +71,35 @@ class AuthFragment : Fragment() {
             }
         }
 
+        /*        viewLifecycleOwner.lifecycleScope.launch {
+                    authViewModel.user.collect {
+                        findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+                    }
+                }*/
+
         viewLifecycleOwner.lifecycleScope.launch {
-            authViewModel.user.collect {
-                findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+            authViewModel.flagAuth.collect {
+                if (it) findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+                else {
+                    Snackbar.make(
+                        binding.root,
+                        "Ошибка входа.",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
             }
         }
 
         binding.enterBTN.setOnClickListener {
-            authViewModel.getUserByLogin(binding.loginTI.text.toString())
+//            authViewModel.getUserByLogin(binding.loginTI.text.toString())
+            authViewModel.auth(
+                User(
+                    login = binding.loginTI.text.toString(),
+                    pass = binding.passTI.text.toString(),
+                    birthday = "",
+                    email = binding.loginTI.text.toString()
+                )
+            )
         }
 
         binding.registrationBTN.setOnClickListener {

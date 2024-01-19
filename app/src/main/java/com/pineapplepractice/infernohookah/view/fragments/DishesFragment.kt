@@ -6,17 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
-import com.pineapplepractice.infernohookah.data.Category
-import com.pineapplepractice.infernohookah.data.TypeOfDishes
 import com.pineapplepractice.infernohookah.data.listOfCategory
-import com.pineapplepractice.infernohookah.data.listOfHookahCategory
+import com.pineapplepractice.infernohookah.data.listOfDishes
 import com.pineapplepractice.infernohookah.data.listOfTypeOfDishes
 import com.pineapplepractice.infernohookah.databinding.FragmentDishesBinding
 import com.pineapplepractice.infernohookah.utils.GridSpacingItemDecoration
 import com.pineapplepractice.infernohookah.view.rvadapters.CategoryRecyclerAdapter
 import com.pineapplepractice.infernohookah.view.rvadapters.DishesRecyclerAdapter
-import com.pineapplepractice.infernohookah.view.rvadapters.HookahsRecyclerAdapter
 import com.pineapplepractice.infernohookah.view.rvadapters.TypeOfDishesRecyclerAdapter
 import com.pineapplepractice.infernohookah.viewmodel.DishesViewModel
 
@@ -28,11 +24,12 @@ class DishesFragment : Fragment() {
     private val spacing = 1 // отступ между элементами в пикселях
     private val includeEdge = false // включить отступы по краям
 
-    private lateinit var dishesRecyclerAdapter: DishesRecyclerAdapter
-    private lateinit var categoryRecyclerAdapter: CategoryRecyclerAdapter
     private lateinit var typeOfDishesRecyclerAdapter: TypeOfDishesRecyclerAdapter
-    private lateinit var hookahsRecyclerAdapter: HookahsRecyclerAdapter
-    private lateinit var recyclerView: RecyclerView
+
+    private lateinit var categoryRecyclerAdapter: CategoryRecyclerAdapter
+
+    private lateinit var dishesRecyclerAdapter: DishesRecyclerAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,107 +46,49 @@ class DishesFragment : Fragment() {
 
     private fun initRV() = with(binding) {
         val itemDecoration = GridSpacingItemDecoration(spanCount, spacing, includeEdge)
-        // Для выбора кальяна или чая
-        recyclerView = typeOfDishesRV
-        recyclerView.apply {
-            typeOfDishesRecyclerAdapter = TypeOfDishesRecyclerAdapter(
-                listOfTypeOfDishes) { string ->
-                println("!!! тип кальяна - $string")
+
+        val firstFilteredListDishes = listOfDishes.filter {
+            it.idType == 0
+        }
+        dishesRecyclerAdapter = DishesRecyclerAdapter(firstFilteredListDishes)
+        dishesRecyclerView.adapter = dishesRecyclerAdapter
+
+        val firstFilteredListCategory = listOfCategory.filter {
+            it.idType == 0
+        }
+
+        categoryRecyclerAdapter =
+            CategoryRecyclerAdapter(firstFilteredListCategory) { string, idType ->
+                println("!!! категория - $string, idtype=$idType")
+                val filteredList = listOfDishes.filter {
+                    if (string == "Все") {
+                        it.idType == idType
+                    } else {
+                        it.idType == idType && it.description == string
+                    }
+                }
+                dishesRecyclerAdapter.updateData(filteredList)
             }
+        categoryRecyclerView.adapter = categoryRecyclerAdapter
 
-/*                object : TypeOfDishesRecyclerAdapter.OnItemClickListener {
-                    override fun click(typeOfDishes: TypeOfDishes) {
-                        if (typeOfDishes.name == "Кальян") {
-                            dishesRecyclerView.visibility = View.GONE
-                            categoryRecyclerView.visibility = View.GONE
-                            categoryItemSpace.visibility = View.GONE
-                            categoryTV.visibility = View.GONE
+        typeOfDishesRecyclerAdapter =
+            TypeOfDishesRecyclerAdapter(listOfTypeOfDishes) { string, id ->
+                println("!!! тип кальяна - $string, id=$id")
 
-                            //Для кальянов
-                            recyclerView = hookahsRecyclerView
-                            recyclerView.apply {
-                                hookahsRecyclerAdapter = HookahsRecyclerAdapter()
-                            }
-                            recyclerView.adapter = hookahsRecyclerAdapter
-                            hookahsRecyclerView.visibility = View.VISIBLE
-                        }
-                        else {
-                            hookahsRecyclerView.visibility = View.GONE
-                            dishesRecyclerView.visibility = View.VISIBLE
-                            categoryRecyclerView.visibility = View.VISIBLE
-                            categoryItemSpace.visibility = View.VISIBLE
-                            categoryTV.visibility = View.VISIBLE
-                        }
-                    }
-                })*/
+                val filteredListCategory = listOfCategory.filter {
+                    it.idType == id
+                }
+                println("!!! список категорий - $filteredListCategory")
+                categoryRecyclerAdapter.resetSelectedItem()
+                categoryRecyclerAdapter.updateData(filteredListCategory)
 
-/*            typeOfDishesRecyclerAdapter = TypeOfDishesRecyclerAdapter(
-                listOfTypeOfDishes,
-                object : TypeOfDishesRecyclerAdapter.OnItemClickListener {
-                    override fun click(typeOfDishes: TypeOfDishes) {
-                        if (typeOfDishes.name == "Кальян") {
-                            dishesRecyclerView.visibility = View.GONE
-                            recyclerView = categoryRecyclerView
-                            recyclerView.apply {
-                                categoryRecyclerAdapter = CategoryRecyclerAdapter(
-                                    listOfHookahCategory,
-                                    object : CategoryRecyclerAdapter.OnItemClickListener {
-                                        override fun click(category: Category) {
-                                            hookahsRecyclerAdapter.filterHookahItemsByCategory(category.name)
-                                        }
-                                    })
-                            }
-                            recyclerView.adapter = categoryRecyclerAdapter
-
-                            //Для кальянов
-                            recyclerView = hookahsRecyclerView
-                            recyclerView.apply {
-                                hookahsRecyclerAdapter = HookahsRecyclerAdapter()
-                            }
-                            recyclerView.adapter = hookahsRecyclerAdapter
-                            hookahsRecyclerView.addItemDecoration(itemDecoration)
-                            hookahsRecyclerView.visibility = View.VISIBLE
-                        }
-                        else {
-                            hookahsRecyclerView.visibility = View.GONE
-                            dishesRecyclerView.visibility = View.VISIBLE
-                            recyclerView = categoryRecyclerView
-                            recyclerView.apply {
-                                categoryRecyclerAdapter = CategoryRecyclerAdapter(
-                                    listOfCategory,
-                                    object : CategoryRecyclerAdapter.OnItemClickListener {
-                                        override fun click(category: Category) {
-                                            dishesRecyclerAdapter.filterItemsByCategory(category.name)
-                                        }
-                                    })
-                            }
-                            recyclerView.adapter = categoryRecyclerAdapter
-
-                        }
-                    }
-                })*/
-        }
-        recyclerView.adapter = typeOfDishesRecyclerAdapter
+                val filteredListDishes = listOfDishes.filter {
+                    it.idType == id
+                }
+                dishesRecyclerAdapter.updateData(filteredListDishes)
+            }
+        typeOfDishesRV.adapter = typeOfDishesRecyclerAdapter
         typeOfDishesRV.addItemDecoration(itemDecoration)
-
-        // для Items
-        recyclerView = dishesRecyclerView
-        recyclerView.apply {
-            dishesRecyclerAdapter = DishesRecyclerAdapter()
-        }
-        recyclerView.adapter = dishesRecyclerAdapter
-        dishesRecyclerView.addItemDecoration(itemDecoration)
-
-        recyclerView = categoryRecyclerView
-        recyclerView.apply {
-            categoryRecyclerAdapter = CategoryRecyclerAdapter(listOfCategory,
-                object : CategoryRecyclerAdapter.OnItemClickListener {
-                    override fun click(category: Category) {
-                        dishesRecyclerAdapter.filterItemsByCategory(category.name)
-                    }
-                })
-        }
-        recyclerView.adapter = categoryRecyclerAdapter
     }
 
     override fun onDestroyView() {

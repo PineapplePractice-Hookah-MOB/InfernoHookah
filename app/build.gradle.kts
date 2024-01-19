@@ -90,4 +90,8 @@ dependencies {
     //Carousel
     implementation ("com.github.sparrow007:carouselrecyclerview:1.2.1")
 
+//    implementation ("com.auth0:java-jwt:3.18.1")
+    implementation ("io.github.nefilim.kjwt:kjwt-core:0.9.0")
+
+
 }

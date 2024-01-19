@@ -1,23 +1,20 @@
 package com.pineapplepractice.infernohookah.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.pineapplepractice.infernohookah.domain.models.SavePhoneFromET
 import com.pineapplepractice.infernohookah.domain.models.User
+import com.pineapplepractice.infernohookah.domain.usecase.AuthUserUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetUserByLoginUseCase
-import com.pineapplepractice.infernohookah.domain.usecase.LoginByPhoneUseCase
-import com.pineapplepractice.infernohookah.domain.usecase.SavePhoneToSharedPrefUseCase
-import com.pineapplepractice.infernohookah.domain.usecase.SaveUserUseCase
-import com.pineapplepractice.infernohookah.domain.usecase.ValidatePhoneNumberUseCase
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val getUserByLoginUseCase: GetUserByLoginUseCase
+    private val getUserByLoginUseCase: GetUserByLoginUseCase,
+    private val authUserUseCase: AuthUserUseCase
 ) : ViewModel() {
 
     private val _showToastEvent = MutableSharedFlow<String>()
@@ -27,6 +24,10 @@ class AuthViewModel(
     private val _user = MutableSharedFlow<User>()
     val user: SharedFlow<User>
         get() = _user.asSharedFlow()
+
+    private val _flagAuth = MutableSharedFlow<Boolean>()
+    val flagAuth: SharedFlow<Boolean>
+        get() = _flagAuth.asSharedFlow()
 
     /*    fun savePhone(phone: String) {
             val params1 = SavePhoneFromET(phone)
@@ -54,14 +55,24 @@ class AuthViewModel(
         }
     }
 
+    fun auth(user: User){
+        viewModelScope.launch {
+            _flagAuth.emit(authUserUseCase.execute(user))
+/*            if () _showToastEvent.emit("Пользователь с логином ${user.login} найден.")
+            else _showToastEvent.emit("Пользователь с логином ${user.login} не найден. Зарегистрируйтесь, пожалуйста.")*/
+        }
+    }
+
     class Factory(
-        val getUserByLoginUseCase: GetUserByLoginUseCase
+        val getUserByLoginUseCase: GetUserByLoginUseCase,
+        val authUserUseCase: AuthUserUseCase
     ) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
                 return AuthViewModel(
-                    getUserByLoginUseCase = getUserByLoginUseCase
+                    getUserByLoginUseCase = getUserByLoginUseCase,
+                    authUserUseCase = authUserUseCase
                 ) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")

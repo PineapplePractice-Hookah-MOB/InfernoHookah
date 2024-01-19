@@ -24,6 +24,7 @@ class HookahInteractor(
                 val bookingRequest = BookingRequest(
                     2,
                     4,
+                    2,
                     "Android test booking",
                     "2023-12-22 22:04:30",
                     "2023-12-22 22:45:30"
