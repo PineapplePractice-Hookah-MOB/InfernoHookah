@@ -27,14 +27,8 @@ class HomeViewModel(private val getFirstBookingUseCase: GetFirstBookingUseCase) 
         get() = _bookingTVText.asSharedFlow()
 
     init {
-//        App.instance.dagger.inject(this)
-
 
         viewModelScope.launch {
-//            _listFlow.emit(listOf(1, 2, 3, 4, 5))
-
-//            interactor.getApi()
-
             val bookingParams = getFirstBookingUseCase.execute()
             println("bookingParams: $bookingParams")
             _bookingTVText.emit("У вас забронирован столик\n${bookingParams?.bookedFrom}")

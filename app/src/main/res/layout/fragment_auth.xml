@@ -98,7 +98,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterBTN" />
 
-    <androidx.appcompat.widget.AppCompatButton
+<!--    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/backenterBTN"
         android:layout_width="286dp"
         android:layout_height="70dp"
@@ -114,7 +114,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registrationBTN" />
+        app:layout_constraintTop_toBottomOf="@+id/registrationBTN" />-->
 
     <ImageView
         android:id="@+id/smokeMini"

@@ -9,7 +9,8 @@ data class Dishes(
     val description: String,
     val count: Int,
     val price: Int,
-    val image: Int
+    val image: Int,
+    val urlImage: String = ""
 )
 
 val listOfDishes = listOf(

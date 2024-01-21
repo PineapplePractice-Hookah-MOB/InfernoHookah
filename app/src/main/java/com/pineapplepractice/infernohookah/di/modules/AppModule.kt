@@ -3,6 +3,7 @@ package com.pineapplepractice.infernohookah.di.modules
 import android.content.Context
 import com.pineapplepractice.infernohookah.domain.usecase.AuthUserUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetFirstBookingUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.GetMenuFromApiUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetUserByLoginUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetUserIdFromStorageUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.LoginByPhoneUseCase
@@ -11,6 +12,7 @@ import com.pineapplepractice.infernohookah.domain.usecase.SavePhoneToSharedPrefU
 import com.pineapplepractice.infernohookah.domain.usecase.SaveUserUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.ValidatePhoneNumberUseCase
 import com.pineapplepractice.infernohookah.viewmodel.AuthViewModel
+import com.pineapplepractice.infernohookah.viewmodel.DishesViewModel
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
 import com.pineapplepractice.infernohookah.viewmodel.RegistrationViewModel
 import com.pineapplepractice.infernohookah.viewmodel.ReservationViewModel
@@ -71,5 +73,13 @@ class AppModule(val context: Context) {
     ) = AuthViewModel.Factory(
         getUserByLoginUseCase = getUserByLoginUseCase,
         authUserUseCase = authUserUseCase
+    )
+
+    @Provides
+    fun provideDishesViewModelFactory(
+        getMenuFromApiUseCase: GetMenuFromApiUseCase
+
+    ) = DishesViewModel.Factory(
+        getMenuFromApiUseCase = getMenuFromApiUseCase
     )
 }

@@ -41,8 +41,14 @@ class DishesRecyclerAdapter(private var items: List<Dishes>) :
         holder.countOfDish.text = tea.count.toString() + "мл"
         holder.priceOfDish.text = tea.price.toString() + "р."
 
-        Glide.with(holder.dishesCardView)
+/*        Glide.with(holder.dishesCardView)
             .load(tea.image)
+            .error(R.drawable.ic_menu)
+            .centerCrop()
+            .into(holder.imageOfDish)*/
+
+        Glide.with(holder.dishesCardView)
+            .load(tea.urlImage)
             .error(R.drawable.ic_menu)
             .centerCrop()
             .into(holder.imageOfDish)

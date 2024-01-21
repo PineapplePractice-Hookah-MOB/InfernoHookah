@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
 
     private val homeFragmentViewModel: HomeViewModel by viewModels()
+
     private lateinit var promotionsAdapter: PromotionsRecyclerAdapter
     private lateinit var promotionsRecyclerView: CarouselRecyclerview
 
