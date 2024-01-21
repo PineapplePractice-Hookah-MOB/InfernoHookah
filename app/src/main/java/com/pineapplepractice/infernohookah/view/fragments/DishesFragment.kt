@@ -1,25 +1,36 @@
 package com.pineapplepractice.infernohookah.view.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.pineapplepractice.infernohookah.data.listOfCategory
-import com.pineapplepractice.infernohookah.data.listOfDishes
-import com.pineapplepractice.infernohookah.data.listOfTypeOfDishes
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.pineapplepractice.infernohookah.App
+//import com.pineapplepractice.infernohookah.data.listOfCategory
+//import com.pineapplepractice.infernohookah.data.listOfDishes
+//import com.pineapplepractice.infernohookah.data.listOfTypeOfDishes
 import com.pineapplepractice.infernohookah.databinding.FragmentDishesBinding
+import com.pineapplepractice.infernohookah.domain.models.RootDishes
 import com.pineapplepractice.infernohookah.utils.GridSpacingItemDecoration
 import com.pineapplepractice.infernohookah.view.rvadapters.CategoryRecyclerAdapter
 import com.pineapplepractice.infernohookah.view.rvadapters.DishesRecyclerAdapter
 import com.pineapplepractice.infernohookah.view.rvadapters.TypeOfDishesRecyclerAdapter
 import com.pineapplepractice.infernohookah.viewmodel.DishesViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class DishesFragment : Fragment() {
     private var _binding: FragmentDishesBinding? = null
     private val binding get() = _binding!!
-    private val dishesFragmentViewModel: DishesViewModel by viewModels()
+
+    private lateinit var dishesViewModel: DishesViewModel
+
+    @Inject
+    lateinit var vmFactory: DishesViewModel.Factory
+
     private val spanCount = 2 // количество столбцов
     private val spacing = 1 // отступ между элементами в пикселях
     private val includeEdge = false // включить отступы по краям
@@ -30,6 +41,10 @@ class DishesFragment : Fragment() {
 
     private lateinit var dishesRecyclerAdapter: DishesRecyclerAdapter
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        App.instance.dagger.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +56,28 @@ class DishesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRV()
+        dishesViewModel =
+            ViewModelProvider(this, vmFactory)[DishesViewModel::class.java]
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            dishesViewModel.getDishMenu()
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            dishesViewModel.rootDishesFlow.collect {
+                initRV(it)
+            }
+        }
     }
 
-    private fun initRV() = with(binding) {
+    private fun initRV(rootDishes: RootDishes) = with(binding) {
         val itemDecoration = GridSpacingItemDecoration(spanCount, spacing, includeEdge)
+
+        val listOfDishes = rootDishes.listDishes
+        val listOfCategory = rootDishes.listCategory
+        val listOfTypeOfDishes = rootDishes.listTypeOfDishes
+
+
 
         val firstFilteredListDishes = listOfDishes.filter {
             it.idType == 0
@@ -60,14 +92,14 @@ class DishesFragment : Fragment() {
         categoryRecyclerAdapter =
             CategoryRecyclerAdapter(firstFilteredListCategory) { string, idType ->
                 println("!!! категория - $string, idtype=$idType")
-                val filteredList = listOfDishes.filter {
+                val filteredListDishes = listOfDishes.filter {
                     if (string == "Все") {
                         it.idType == idType
                     } else {
                         it.idType == idType && it.description == string
                     }
                 }
-                dishesRecyclerAdapter.updateData(filteredList)
+                dishesRecyclerAdapter.updateData(filteredListDishes)
             }
         categoryRecyclerView.adapter = categoryRecyclerAdapter
 
@@ -85,6 +117,9 @@ class DishesFragment : Fragment() {
                 val filteredListDishes = listOfDishes.filter {
                     it.idType == id
                 }
+                println("!!! список dishes - $listOfDishes")
+                println("!!! список filter dishes - $filteredListDishes")
+
                 dishesRecyclerAdapter.updateData(filteredListDishes)
             }
         typeOfDishesRV.adapter = typeOfDishesRecyclerAdapter

@@ -106,9 +106,9 @@ class AuthFragment : Fragment() {
             findNavController().navigate(R.id.action_authFragment_to_registrationFragment)
         }
 
-        binding.backenterBTN.setOnClickListener {
+/*        binding.backenterBTN.setOnClickListener {
             findNavController().navigate(R.id.action_authFragment_to_homeFragment)
-        }
+        }*/
     }
 
     override fun onDestroyView() {

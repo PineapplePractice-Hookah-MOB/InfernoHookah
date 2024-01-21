@@ -6,6 +6,7 @@ import com.pineapplepractice.infernohookah.di.modules.DatabaseModule
 import com.pineapplepractice.infernohookah.di.modules.DomainModule
 import com.pineapplepractice.infernohookah.di.modules.RemoteModule
 import com.pineapplepractice.infernohookah.view.fragments.AuthFragment
+import com.pineapplepractice.infernohookah.view.fragments.DishesFragment
 import com.pineapplepractice.infernohookah.view.fragments.HomeFragment
 import com.pineapplepractice.infernohookah.view.fragments.RegistrationFragment
 import com.pineapplepractice.infernohookah.view.fragments.ReservationFragment
@@ -30,5 +31,6 @@ interface AppComponent {
     fun inject(reservationFragment: ReservationFragment)
     fun inject(registrationFragment: RegistrationFragment)
     fun inject(authFragment: AuthFragment)
+    fun inject(dishesFragment: DishesFragment)
 
 }

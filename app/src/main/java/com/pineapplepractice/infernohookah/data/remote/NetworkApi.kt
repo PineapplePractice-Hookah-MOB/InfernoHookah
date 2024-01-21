@@ -2,6 +2,7 @@ package com.pineapplepractice.infernohookah.data.remote
 
 import com.pineapplepractice.infernohookah.data.datamodels.BookingRequest
 import com.pineapplepractice.infernohookah.data.datamodels.BookingResponse
+import com.pineapplepractice.infernohookah.data.datamodels.DishMenuResponse
 import com.pineapplepractice.infernohookah.data.datamodels.TokenResponse
 import com.pineapplepractice.infernohookah.data.datamodels.UserAuthRequest
 import com.pineapplepractice.infernohookah.data.datamodels.UserRequest
@@ -13,6 +14,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface NetworkApi {
 
@@ -26,6 +28,13 @@ interface NetworkApi {
 
     @GET("users/all")
     fun getAllUsers(): Call<List<UserResponse>>
+
+    @GET("menu")
+    fun getDishMenu(
+        @Header("Authorization") token: String,
+        @Query("from") from: Int,
+        @Query("size") size: Int
+    ): Call<List<DishMenuResponse>>
 
     @POST("booking")
     fun createPost(
