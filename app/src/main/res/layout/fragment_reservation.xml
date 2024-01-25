@@ -132,7 +132,7 @@
         android:text="Пожалуйста, свяжитесь с администратором для осуществления бронирования по номеру +7 991 167 8894"
         android:textColor="@color/red"
         android:textSize="16sp"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
 

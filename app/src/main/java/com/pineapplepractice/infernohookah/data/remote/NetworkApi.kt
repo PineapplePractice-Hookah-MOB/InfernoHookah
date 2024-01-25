@@ -3,6 +3,7 @@ package com.pineapplepractice.infernohookah.data.remote
 import com.pineapplepractice.infernohookah.data.datamodels.BookingRequest
 import com.pineapplepractice.infernohookah.data.datamodels.BookingResponse
 import com.pineapplepractice.infernohookah.data.datamodels.DishMenuResponse
+import com.pineapplepractice.infernohookah.data.datamodels.ReviewRequest
 import com.pineapplepractice.infernohookah.data.datamodels.TokenResponse
 import com.pineapplepractice.infernohookah.data.datamodels.UserAuthRequest
 import com.pineapplepractice.infernohookah.data.datamodels.UserRequest
@@ -25,6 +26,9 @@ interface NetworkApi {
 
     @POST("auth/register")
     fun saveUser(@Body user: UserRequest): Call<ResponseBody>
+
+    @POST("comment")
+    fun saveReview(@Header("Authorization") token: String, @Body review: ReviewRequest): Call<ResponseBody>
 
     @GET("users/all")
     fun getAllUsers(): Call<List<UserResponse>>
@@ -49,5 +53,7 @@ interface NetworkApi {
         @Path("userId") userId: String,
         @Header("Authorization") token: String
     ): Call<List<BookingResponse>>
+
+
 
 }

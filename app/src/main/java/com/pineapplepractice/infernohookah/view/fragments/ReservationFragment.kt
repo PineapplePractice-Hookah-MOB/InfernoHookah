@@ -92,7 +92,7 @@ class ReservationFragment : Fragment() {
                 if (parent?.getItemAtPosition(pos) == "6 и более") {
                     binding.tvContactWithUs.visibility = View.VISIBLE
                 } else {
-                    binding.tvContactWithUs.visibility = View.INVISIBLE
+                    binding.tvContactWithUs.visibility = View.GONE
                 }
 
             }

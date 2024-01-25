@@ -16,6 +16,7 @@ import com.pineapplepractice.infernohookah.domain.usecase.GetUserIdFromStorageUs
 import com.pineapplepractice.infernohookah.domain.usecase.LoginByPhoneUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SaveBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SavePhoneToSharedPrefUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.SaveReviewUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SaveUserUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.ValidatePhoneNumberUseCase
 import dagger.Module
@@ -24,6 +25,12 @@ import javax.inject.Singleton
 
 @Module
 class DomainModule() {
+
+    @Singleton
+    @Provides
+    fun provideSaveReviewUseCase(mainRepository: MainRepository): SaveReviewUseCase {
+        return SaveReviewUseCase(mainRepository = mainRepository)
+    }
 
     @Singleton
     @Provides
