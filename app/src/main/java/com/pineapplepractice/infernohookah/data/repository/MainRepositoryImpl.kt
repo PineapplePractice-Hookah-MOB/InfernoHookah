@@ -8,6 +8,7 @@ import com.pineapplepractice.infernohookah.data.TypeOfDishes
 import com.pineapplepractice.infernohookah.data.datamodels.BookingRequest
 import com.pineapplepractice.infernohookah.data.datamodels.BookingResponse
 import com.pineapplepractice.infernohookah.data.datamodels.DishMenuResponse
+import com.pineapplepractice.infernohookah.data.datamodels.ReviewRequest
 import com.pineapplepractice.infernohookah.data.datamodels.TokenResponse
 import com.pineapplepractice.infernohookah.data.datamodels.UserAuthRequest
 import com.pineapplepractice.infernohookah.data.datamodels.UserRequest
@@ -310,6 +311,15 @@ class MainRepositoryImpl(
         }
 
         return null
+    }
+
+    override suspend fun saveReview(review: String): Boolean {
+        val response =
+            networkApi.saveReview("Bearer ${storage.getAccessToken()}",
+                ReviewRequest(userId = storage.getUserId(), text = review))
+                .awaitResponse()
+
+        return response.isSuccessful
     }
 
     /*    override suspend fun getUserByLogin(login: String): User? {

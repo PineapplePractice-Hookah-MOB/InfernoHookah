@@ -9,11 +9,13 @@ import com.pineapplepractice.infernohookah.domain.usecase.GetUserIdFromStorageUs
 import com.pineapplepractice.infernohookah.domain.usecase.LoginByPhoneUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SaveBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SavePhoneToSharedPrefUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.SaveReviewUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SaveUserUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.ValidatePhoneNumberUseCase
 import com.pineapplepractice.infernohookah.viewmodel.AuthViewModel
 import com.pineapplepractice.infernohookah.viewmodel.DishesViewModel
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
+import com.pineapplepractice.infernohookah.viewmodel.MiscellaneousViewModel
 import com.pineapplepractice.infernohookah.viewmodel.RegistrationViewModel
 import com.pineapplepractice.infernohookah.viewmodel.ReservationViewModel
 import com.pineapplepractice.infernohookah.viewmodel.vmfactory.AuthViewModelFactory
@@ -81,5 +83,13 @@ class AppModule(val context: Context) {
 
     ) = DishesViewModel.Factory(
         getMenuFromApiUseCase = getMenuFromApiUseCase
+    )
+
+    @Provides
+    fun provideMiscellaneousViewModelFactory(
+        saveReviewUseCase: SaveReviewUseCase
+
+    ) = MiscellaneousViewModel.Factory(
+        saveReviewUseCase = saveReviewUseCase
     )
 }
