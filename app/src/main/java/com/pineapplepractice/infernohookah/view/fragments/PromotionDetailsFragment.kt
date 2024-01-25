@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.Promotions
+import com.pineapplepractice.infernohookah.data.promotionsItems
 import com.pineapplepractice.infernohookah.databinding.FragmentPromotionDetailsBinding
 import com.pineapplepractice.infernohookah.view.activity.MainActivity
 
@@ -40,8 +41,13 @@ class PromotionDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setDetails()
-        closeDetails()
+        val bundle = arguments
+        if (bundle != null) {
+            val idPromotion = bundle.getInt("idPromotion")
+            // Можно использовать полученное значение
+            setDetails(idPromotion)
+            closeDetails()
+        }
     }
 
     override fun onDestroyView() {
@@ -49,39 +55,49 @@ class PromotionDetailsFragment : Fragment() {
         _binding = null
     }
 
-    private fun setDetails() {
-        promotion =
-            arguments?.getParcelable<Promotions>(MainActivity.KEY_PROMOTIONS_DETAILS_FRAGMENT) as Promotions
-        binding.descriptionOfPromotion.text = promotion.description
-        binding.nameOfPromotion.text = promotion.name
+    private fun setDetails(idPromotion: Int) {
+        val promotion = promotionsItems.find { it.id == idPromotion }
 
-        Glide.with(this)
-            .load(promotion.image)
-            .error(R.drawable.ic_logo_inferno)
-            .centerCrop()
-            .listener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean,
-                ): Boolean {
-                    startPostponedEnterTransition()
-                    return false
-                }
 
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    startPostponedEnterTransition()
-                    return false
-                }
-            })
-            .into(binding.imageOfPromotion)
+        promotion?.let {
+//            promotion =
+//                arguments?.getParcelable<Promotions>(MainActivity.KEY_PROMOTIONS_DETAILS_FRAGMENT) as Promotions
+            binding.descriptionOfPromotion.text = it.description
+            binding.nameOfPromotion.text = it.name
+
+            Glide.with(this)
+                .load(it.image)
+                .error(R.drawable.ic_logo_inferno)
+                .centerCrop()
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean,
+                    ): Boolean {
+                        startPostponedEnterTransition()
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        startPostponedEnterTransition()
+                        return false
+                    }
+                })
+                .into(binding.imageOfPromotion)
+        } ?: run {
+            println("Сюда зашло потому что не была найдена акция по id")
+
+        }
+
+
     }
 
     private fun closeDetails() {

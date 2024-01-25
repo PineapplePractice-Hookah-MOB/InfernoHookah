@@ -13,65 +13,69 @@ import com.bumptech.glide.Glide
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.data.TypeOfDishes
 import com.pineapplepractice.infernohookah.databinding.ItemTypeOfDishesBinding
+import com.pineapplepractice.infernohookah.databinding.MainPromotionsItemBinding
 
 class TypeOfDishesRecyclerAdapter(
     private val items: List<TypeOfDishes>,
-    private val onItemClick: (title: String) -> Unit
+    private val onItemClick: (title: String, id: Int) -> Unit
 ) : RecyclerView.Adapter<TypeOfDishesRecyclerAdapter.InnerTypeOfDishesViewHolder>() {
-
-    private var _binding: ItemTypeOfDishesBinding? = null
-    private val binding get() = _binding!!
 
     private var selectedItemPosition: Int = 0
 
-    inner class InnerTypeOfDishesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class InnerTypeOfDishesViewHolder(binding: ItemTypeOfDishesBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        val typeTV = binding.typeTV
+        val typeCardView = binding.typeCardView
+        val typeIV = binding.typeIV
+    }
 
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerTypeOfDishesViewHolder {
-        _binding = ItemTypeOfDishesBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+        return InnerTypeOfDishesViewHolder(
+            ItemTypeOfDishesBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
-        return InnerTypeOfDishesViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: InnerTypeOfDishesViewHolder, position: Int) {
 
         val item = items[position]
 
-        holder.itemView.apply {
-            binding.typeTV.text = item.name
-            Glide.with(binding.typeCardView)
-                .load(item.image)
-                .error(R.drawable.ic_menu)
-                .centerCrop()
-                .into(binding.typeIV)
-        }
+        holder.typeTV.text = item.name
+
+        Glide.with(holder.typeCardView)
+            .load(item.image)
+            .error(R.drawable.ic_menu)
+            .centerCrop()
+            .into(holder.typeIV)
 
         if (selectedItemPosition == position) {
-            holder.itemView.findViewById<CardView>(R.id.typeCardView)
-                .setCardBackgroundColor(Color.WHITE)
-            holder.itemView.findViewById<TextView>(R.id.typeTV)
-                .setTextColor(Color.parseColor("#272727"))
-            holder.itemView.findViewById<ImageView>(R.id.typeIV).setColorFilter(Color.BLACK,
-                PorterDuff.Mode.SRC_IN)
+            holder.typeCardView.setCardBackgroundColor(Color.WHITE)
+            holder.typeTV.setTextColor(Color.parseColor("#272727"))
+            holder.typeIV.setColorFilter(
+                Color.BLACK,
+                PorterDuff.Mode.SRC_IN
+            )
         } else {
-            holder.itemView.findViewById<CardView>(R.id.typeCardView)
-                .setCardBackgroundColor(Color.parseColor("#272727"))
-            holder.itemView.findViewById<TextView>(R.id.typeTV)
-                .setTextColor(Color.WHITE)
-            holder.itemView.findViewById<ImageView>(R.id.typeIV).setColorFilter(Color.WHITE,
-                PorterDuff.Mode.SRC_IN)
+            holder.typeCardView.setCardBackgroundColor(Color.parseColor("#272727"))
+            holder.typeTV.setTextColor(Color.WHITE)
+            holder.typeIV.setColorFilter(
+                Color.WHITE,
+                PorterDuff.Mode.SRC_IN
+            )
         }
 
-        binding.typeCardView.setOnClickListener{
+        holder.typeCardView.setOnClickListener {
             val previousSelected = selectedItemPosition
             selectedItemPosition = holder.adapterPosition
             notifyItemChanged(previousSelected)
             notifyItemChanged(selectedItemPosition)
-            onItemClick(item.name)
+            onItemClick(item.name, item.id)
         }
     }
-
 }
 

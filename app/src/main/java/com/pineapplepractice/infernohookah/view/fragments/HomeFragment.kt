@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.pineapplepractice.infernohookah.App
 import com.pineapplepractice.infernohookah.R
@@ -31,10 +32,17 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
 
     private val homeFragmentViewModel: HomeViewModel by viewModels()
+
     private lateinit var promotionsAdapter: PromotionsRecyclerAdapter
     private lateinit var promotionsRecyclerView: CarouselRecyclerview
 
     private lateinit var scope: CoroutineScope
+
+    private val navController: NavController by lazy {
+        val navHostFragment =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
+        navHostFragment.navController
+    }
 
 
     @Inject
@@ -69,11 +77,12 @@ class HomeFragment : Fragment() {
         }
 
         (requireActivity() as MainActivity).visibleBottomNavigation()
+/*        val navHostFragment =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
+        val navController = navHostFragment.navController*/
+
         initRV()
 
-        val navHostFragment =
-            requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
-        val navController = navHostFragment.navController
 
         binding.bonusCard.setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_bonusHistoryFragment, null)
@@ -90,11 +99,16 @@ class HomeFragment : Fragment() {
     private fun initRV() {
         promotionsRecyclerView = binding.promotionsRv
         promotionsRecyclerView.apply {
-            promotionsAdapter = PromotionsRecyclerAdapter(promotionsItems) { promotions, image ->
-                (requireActivity() as MainActivity).launchDetailsFragment(
+            promotionsAdapter = PromotionsRecyclerAdapter(promotionsItems) { id ->
+                val bundle = Bundle()
+                bundle.putInt("idPromotion",id)
+
+                navController.navigate(R.id.action_homeFragment_to_promotionDetailsFragment, bundle)
+
+/*                (requireActivity() as MainActivity).launchDetailsFragment(
                     promotions,
                     R.id.action_promotionsFragment_to_promotionDetailsFragment,
-                    image)
+                    image)*/
             }
 /*                object : PromotionsRecyclerAdapter.OnItemClickListener {
                     override fun click(promotions: Promotions, image: ImageView) {

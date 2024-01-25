@@ -92,7 +92,7 @@ class ReservationFragment : Fragment() {
                 if (parent?.getItemAtPosition(pos) == "6 и более") {
                     binding.tvContactWithUs.visibility = View.VISIBLE
                 } else {
-                    binding.tvContactWithUs.visibility = View.INVISIBLE
+                    binding.tvContactWithUs.visibility = View.GONE
                 }
 
             }
@@ -138,7 +138,7 @@ class ReservationFragment : Fragment() {
     }
 
     fun checkDateAndTime(dateTimeInMillis: Long): Boolean {
-        return checkDateAndTimeWithNow(dateTimeInMillis) && checkDateAndTimeOutOfRange(
+        return checkDateAndTimeWithNow(dateTimeInMillis) && checkDateAndTimeOutOfRangeFrom12To24(
             dateTimeInMillis
         )
     }
@@ -193,6 +193,32 @@ class ReservationFragment : Fragment() {
         return result
     }
 
+    fun checkDateAndTimeOutOfRangeFrom12To24(dateTimeInMillis: Long): Boolean {
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = dateTimeInMillis
+        }
+
+        val startTime = calendar.clone() as Calendar
+        startTime.apply {
+            set(Calendar.HOUR_OF_DAY, START_PM12_HOUR)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+
+        val endTime = calendar.clone() as Calendar
+        endTime.apply {
+            set(Calendar.HOUR_OF_DAY, END_PM_HOUR)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+
+        val result: Boolean = (calendar in startTime..endTime)
+        if (!result) showSnackBar("Режим работы с 12:00 до 24:00")
+        return result
+    }
+
     fun showSnackBar(toastText: String) {
         Snackbar.make(
             binding.root,
@@ -210,6 +236,7 @@ class ReservationFragment : Fragment() {
         private const val START_AM_HOUR = 0
         private const val END_AM_HOUR = 1
         private const val START_PM_HOUR = 15
+        private const val START_PM12_HOUR = 12
         private const val END_PM_HOUR = 24
         private const val DEFAULT_COUNT_PEOPLE = 1
     }

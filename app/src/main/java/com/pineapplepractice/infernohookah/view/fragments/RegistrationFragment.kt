@@ -55,7 +55,7 @@ class RegistrationFragment : Fragment() {
                         toastText,
                         Snackbar.LENGTH_LONG
                     ).show()
-                    delay(5000)
+                    delay(3000)
 
                     findNavController().navigate(R.id.action_registrationFragment_to_authFragment)
                 }
@@ -74,7 +74,19 @@ class RegistrationFragment : Fragment() {
                 birthday = binding.birthdayTI.text.toString(),
                 pass = binding.passTI.text.toString()
             )
-            registrationViewModel.registerUser(user)
+            if (binding.checkBox.isChecked) {
+                registrationViewModel.registerUser(user)
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    "для регистрации поставьте, пожалуйста, согласие на отправку персональных данных",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
+
+        binding.close.setOnClickListener {
+            findNavController().navigate(R.id.action_registrationFragment_to_authFragment)
         }
     }
 
