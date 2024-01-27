@@ -57,24 +57,24 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 
     //Glide
-    implementation ("com.github.bumptech.glide:glide:4.15.1")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 
     //Dagger
-    implementation ("com.google.dagger:dagger:2.47")
-    implementation ("com.google.dagger:dagger-android-support:2.45")
-    kapt ("com.google.dagger:dagger-android-processor:2.45")
-    kapt ("com.google.dagger:dagger-compiler:2.47")
+    implementation("com.google.dagger:dagger:2.47")
+    implementation("com.google.dagger:dagger-android-support:2.45")
+    kapt("com.google.dagger:dagger-android-processor:2.45")
+    kapt("com.google.dagger:dagger-compiler:2.47")
 
     //Room
-    implementation ("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.room:room-runtime:2.5.2")
     //noinspection KaptUsageInsteadOfKsp
-    kapt ("androidx.room:room-compiler:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -85,13 +85,17 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
 
     //ViewModel
-    implementation ("androidx.fragment:fragment-ktx:1.6.1")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation ("androidx.activity:activity-ktx:1.8.2")
 
     //Carousel
-    implementation ("com.github.sparrow007:carouselrecyclerview:1.2.1")
+    implementation("com.github.sparrow007:carouselrecyclerview:1.2.1")
 
-//    implementation ("com.auth0:java-jwt:3.18.1")
-    implementation ("io.github.nefilim.kjwt:kjwt-core:0.9.0")
+    // decode token
+    //    implementation ("com.auth0:java-jwt:3.18.1")
+    implementation("io.github.nefilim.kjwt:kjwt-core:0.9.0")
 
+    //edit input mask
+    implementation("com.redmadrobot:input-mask-android:7.2.4")
 
 }

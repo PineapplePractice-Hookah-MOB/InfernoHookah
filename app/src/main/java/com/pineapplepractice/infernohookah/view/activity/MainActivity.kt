@@ -2,20 +2,17 @@ package com.pineapplepractice.infernohookah.view.activity
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.pineapplepractice.infernohookah.App
 import com.pineapplepractice.infernohookah.R
-import com.pineapplepractice.infernohookah.data.Promotions
 import com.pineapplepractice.infernohookah.databinding.ActivityMainBinding
-import com.pineapplepractice.infernohookah.view.fragments.PromotionDetailsFragment
+import com.pineapplepractice.infernohookah.viewmodel.MainActivityViewModel
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,12 +21,27 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
+    private lateinit var mainActivityViewModel: MainActivityViewModel
+
+    @Inject
+    lateinit var vmFactory: MainActivityViewModel.Factory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        App.instance.dagger.inject(this)
+
+        mainActivityViewModel =
+            ViewModelProvider(this, vmFactory)[MainActivityViewModel::class.java]
+
         startApp()
 
+    }
+
+    fun getMainActivityViewModel(): MainActivityViewModel {
+        return mainActivityViewModel
     }
 
     fun visibleBottomNavigation()= with(binding) {
@@ -66,6 +78,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
         initBottomNavigationMenu()
     }
 

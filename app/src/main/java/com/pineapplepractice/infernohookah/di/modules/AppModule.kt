@@ -6,6 +6,7 @@ import com.pineapplepractice.infernohookah.domain.usecase.GetFirstBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetMenuFromApiUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetUserByLoginUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetUserIdFromStorageUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.GetUserNameFromStorageUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.LoginByPhoneUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SaveBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SavePhoneToSharedPrefUseCase
@@ -15,17 +16,27 @@ import com.pineapplepractice.infernohookah.domain.usecase.ValidatePhoneNumberUse
 import com.pineapplepractice.infernohookah.viewmodel.AuthViewModel
 import com.pineapplepractice.infernohookah.viewmodel.DishesViewModel
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
+import com.pineapplepractice.infernohookah.viewmodel.MainActivityViewModel
 import com.pineapplepractice.infernohookah.viewmodel.MiscellaneousViewModel
 import com.pineapplepractice.infernohookah.viewmodel.RegistrationViewModel
 import com.pineapplepractice.infernohookah.viewmodel.ReservationViewModel
 import com.pineapplepractice.infernohookah.viewmodel.vmfactory.AuthViewModelFactory
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class AppModule(val context: Context) {
     @Provides
     fun provideContext() = context
+
+    @Singleton
+    @Provides
+    fun provideMainActivityViewModelFactory(
+        getUserNameFromStorageUseCase: GetUserNameFromStorageUseCase
+    ) = MainActivityViewModel.Factory(
+        getUserNameFromStorageUseCase = getUserNameFromStorageUseCase
+    )
 
     @Provides
     fun provideAuthFragmentViewModelFactory(
@@ -43,9 +54,11 @@ class AppModule(val context: Context) {
     //    @Singleton
     @Provides
     fun provideHomeViewModelFactory(
-        getFirstBookingUseCase: GetFirstBookingUseCase
+        getFirstBookingUseCase: GetFirstBookingUseCase,
+        getUserNameFromStorageUseCase: GetUserNameFromStorageUseCase
     ) = HomeViewModel.Factory(
-        getFirstBookingUseCase = getFirstBookingUseCase
+        getFirstBookingUseCase = getFirstBookingUseCase,
+        getUserNameFromStorageUseCase = getUserNameFromStorageUseCase
 
     )
 

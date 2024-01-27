@@ -19,6 +19,7 @@ import com.pineapplepractice.infernohookah.view.rvadapters.CategoryRecyclerAdapt
 import com.pineapplepractice.infernohookah.view.rvadapters.DishesRecyclerAdapter
 import com.pineapplepractice.infernohookah.view.rvadapters.TypeOfDishesRecyclerAdapter
 import com.pineapplepractice.infernohookah.viewmodel.DishesViewModel
+import com.pineapplepractice.infernohookah.viewmodel.MainActivityViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -41,6 +42,10 @@ class DishesFragment : Fragment() {
 
     private lateinit var dishesRecyclerAdapter: DishesRecyclerAdapter
 
+    private lateinit var mainActivityViewModel: MainActivityViewModel
+    @Inject
+    lateinit var mainActivityViewModelFactory: MainActivityViewModel.Factory
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         App.instance.dagger.inject(this)
@@ -56,6 +61,21 @@ class DishesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainActivityViewModel = ViewModelProvider(
+            requireActivity(),
+            mainActivityViewModelFactory
+        )[MainActivityViewModel::class.java]
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            mainActivityViewModel.getUserName()
+
+            mainActivityViewModel.userName.collect {
+                println("FragmentHome: имя пользователя: $it")
+
+                binding.userNameHome.text = it
+            }
+        }
+
         dishesViewModel =
             ViewModelProvider(this, vmFactory)[DishesViewModel::class.java]
 

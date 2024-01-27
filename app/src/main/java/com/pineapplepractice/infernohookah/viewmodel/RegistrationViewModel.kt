@@ -25,6 +25,7 @@ class RegistrationViewModel(
         viewModelScope.launch {
             if (saveUserUseCase.execute(user))
                 _showToastEvent.emit("Вы зарегистрированы")
+            else _showToastEvent.emit("Ошибка регистрации. Такой e-mail уже существует.")
         }
     }
 

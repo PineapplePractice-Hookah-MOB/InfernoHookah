@@ -14,7 +14,9 @@ import com.pineapplepractice.infernohookah.App
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.databinding.FragmentAuthBinding
 import com.pineapplepractice.infernohookah.domain.models.User
+import com.pineapplepractice.infernohookah.view.activity.MainActivity
 import com.pineapplepractice.infernohookah.viewmodel.AuthViewModel
+import com.pineapplepractice.infernohookah.viewmodel.MainActivityViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,9 +26,14 @@ class AuthFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var authViewModel: AuthViewModel
+    private lateinit var mainActivityViewModel: MainActivityViewModel
+
 
     @Inject
     lateinit var vmFactory: AuthViewModel.Factory
+    @Inject
+    lateinit var mainActivityViewModelFactory: MainActivityViewModel.Factory
+
 
     /*    @Inject
         lateinit var authFragmentViewModelFactory: AuthViewModelFactory
@@ -44,6 +51,10 @@ class AuthFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         App.instance.dagger.inject(this)
+
+/*        if (context is MainActivity) {
+            mainActivityViewModel = context.getMainActivityViewModel()
+        }*/
     }
 
     override fun onCreateView(
@@ -56,10 +67,25 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mainActivityViewModel = ViewModelProvider(
+            requireActivity(),
+            mainActivityViewModelFactory
+        )[MainActivityViewModel::class.java]
+
         authViewModel =
             ViewModelProvider(this, vmFactory)[AuthViewModel::class.java]
 
         viewLifecycleOwner.lifecycleScope.launch {
+
+
+            mainActivityViewModel.userName.collect {
+                println("AuthFragment: имя пользователя: $it")
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            println("AuthFragment: запуск authViewModel.showToastEvent.collect")
+
             authViewModel.showToastEvent.collect { toastText ->
                 if (toastText.isNotEmpty()) {
                     Snackbar.make(
@@ -78,8 +104,19 @@ class AuthFragment : Fragment() {
                 }*/
 
         viewLifecycleOwner.lifecycleScope.launch {
+            println("AuthFragment: запуск authViewModel.flagAuth.collect outside")
+
             authViewModel.flagAuth.collect {
-                if (it) findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+                println("AuthFragment: запуск authViewModel.flagAuth.collect inside")
+
+                if (it) {
+
+                    println("AuthFragment: запуск mainActivityViewModel.getUserName()")
+                    mainActivityViewModel.getUserName()
+                    println("AuthFragment: после запуска mainActivityViewModel.getUserName()")
+
+                    findNavController().navigate(R.id.action_authFragment_to_homeFragment)
+                }
                 else {
                     Snackbar.make(
                         binding.root,
@@ -97,7 +134,8 @@ class AuthFragment : Fragment() {
                     login = binding.loginTI.text.toString(),
                     pass = binding.passTI.text.toString(),
                     birthday = "",
-                    email = binding.loginTI.text.toString()
+                    email = binding.loginTI.text.toString(),
+                    name = ""
                 )
             )
         }

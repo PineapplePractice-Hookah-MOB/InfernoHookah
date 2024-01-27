@@ -26,6 +26,7 @@ import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.viewmodel.MiscellaneousViewModel
 import com.pineapplepractice.infernohookah.databinding.FragmentMiscellaneousBinding
 import com.pineapplepractice.infernohookah.viewmodel.AuthViewModel
+import com.pineapplepractice.infernohookah.viewmodel.MainActivityViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,6 +34,10 @@ class MiscellaneousFragment : Fragment() {
     private var _binding: FragmentMiscellaneousBinding? = null
     private val binding get() = _binding!!
 //    private val miscellaneousFragmentViewModel: MiscellaneousViewModel by viewModels()
+
+    private lateinit var mainActivityViewModel: MainActivityViewModel
+    @Inject
+    lateinit var mainActivityViewModelFactory: MainActivityViewModel.Factory
 
     private lateinit var miscellaneousViewModel: MiscellaneousViewModel
 
@@ -54,6 +59,20 @@ class MiscellaneousFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainActivityViewModel = ViewModelProvider(
+            requireActivity(),
+            mainActivityViewModelFactory
+        )[MainActivityViewModel::class.java]
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            mainActivityViewModel.getUserName()
+
+            mainActivityViewModel.userName.collect {
+                println("FragmentHome: имя пользователя: $it")
+
+                binding.userName.text = it
+            }
+        }
 
         miscellaneousViewModel =
             ViewModelProvider(this, vmFactory)[MiscellaneousViewModel::class.java]

@@ -10,9 +10,22 @@ class SharedPrefStorage(private val context: Context) : Storage {
     private val sharedPreferences =
         context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
 
+    override fun saveUserName(userName: String): Boolean {
+        return if (userName.isNotEmpty()) {
+            sharedPreferences.edit().putString(KEY_USER_NAME, userName).apply()
+            true
+        } else false
+    }
+
+    override fun getUserName(): String {
+        return sharedPreferences.getString(KEY_USER_NAME, "") ?: ""
+    }
+
     override fun saveUserId(userId: String): Boolean {
-        sharedPreferences.edit().putString(KEY_USER_ID, userId).apply()
-        return true
+        return if (userId.isNotEmpty()) {
+            sharedPreferences.edit().putString(KEY_USER_ID, userId).apply()
+            true
+        } else false
     }
 
     override fun getUserId(): String {
@@ -50,5 +63,6 @@ class SharedPrefStorage(private val context: Context) : Storage {
         private const val KEY_ACCESS_TOKEN = "access_token"
         private const val KEY_REFRESH_TOKEN = "refresh_token"
         private const val KEY_USER_ID = "user_id"
+        private const val KEY_USER_NAME = "user_name"
     }
 }

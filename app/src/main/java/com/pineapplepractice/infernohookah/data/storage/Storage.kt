@@ -8,6 +8,10 @@ import com.pineapplepractice.infernohookah.domain.models.PhoneNumber
 //Если хочется добавить if, то создаем новый UseCase
 interface Storage {
 
+    fun saveUserName(userName: String): Boolean
+
+    fun getUserName(): String
+
     fun saveUserId(userId: String): Boolean
 
     fun getUserId(): String
