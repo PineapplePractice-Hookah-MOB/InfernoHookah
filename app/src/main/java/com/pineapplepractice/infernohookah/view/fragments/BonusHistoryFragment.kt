@@ -1,16 +1,23 @@
 package com.pineapplepractice.infernohookah.view.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.pineapplepractice.infernohookah.App
 import com.pineapplepractice.infernohookah.viewmodel.BonusHistoryViewModel
 import com.pineapplepractice.infernohookah.databinding.FragmentBonusHistoryBinding
 import com.pineapplepractice.infernohookah.view.rvadapters.HistoryBonusRecyclerAdapter
+import com.pineapplepractice.infernohookah.viewmodel.MainActivityViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class BonusHistoryFragment : Fragment() {
 
@@ -18,12 +25,21 @@ class BonusHistoryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val bonusHistoryFragmentViewModel: BonusHistoryViewModel by viewModels()
+    private lateinit var mainActivityViewModel: MainActivityViewModel
 
     private lateinit var bonusHistoryAdapter: HistoryBonusRecyclerAdapter
     private lateinit var scrollListener: RecyclerView.OnScrollListener
     private lateinit var recyclerView: RecyclerView
     private var totalItemCount = DEFAULT_TOTAL_ITEM_COUNT
 
+
+    @Inject
+    lateinit var mainActivityViewModelFactory: MainActivityViewModel.Factory
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        App.instance.dagger.inject(this)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +50,21 @@ class BonusHistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainActivityViewModel = ViewModelProvider(
+            requireActivity(),
+            mainActivityViewModelFactory
+        )[MainActivityViewModel::class.java]
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            mainActivityViewModel.getUserName()
+
+            mainActivityViewModel.userName.collect {
+                println("FragmentHome: имя пользователя: $it")
+
+                binding.userName.text = it
+            }
+        }
+
         initRV()
         addRVScrollListener()
     }

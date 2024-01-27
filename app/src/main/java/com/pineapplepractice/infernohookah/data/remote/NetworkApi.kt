@@ -33,6 +33,12 @@ interface NetworkApi {
     @GET("users/all")
     fun getAllUsers(): Call<List<UserResponse>>
 
+    @GET("users/{userId}")
+    fun getUserById(
+        @Path("userId") userId: String,
+        @Header("Authorization") token: String
+    ): Call<UserResponse>
+
     @GET("menu")
     fun getDishMenu(
         @Header("Authorization") token: String,

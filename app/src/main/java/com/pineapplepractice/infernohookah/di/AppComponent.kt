@@ -1,14 +1,18 @@
 package com.pineapplepractice.infernohookah.di
 
+import com.pineapplepractice.infernohookah.di.modules.AppBinds
 import com.pineapplepractice.infernohookah.di.modules.AppModule
 import com.pineapplepractice.infernohookah.di.modules.DataModule
 import com.pineapplepractice.infernohookah.di.modules.DatabaseModule
 import com.pineapplepractice.infernohookah.di.modules.DomainModule
 import com.pineapplepractice.infernohookah.di.modules.RemoteModule
+import com.pineapplepractice.infernohookah.view.activity.MainActivity
 import com.pineapplepractice.infernohookah.view.fragments.AuthFragment
+import com.pineapplepractice.infernohookah.view.fragments.BonusHistoryFragment
 import com.pineapplepractice.infernohookah.view.fragments.DishesFragment
 import com.pineapplepractice.infernohookah.view.fragments.HomeFragment
 import com.pineapplepractice.infernohookah.view.fragments.MiscellaneousFragment
+import com.pineapplepractice.infernohookah.view.fragments.PromotionsFragment
 import com.pineapplepractice.infernohookah.view.fragments.RegistrationFragment
 import com.pineapplepractice.infernohookah.view.fragments.ReservationFragment
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
@@ -24,9 +28,14 @@ import javax.inject.Singleton
         DataModule::class,
         DomainModule::class,
         RemoteModule::class,
+        AppBinds::class
     ]
 )
 interface AppComponent {
+    fun inject(mainActivity: MainActivity)
+
+    fun inject(promotionsFragment: PromotionsFragment)
+    fun inject(bonusHistoryFragment: BonusHistoryFragment)
     fun inject(homeViewModel: HomeViewModel)
     fun inject(homeFragment: HomeFragment)
     fun inject(reservationFragment: ReservationFragment)

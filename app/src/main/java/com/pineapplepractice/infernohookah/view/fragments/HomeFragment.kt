@@ -1,5 +1,6 @@
 package com.pineapplepractice.infernohookah.view.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.pineapplepractice.infernohookah.utils.carouselrecyclerview.SnapHelper
 import com.pineapplepractice.infernohookah.view.activity.MainActivity
 import com.pineapplepractice.infernohookah.view.rvadapters.PromotionsRecyclerAdapter
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
+import com.pineapplepractice.infernohookah.viewmodel.MainActivityViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,6 +32,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var mainActivityViewModel: MainActivityViewModel
 
     private val homeFragmentViewModel: HomeViewModel by viewModels()
 
@@ -48,8 +51,20 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var vmFactory: HomeViewModel.Factory
 
+    @Inject
+    lateinit var mainActivityViewModelFactory: MainActivityViewModel.Factory
+
 //    private val homeViewModel: HomeViewModel by viewModels { vmFactory }
 
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        App.instance.dagger.inject(this)
+
+/*        if (context is MainActivity) {
+            mainActivityViewModel = context.getMainActivityViewModel()
+        }*/
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,24 +77,45 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        App.instance.dagger.inject(this)
+//        App.instance.dagger.inject(this)
+
+        mainActivityViewModel = ViewModelProvider(
+            requireActivity(),
+            mainActivityViewModelFactory
+        )[MainActivityViewModel::class.java]
 
         homeViewModel = ViewModelProvider(this, vmFactory).get(HomeViewModel::class.java)
 
+
+
         viewLifecycleOwner.lifecycleScope.launch {
+            mainActivityViewModel.getUserName()
+
+            mainActivityViewModel.userName.collect {
+                println("FragmentHome: имя пользователя: $it")
+
+                binding.userNameHome.text = it
+            }
+        }
+
+
+        viewLifecycleOwner.lifecycleScope.launch {
+
             homeFragmentViewModel.bookingTVText.collect { newText ->
                 // Обработка нового текста
                 if (newText.isNotEmpty()) {
                     binding.bookingTv.text = newText
                     binding.cardViewBooking.visibility = View.VISIBLE
+                } else {
+                    binding.cardViewBooking.visibility = View.GONE
                 }
             }
         }
 
         (requireActivity() as MainActivity).visibleBottomNavigation()
-/*        val navHostFragment =
-            requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
-        val navController = navHostFragment.navController*/
+        /*        val navHostFragment =
+                    requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentPlaceholder) as NavHostFragment
+                val navController = navHostFragment.navController*/
 
         initRV()
 
@@ -101,24 +137,24 @@ class HomeFragment : Fragment() {
         promotionsRecyclerView.apply {
             promotionsAdapter = PromotionsRecyclerAdapter(promotionsItems) { id ->
                 val bundle = Bundle()
-                bundle.putInt("idPromotion",id)
+                bundle.putInt("idPromotion", id)
 
                 navController.navigate(R.id.action_homeFragment_to_promotionDetailsFragment, bundle)
 
-/*                (requireActivity() as MainActivity).launchDetailsFragment(
-                    promotions,
-                    R.id.action_promotionsFragment_to_promotionDetailsFragment,
-                    image)*/
+                /*                (requireActivity() as MainActivity).launchDetailsFragment(
+                                    promotions,
+                                    R.id.action_promotionsFragment_to_promotionDetailsFragment,
+                                    image)*/
             }
-/*                object : PromotionsRecyclerAdapter.OnItemClickListener {
-                    override fun click(promotions: Promotions, image: ImageView) {
-                        (requireActivity() as MainActivity).launchDetailsFragment(
-                            promotions,
-                            R.id.action_homeFragment_to_promotionDetailsFragment,
-                            image
-                        )
-                    }
-                })*/
+            /*                object : PromotionsRecyclerAdapter.OnItemClickListener {
+                                override fun click(promotions: Promotions, image: ImageView) {
+                                    (requireActivity() as MainActivity).launchDetailsFragment(
+                                        promotions,
+                                        R.id.action_homeFragment_to_promotionDetailsFragment,
+                                        image
+                                    )
+                                }
+                            })*/
             promotionsRecyclerView.adapter = promotionsAdapter
             promotionsRecyclerView.setAlpha(true)
             promotionsRecyclerView.setInfinite(true)

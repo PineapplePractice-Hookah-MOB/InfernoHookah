@@ -13,6 +13,7 @@ import com.pineapplepractice.infernohookah.domain.usecase.GetFirstBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetMenuFromApiUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetUserByLoginUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.GetUserIdFromStorageUseCase
+import com.pineapplepractice.infernohookah.domain.usecase.GetUserNameFromStorageUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.LoginByPhoneUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SaveBookingUseCase
 import com.pineapplepractice.infernohookah.domain.usecase.SavePhoneToSharedPrefUseCase
@@ -25,6 +26,12 @@ import javax.inject.Singleton
 
 @Module
 class DomainModule() {
+
+    @Singleton
+    @Provides
+    fun provideGetUserNameFromStorageUseCase(mainRepository: MainRepository): GetUserNameFromStorageUseCase {
+        return GetUserNameFromStorageUseCase(mainRepository = mainRepository)
+    }
 
     @Singleton
     @Provides

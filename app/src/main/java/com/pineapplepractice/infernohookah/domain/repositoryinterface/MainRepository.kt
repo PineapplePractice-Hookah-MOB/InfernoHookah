@@ -26,10 +26,13 @@ interface MainRepository {
     suspend fun getAllUser(): List<UserResponse>?
 
     suspend fun getUserIdFromStorage(): String
+    suspend fun getUserNameFromStorage(): String
+
     suspend fun getUserByLogin(login: String): User?
 //    suspend fun getDishMenuFromApi(): Map<Pair<Int, String>, List<DishMenuResponse>>?
     suspend fun getDishMenuFromApi(): RootDishes?
     suspend  fun saveReview(review: String): Boolean
+
 //    suspend fun getUserByLogin(login: String)
 
 }
