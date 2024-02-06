@@ -28,8 +28,7 @@
             android:id="@+id/typeIV"
             android:layout_width="41dp"
             android:layout_height="34dp"
-            android:gravity="center"
-            android:src="@mipmap/ic_launcher" />
+            android:gravity="center" />
 
     </LinearLayout>
 

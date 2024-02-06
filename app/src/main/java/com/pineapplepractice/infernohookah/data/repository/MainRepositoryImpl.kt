@@ -14,6 +14,7 @@ import com.pineapplepractice.infernohookah.data.datamodels.UserAuthRequest
 import com.pineapplepractice.infernohookah.data.datamodels.UserRequest
 import com.pineapplepractice.infernohookah.data.datamodels.UserResponse
 import com.pineapplepractice.infernohookah.data.remote.NetworkApi
+import com.pineapplepractice.infernohookah.data.remote.dishes.DishesApi
 import com.pineapplepractice.infernohookah.data.storage.Storage
 import com.pineapplepractice.infernohookah.domain.models.PhoneNumber
 import com.pineapplepractice.infernohookah.domain.models.RootDishes
@@ -29,6 +30,7 @@ import retrofit2.awaitResponse
 class MainRepositoryImpl(
     private val storage: Storage,
     private val networkApi: NetworkApi,
+    private val dishesApi: DishesApi
 ) : MainRepository {
 
     override suspend fun authUser(user: User): TokenResponse? {
@@ -92,11 +94,38 @@ class MainRepositoryImpl(
     }
 
     override suspend fun saveBooking(bookingRequest: BookingRequest): Boolean {
-        val response =
-            networkApi.createPost("Bearer ${storage.getAccessToken()}", bookingRequest)
-                .awaitResponse()
 
-        return response.isSuccessful
+
+        try {
+            val response =
+                networkApi.createPost("Bearer ${storage.getAccessToken()}", bookingRequest)
+                    .awaitResponse()
+
+            if (response.isSuccessful) {
+
+                println("Теперь у вас есть тело ответа, которое вы можете прочитать или обработать ")
+                println("body : ${response.body()} ")
+
+                println("response: $response")
+                println("response.isSuccessful: ${response.isSuccessful}")
+                println("response.body: ${response.body()}")
+                println("response.code: ${response.code()}")
+                println("response.headers: ${response.headers()}")
+                println("response.errorBody: ${response.errorBody()}")
+                println("response.message: ${response.message()}")
+                println("response.raw: ${response.raw()}")
+                return true
+            } else {
+                val errorBody: ResponseBody? = response.errorBody()
+                return false
+            }
+        } catch (e: Exception) {
+            // Обработка исключения, возникшего при выполнении запроса
+            println("e: Exception")
+            println(e)
+        }
+
+        return false
     }
 
     override suspend fun getBookingByUserId(id: Int): BookingResponse? {
@@ -195,8 +224,10 @@ class MainRepositoryImpl(
     //    override suspend fun getDishMenuFromApi(): Map<Pair<Int, String>, List<DishMenuResponse>>? {
     override suspend fun getDishMenuFromApi(): RootDishes? {
         try {
+            /*            val response =
+                            networkApi.getDishMenu("Bearer ${storage.getAccessToken()}", 0, 30).awaitResponse()*/
             val response =
-                networkApi.getDishMenu("Bearer ${storage.getAccessToken()}", 0, 30).awaitResponse()
+                dishesApi.getDishMenu().awaitResponse()
 
             if (response.isSuccessful) {
 //                val responseBody: List<DishMenuResponse>? = response.body()
@@ -228,8 +259,8 @@ class MainRepositoryImpl(
     private fun mapDomainUserToDataUserRequest(user: User): UserRequest {
         return UserRequest(
             name = user.login,
-//            birthday = user.birthday,
-            birthday = "1975-12-12",
+            birthday = user.birthday,
+//            birthday = "1975-12-12",
             email = user.email,
             password = user.pass
         )

@@ -125,6 +125,15 @@ class RegistrationFragment : Fragment() {
             println("replypassTI: ${binding.replypassTI.text} ")
             println("replypassTI.isEmpty: ${binding.replypassTI.text.trim().isEmpty()} ")
 
+            if(!isEmailValid(binding.emailTI.text.toString())) {
+                Snackbar.make(
+                    binding.root,
+                    "E-mail содержит не допустимые символы. Или не верный формат записи.",
+                    Snackbar.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+
             if(binding.passTI.text.toString().trim() != binding.replypassTI.text.toString().trim()) {
                 Snackbar.make(
                     binding.root,
@@ -176,5 +185,10 @@ class RegistrationFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    fun isEmailValid(email: String): Boolean {
+        val emailRegex = Regex("^([A-Za-z0-9._%+-]+)@([A-Za-z0-9-]+)\\.([A-Za-z]{2,})$")
+        return emailRegex.matches(email)
+    }
+
 
 }

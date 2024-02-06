@@ -55,7 +55,7 @@ class ReservationViewModel(
         viewModelScope.launch {
             val userId = getUserIdFromStorageUseCase.execute()
             if (userId != "") {
-                saveBookingUseCase.execute(
+                val flag: Boolean = saveBookingUseCase.execute(
                     BookingRequest(
                         tableId = 1,
                         userId = userId.toInt(),
@@ -65,7 +65,9 @@ class ReservationViewModel(
                         bookedTill = bookedTill
                     )
                 )
-                _showToastEvent.emit("У вас забронирован столик №1 на $itemPosition с $bookedFrom по $bookedTill")
+                if (flag) _showToastEvent.emit("У вас забронирован столик №1 на $itemPosition с $bookedFrom по $bookedTill")
+                else _showToastEvent.emit("Столик на это время занят. Забронируйте столик на другую дату.")
+//                else _showToastEvent.emit("Столик не забронирован. Уточните у администратора причину по тел. +123456789")
             } else {
                 _showToastEvent.emit("Ошибка приложения. Отсутствует id ...")
             }
