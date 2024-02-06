@@ -1,5 +1,6 @@
 package com.pineapplepractice.infernohookah.view.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.databinding.FragmentReservationBinding
 import com.pineapplepractice.infernohookah.utils.DateTimePicker
 import com.pineapplepractice.infernohookah.viewmodel.HomeViewModel
+import com.pineapplepractice.infernohookah.viewmodel.MainActivityViewModel
 import com.pineapplepractice.infernohookah.viewmodel.ReservationViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -35,10 +37,20 @@ class ReservationFragment : Fragment() {
 
     private var currentDateTimeInMillis = Date().time
 
+    private lateinit var mainActivityViewModel: MainActivityViewModel
+    @Inject
+    lateinit var mainActivityViewModelFactory: MainActivityViewModel.Factory
+
 //    private val reservationFragmentViewModel: ReservationViewModel by viewModels()
 
     @Inject
     lateinit var vmFactory: ReservationViewModel.Factory
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        App.instance.dagger.inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,7 +62,20 @@ class ReservationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        App.instance.dagger.inject(this)
+        mainActivityViewModel = ViewModelProvider(
+            requireActivity(),
+            mainActivityViewModelFactory
+        )[MainActivityViewModel::class.java]
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            mainActivityViewModel.getUserName()
+
+            mainActivityViewModel.userName.collect {
+                println("FragmentHome: имя пользователя: $it")
+
+                binding.userNameHome.text = it
+            }
+        }
 
         reservationViewModel =
             ViewModelProvider(this, vmFactory).get(ReservationViewModel::class.java)

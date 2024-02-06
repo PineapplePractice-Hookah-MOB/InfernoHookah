@@ -8,7 +8,7 @@ data class UserResponse(
     val phone: String,
     val comment: String,
     val card: String,
-    val birthday: List<Int>,
+    val birthday: String,
     val groupIds: Int,
     val points: Float
 )

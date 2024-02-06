@@ -1,7 +1,10 @@
 package com.pineapplepractice.infernohookah.view.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,12 +18,14 @@ import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.databinding.FragmentRegistrationBinding
 import com.pineapplepractice.infernohookah.domain.models.User
 import com.pineapplepractice.infernohookah.viewmodel.RegistrationViewModel
+import com.redmadrobot.inputmask.MaskedTextChangedListener
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 class RegistrationFragment : Fragment() {
-
     private var _binding: FragmentRegistrationBinding? = null
     private val binding get() = _binding!!
 
@@ -43,6 +48,56 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val checkDateWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            @SuppressLint("SimpleDateFormat")
+            override fun afterTextChanged(s: Editable?) {
+                // Дополнительная обработка после изменения текста
+                // Здесь можно обрабатывать результат после ввода
+                val enteredText = s.toString()
+                if (enteredText != "" && enteredText.length == 10) {
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+                    dateFormat.isLenient = false
+                    try {
+                        val date = dateFormat.parse(enteredText)
+                        println("date: $date")
+                    } catch (e: ParseException) {
+                        println("exception: $e")
+                        Snackbar.make(
+                            binding.root,
+                            "Недопустимая дата.",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                        s?.clear()
+                    }
+
+                }
+            }
+        }
+
+/*        binding.replypassTI.setOnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                if (binding.replypassTI.toString().trim() != binding.passTI.toString().trim()) {
+                    Snackbar.make(
+                        binding.root,
+                        "Пароли не совпадают.",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    binding.replypassTI.setText("")
+                }
+            }
+        }*/
+
+        val listener = MaskedTextChangedListener("[0000]-[00]-[00]", binding.birthdayTI)
+        binding.birthdayTI.addTextChangedListener(listener)
+        binding.birthdayTI.addTextChangedListener(checkDateWatcher)
+        binding.birthdayTI.onFocusChangeListener = listener
+
+
 
         registrationViewModel =
             ViewModelProvider(this, vmFactory)[RegistrationViewModel::class.java]
@@ -67,10 +122,46 @@ class RegistrationFragment : Fragment() {
             println("nameTI: ${binding.nameTI.text} ")
             println("birthdayTI: ${binding.birthdayTI.text} ")
             println("passTI: ${binding.passTI.text} ")
+            println("replypassTI: ${binding.replypassTI.text} ")
+            println("replypassTI.isEmpty: ${binding.replypassTI.text.trim().isEmpty()} ")
+
+            if(!isEmailValid(binding.emailTI.text.toString())) {
+                Snackbar.make(
+                    binding.root,
+                    "E-mail содержит не допустимые символы. Или не верный формат записи.",
+                    Snackbar.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+
+            if(binding.passTI.text.toString().trim() != binding.replypassTI.text.toString().trim()) {
+                Snackbar.make(
+                    binding.root,
+                    "Пароли не совпадают.",
+                    Snackbar.LENGTH_LONG
+                ).show()
+//                binding.replypassTI.setText("")
+                return@setOnClickListener
+            }
+
+            if (binding.emailTI.text.toString().trim().isEmpty() ||
+                binding.nameTI.text.toString().trim().isEmpty() ||
+                binding.birthdayTI.text.toString().trim().isEmpty() ||
+                binding.passTI.text.toString().trim().isEmpty() ||
+                binding.replypassTI.text.toString().trim().isEmpty()
+            ) {
+                Snackbar.make(
+                    binding.root,
+                    "заполните, пожалуйста, все поля для регистрации",
+                    Snackbar.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
 
             val user = User(
                 email = binding.emailTI.text.toString(),
                 login = binding.nameTI.text.toString(),
+                name = binding.nameTI.text.toString(),
                 birthday = binding.birthdayTI.text.toString(),
                 pass = binding.passTI.text.toString()
             )
@@ -94,5 +185,10 @@ class RegistrationFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    fun isEmailValid(email: String): Boolean {
+        val emailRegex = Regex("^([A-Za-z0-9._%+-]+)@([A-Za-z0-9-]+)\\.([A-Za-z]{2,})$")
+        return emailRegex.matches(email)
+    }
+
 
 }
