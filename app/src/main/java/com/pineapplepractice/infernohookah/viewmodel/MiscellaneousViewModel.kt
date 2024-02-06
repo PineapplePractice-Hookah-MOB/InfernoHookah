@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 class MiscellaneousViewModel(private val saveReviewUseCase: SaveReviewUseCase) : ViewModel() {
-    private val _flagAuth = MutableSharedFlow<Boolean>()
-    val flagAuth: SharedFlow<Boolean>
-        get() = _flagAuth.asSharedFlow()
+    private val _flagSend = MutableSharedFlow<Boolean>()
+    val flagSend: SharedFlow<Boolean>
+        get() = _flagSend.asSharedFlow()
 
     fun saveReview(review: String) {
         viewModelScope.launch {
-            _flagAuth.emit(saveReviewUseCase.execute(review))
+            _flagSend.emit(saveReviewUseCase.execute(review))
         }
     }
 

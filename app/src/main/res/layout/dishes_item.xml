@@ -21,7 +21,6 @@
             android:layout_height="68dp"
             android:layout_marginTop="12dp"
             app:shapeAppearanceOverlay="@style/CircleImageView"
-            android:src="@mipmap/ic_launcher"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

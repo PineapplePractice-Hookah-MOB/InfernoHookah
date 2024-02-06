@@ -5,6 +5,7 @@ import com.example.cleanarchitecturekiparokovalenko.data.storage.sharedprefs.Sha
 import com.pineapplepractice.infernohookah.data.dao.InfernoDao
 import com.pineapplepractice.infernohookah.data.remote.NetworkApi
 import com.pineapplepractice.infernohookah.data.remote.booking.BookingApi
+import com.pineapplepractice.infernohookah.data.remote.dishes.DishesApi
 import com.pineapplepractice.infernohookah.data.remote.zvonok.ZvonokApi
 import com.pineapplepractice.infernohookah.data.repository.MainRepositoryImpl
 import com.pineapplepractice.infernohookah.data.storage.Storage
@@ -26,12 +27,12 @@ class DataModule {
     fun provideRepository(
         storage: Storage,
         networkApi: NetworkApi,
-//        bookingApi: BookingApi
+        dishesApi: DishesApi
     ): MainRepository {
         return MainRepositoryImpl(
             storage = storage,
-            networkApi = networkApi
-//            bookingApi = bookingApi
+            networkApi = networkApi,
+            dishesApi = dishesApi
         )
     }
 

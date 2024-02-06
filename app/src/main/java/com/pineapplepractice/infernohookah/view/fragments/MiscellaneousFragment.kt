@@ -3,7 +3,6 @@ package com.pineapplepractice.infernohookah.view.fragments
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.InputType
@@ -17,15 +16,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.pineapplepractice.infernohookah.App
 import com.pineapplepractice.infernohookah.R
 import com.pineapplepractice.infernohookah.viewmodel.MiscellaneousViewModel
 import com.pineapplepractice.infernohookah.databinding.FragmentMiscellaneousBinding
-import com.pineapplepractice.infernohookah.viewmodel.AuthViewModel
 import com.pineapplepractice.infernohookah.viewmodel.MainActivityViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -78,11 +74,11 @@ class MiscellaneousFragment : Fragment() {
             ViewModelProvider(this, vmFactory)[MiscellaneousViewModel::class.java]
 
         viewLifecycleOwner.lifecycleScope.launch {
-            miscellaneousViewModel.flagAuth.collect {
+            miscellaneousViewModel.flagSend.collect {
                 if (it) {
                     Snackbar.make(
                         binding.root,
-                        "Спасибо за отзыва. Мы обязательно его прочитаем.",
+                        "Спасибо за отзыв. Мы обязательно его прочитаем.",
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
@@ -120,6 +116,17 @@ class MiscellaneousFragment : Fragment() {
 //            builder.setMessage("Введите ваш отзыв:")
             builder.setPositiveButton("Отправить") { dialog, which ->
                 val enteredText = input.text.toString()
+
+                if (enteredText.trim().isEmpty()) {
+                    Snackbar.make(
+                        binding.root,
+                        "Заполните, пожалуйста, поле и отправьте отзыв.",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+
+                    return@setPositiveButton
+                }
+
                 miscellaneousViewModel.saveReview(enteredText)
             }
 

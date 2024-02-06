@@ -4,6 +4,7 @@ import com.pineapplepractice.infernohookah.BuildConfig
 import com.pineapplepractice.infernohookah.data.HookahApi
 import com.pineapplepractice.infernohookah.data.remote.NetworkApi
 import com.pineapplepractice.infernohookah.data.remote.booking.BookingApi
+import com.pineapplepractice.infernohookah.data.remote.dishes.DishesApi
 import com.pineapplepractice.infernohookah.data.remote.zvonok.ZvonokApi
 import dagger.Module
 import dagger.Provides
@@ -63,16 +64,16 @@ class RemoteModule {
         .client(okHttpClient)
         .build()
 
-/*    @Provides
-    @Named("zvonok")
+    @Provides
+    @Named("dishes")
     fun provideZvonokRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         //Указываем базовый URL из констант
-        .baseUrl(ZVONOK_URL)
+        .baseUrl(DISHES_URL)
         //Добавляем конвертер
         .addConverterFactory(GsonConverterFactory.create())
         //Добавляем кастомный клиент
         .client(okHttpClient)
-        .build()*/
+        .build()
 
     @Provides
     @Named("network")
@@ -108,6 +109,10 @@ class RemoteModule {
     @Singleton
     fun provideBookingApi(@Named("booking") retrofit: Retrofit): BookingApi = retrofit.create(BookingApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideDishesApi(@Named("dishes") retrofit: Retrofit): DishesApi = retrofit.create(DishesApi::class.java)
+
     companion object {
         private const val HALF_MINUTE_FOR_SLOW_INTERNET = 30L
         private const val API_KEY = "4fd6a85fabb643a3dd5712210eb2dcfd"
@@ -115,6 +120,7 @@ class RemoteModule {
         private const val ZVONOK_URL = "https://zvonok.com/manager/cabapi_external/api/v1/phones/"
         private const val BOOKING_URL = "http://213.219.212.47:9001/api/"
         private const val NETWORK_URL = "http://213.219.212.47:9000/api/"
+        private const val DISHES_URL = "https://api.maibo.skroy.ru/test0reestr/"
 //        private const val NETWORK_URL = "http://213.219.212.47:9001/api/"
     }
 
