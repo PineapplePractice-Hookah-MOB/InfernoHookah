@@ -17,7 +17,7 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         Executors.newSingleThreadExecutor().execute {
-            val startDelay = 1500L
+            val startDelay = 2000L
             sleep(startDelay)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

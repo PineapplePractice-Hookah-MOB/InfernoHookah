@@ -7,6 +7,20 @@
     tools:context=".view.activity.SplashScreen"
     android:background="@color/main_background">
 
+    <TextView
+        android:id="@+id/bonus_header_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Проект разработан в рамках Pineapple Practice"
+        android:textAlignment="center"
+        android:textColor="#FFFF00"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/smoke"
         android:layout_width="match_parent"
